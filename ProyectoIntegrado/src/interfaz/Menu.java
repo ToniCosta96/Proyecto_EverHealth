@@ -101,6 +101,8 @@ public class Menu extends JPanel implements ActionListener{
 		panelBotones.add(btnPlanificacion);
 		
 		JButton btnHazTuPropio = new JButton("Haz tu propio plato");
+		btnHazTuPropio.setActionCommand("MenuBtnCrearPlato");
+		btnHazTuPropio.addActionListener(this);
 		panelBotones.add(btnHazTuPropio);
 		
 		JButton btnConsultarPlatos = new JButton("Consultar platos");
@@ -146,6 +148,9 @@ public class Menu extends JPanel implements ActionListener{
 		}else if(accio.compareTo("MenuBtnConsultarAlimentos")==0){
 			ventanaPrincipal.cambiapanel("ConsultarAlimentos");
 			ventanaPrincipal.setTitle("Ever Health- Consultar alimentos");
+		}else if(accio.compareTo("MenuBtnCrearPlato")==0){
+			ventanaPrincipal.cambiapanel("CrearPlato");
+			ventanaPrincipal.setTitle("Ever Health- Crear plato");
 		}
 	}
 }

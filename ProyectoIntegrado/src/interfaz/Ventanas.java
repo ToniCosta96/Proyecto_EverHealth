@@ -11,6 +11,7 @@ public class Ventanas extends JFrame{
 	private CardLayout cl;
 	private Menu menu;
 	private Planificacion planificacion;
+	private CrearPlato crearPlato;
 	/**
 	 * Create the frame.
 	 */
@@ -27,14 +28,17 @@ public class Ventanas extends JFrame{
 		CrearUsuario crearUsuario= new CrearUsuario(Ventanas.this);
 		menu = new Menu(Ventanas.this);
 		planificacion= new Planificacion(Ventanas.this);
+		crearPlato= new CrearPlato(Ventanas.this);
 		
 		//Preparar paneles del cardLayout
 		cl.addLayoutComponent(crearUsuario, "Crear Usuario");
 		cl.addLayoutComponent(menu, "Menu");
 		cl.addLayoutComponent(planificacion, "Planificacion");
+		cl.addLayoutComponent(crearPlato, "CrearPlato");
 		//Añadir al contentPane
 		contentPane.add(menu);
 		contentPane.add(planificacion);
+		contentPane.add(crearPlato);
 		contentPane.add(crearUsuario);
 		
 		contentPane.setLayout(cl);
@@ -57,6 +61,8 @@ public class Ventanas extends JFrame{
 			cl.show(contentPane, "CrearUsuario");
 		}else if(nombre.equals("Planificacion")){
 			cl.show(contentPane, "Planificacion");
+		}else if(nombre.equals("CrearPlato")){
+			cl.show(contentPane, "CrearPlato");
 		}else if(nombre.equals("ConsultarPlatos")){
 			ConsultarPlatos consultarPlatos=new ConsultarPlatos(Ventanas.this);
 			cl.addLayoutComponent(consultarPlatos, "ConsultarPlatos");
