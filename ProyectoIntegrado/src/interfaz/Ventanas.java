@@ -67,6 +67,11 @@ public class Ventanas extends JFrame{
 			cl.addLayoutComponent(consultarAlimentos, "ConsultarAlimentos");
 			contentPane.add(consultarAlimentos);
 			cl.show(contentPane, "ConsultarAlimentos");
+		}else if(nombre.equals("PerfilDeUsuario")){
+			PerfilDeUsuario perfilDeUsuario=new PerfilDeUsuario(Ventanas.this);
+			cl.addLayoutComponent(perfilDeUsuario, "PerfilDeUsuario");
+			contentPane.add(perfilDeUsuario);
+			cl.show(contentPane, "PerfilDeUsuario");
 		}
 	}
 }

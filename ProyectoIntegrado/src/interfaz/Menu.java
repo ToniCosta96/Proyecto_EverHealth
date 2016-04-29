@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Color;
 
 public class Menu extends JPanel implements ActionListener{
 	private JTextField txtCaloriasRestantes;
@@ -57,6 +60,31 @@ public class Menu extends JPanel implements ActionListener{
 		panelCabezera.add(panelIrAlPerfil);
 		
 		JLabel lblIrAlPerfil = new JLabel("Ir al perfil de usuario.");
+		lblIrAlPerfil.setForeground(Color.BLUE);
+		lblIrAlPerfil.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblIrAlPerfil.setText("Ir al perfil de usuario.");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblIrAlPerfil.setText("<html><u>Ir al perfil de usuario.</html></u>");
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ventanaPrincipal.cambiapanel("PerfilDeUsuario");
+				ventanaPrincipal.setTitle("Ever Health- Perfil de usuario");
+			}
+		});
 		panelIrAlPerfil.add(lblIrAlPerfil);
 		
 		JPanel panelDivisor = new JPanel();
