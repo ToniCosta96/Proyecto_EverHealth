@@ -116,11 +116,12 @@ public class Menu extends JPanel implements ActionListener{
 		panelBotones.add(btnConsultarAlimentos);
 		
 		//Crear y mostrar la tabla de la planificación
+		String nombresColumnas[]= {"Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"};
 		table = new JTable();
 		String[] datosTabla= new String[5];
 		DefaultTableModel dtm= new DefaultTableModel();
-		for(int columna=0;columna<datosTabla.length;columna++){
-			dtm.addColumn("columna "+columna);
+		for(int columna=0;columna<nombresColumnas.length;columna++){
+			dtm.addColumn(nombresColumnas[columna]);
 		}
 		for(int fila=0;fila<10;fila++){
 			for(int columna=0;columna<datosTabla.length;columna++){
