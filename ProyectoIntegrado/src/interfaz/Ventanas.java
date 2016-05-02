@@ -31,8 +31,13 @@ public class Ventanas extends JFrame{
 		crearPlato= new CrearPlato(Ventanas.this);
 		
 		//Preparar paneles del cardLayout
-		cl.addLayoutComponent(crearUsuario, "Crear Usuario");
-		cl.addLayoutComponent(menu, "Menu");
+		if(ventanaDeInicio=='c'){
+			cl.addLayoutComponent(crearUsuario, "Crear Usuario");
+			cl.addLayoutComponent(menu, "Menu");
+		}else if(ventanaDeInicio=='m'){
+			cl.addLayoutComponent(menu, "Menu");
+			cl.addLayoutComponent(crearUsuario, "Crear Usuario");
+		}
 		cl.addLayoutComponent(planificacion, "Planificacion");
 		cl.addLayoutComponent(crearPlato, "CrearPlato");
 		//Añadir al contentPane
@@ -43,10 +48,6 @@ public class Ventanas extends JFrame{
 		
 		contentPane.setLayout(cl);
 		setContentPane(contentPane);
-		
-		if(ventanaDeInicio=='m'){
-			cl.next(contentPane);
-		}
 	}
 	
 	public void cambiapanel(String nombre){
