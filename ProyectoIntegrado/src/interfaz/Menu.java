@@ -21,7 +21,6 @@ import java.awt.Color;
 
 public class Menu extends JPanel implements ActionListener{
 	private JTextField txtCaloriasRestantes;
-	private JTable table;
 	Ventanas ventanaPrincipal;
 
 	/**
@@ -117,9 +116,9 @@ public class Menu extends JPanel implements ActionListener{
 		
 		//Crear y mostrar la tabla de la planificación
 		String nombresColumnas[]= {"Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"};
-		table = new JTable();
 		String[] datosTabla= new String[nombresColumnas.length];
 		DefaultTableModel dtm= new DefaultTableModel();
+		dtm.addColumn("");
 		for(int columna=0;columna<nombresColumnas.length;columna++){
 			dtm.addColumn(nombresColumnas[columna]);
 		}
@@ -131,7 +130,25 @@ public class Menu extends JPanel implements ActionListener{
 		}
 		
 		JPanel panelTabla = new JPanel();
-		JTable datos= new JTable(dtm);
+		JTable datos= new JTable(dtm) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				if (0 == column)
+					return false;
+				return super.isCellEditable(row, column);
+			}
+			@Override
+			public void changeSelection(int rowIndex, int columnIndex,
+					boolean toggle, boolean extend) {
+				if (columnIndex == 0)
+					// Podemos llamar a changeSelecion() incrementando la columna en 1
+		            // o bien podríamos hacer directamente un return.
+					super.changeSelection(rowIndex, columnIndex + 1, toggle, extend);
+				else
+					super.changeSelection(rowIndex, columnIndex, toggle, extend);
+					}
+				};
+		datos.getColumnModel().getColumn(0).setCellRenderer(datos.getTableHeader().getDefaultRenderer());
 		JScrollPane scrollPane = new JScrollPane(datos);
 		panelTabla.add(scrollPane);
 		panelDivisor.add(panelTabla);
