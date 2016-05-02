@@ -6,6 +6,8 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,7 +21,7 @@ import javax.swing.SwingConstants;
 public class ConsultarPlatos extends JPanel {
 	
 	Ventanas ventanaPrincipal;
-	private JTextField textField;
+	private JTextField textFieldBusqueda;
 	private JTable table;
 
 	public ConsultarPlatos(Ventanas v) {
@@ -46,33 +48,42 @@ public class ConsultarPlatos extends JPanel {
 		panelBusqueda.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panelBusqueda.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(255, 255, 153));
-		FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEFT);
-		panelBusqueda.add(panel_2);
-		
-		JLabel label = new JLabel("Busqueda Platos:");
-		panel_2.add(label);
-		label.setHorizontalTextPosition(SwingConstants.LEFT);
-		label.setHorizontalAlignment(SwingConstants.LEFT);
-		
-		textField = new JTextField();
-		panel_2.add(textField);
-		textField.setAlignmentX(Component.LEFT_ALIGNMENT);
-		textField.setColumns(10);
-		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 255, 153));
-		FlowLayout flowLayout_1 = (FlowLayout) panel_1.getLayout();
-		flowLayout_1.setAlignment(FlowLayout.RIGHT);
+		FlowLayout fl_panel_1 = (FlowLayout) panel_1.getLayout();
+		fl_panel_1.setAlignment(FlowLayout.LEFT);
 		panelBusqueda.add(panel_1);
 		
-		JButton button = new JButton("Atras");
-		panel_1.add(button);
-		button.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		button.setForeground(new Color(255, 153, 51));
-		button.setBackground(new Color(255, 204, 51));
+		JLabel labelBusqueda = new JLabel("Busqueda Platos:");
+		labelBusqueda.setFont(new Font("SimSun", Font.PLAIN, 11));
+		panel_1.add(labelBusqueda);
+		labelBusqueda.setHorizontalTextPosition(SwingConstants.LEFT);
+		labelBusqueda.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		textFieldBusqueda = new JTextField();
+		panel_1.add(textFieldBusqueda);
+		textFieldBusqueda.setAlignmentX(Component.LEFT_ALIGNMENT);
+		textFieldBusqueda.setColumns(10);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(255, 255, 153));
+		FlowLayout fl_panel_2 = (FlowLayout) panel_2.getLayout();
+		fl_panel_2.setAlignment(FlowLayout.RIGHT);
+		panelBusqueda.add(panel_2);
+		
+		JButton buttonAtras = new JButton("Atras");
+		buttonAtras.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ventanaPrincipal.cambiapanel("Menu");
+				
+			}
+		});
+		panel_2.add(buttonAtras);
+		buttonAtras.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		buttonAtras.setForeground(new Color(255, 153, 51));
+		buttonAtras.setBackground(new Color(255, 204, 51));
 		panelCentroConsultaPlatos.setLayout(new BorderLayout(0, 0));
 		panelScroll.setLayout(new GridLayout(0, 1, 0, 0));
 		panelCentroConsultaPlatos.add(panelScroll, BorderLayout.CENTER);
