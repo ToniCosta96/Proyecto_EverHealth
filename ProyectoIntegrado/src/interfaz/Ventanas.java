@@ -15,7 +15,7 @@ public class Ventanas extends JFrame{
 	/**
 	 * Create the frame.
 	 */
-	public Ventanas() {
+	public Ventanas(char ventanaDeInicio) {
 		cl=new CardLayout();
 		
 		setTitle("Ever Health- Crear usuario");
@@ -36,22 +36,17 @@ public class Ventanas extends JFrame{
 		cl.addLayoutComponent(planificacion, "Planificacion");
 		cl.addLayoutComponent(crearPlato, "CrearPlato");
 		//Añadir al contentPane
-		contentPane.add(menu);
-		contentPane.add(planificacion);
-		contentPane.add(crearPlato);
 		contentPane.add(crearUsuario);
+		contentPane.add(menu);
+		contentPane.add(crearPlato);
+		contentPane.add(planificacion);
 		
 		contentPane.setLayout(cl);
 		setContentPane(contentPane);
 		
-	}
-
-	public CardLayout getCardLayout(){
-		return this.cl;
-	}
-	
-	public JPanel getMenu(){
-		return this.menu;
+		if(ventanaDeInicio=='m'){
+			cl.next(contentPane);
+		}
 	}
 	
 	public void cambiapanel(String nombre){

@@ -3,6 +3,8 @@ package interfaz;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -77,6 +79,15 @@ public class InicioDeSesion extends JFrame {
 		contentPane.add(panelBotones);
 		
 		JButton btnNewButton = new JButton("Iniciar sesión.");
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Aquí se accede a la base de datos para introducir el usuario.
+				ventanas('m');
+				dispose();
+			}
+		});
 		panelBotones.add(btnNewButton);
 		
 		lblCrearUsuario = new JLabel("Crear usuario.");
@@ -98,15 +109,15 @@ public class InicioDeSesion extends JFrame {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventanas();
+				ventanas('c');
 				dispose();
 			}
 		});
 		panelBotones.add(lblCrearUsuario);
 	}
 	
-	public void ventanas(){
-		Ventanas frame = new Ventanas();
+	public void ventanas(char ventana){
+		Ventanas frame = new Ventanas(ventana);
 		frame.setVisible(true);
 	}
 }
