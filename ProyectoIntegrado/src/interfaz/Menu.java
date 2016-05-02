@@ -118,7 +118,7 @@ public class Menu extends JPanel implements ActionListener{
 		//Crear y mostrar la tabla de la planificación
 		String nombresColumnas[]= {"Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"};
 		table = new JTable();
-		String[] datosTabla= new String[5];
+		String[] datosTabla= new String[nombresColumnas.length];
 		DefaultTableModel dtm= new DefaultTableModel();
 		for(int columna=0;columna<nombresColumnas.length;columna++){
 			dtm.addColumn(nombresColumnas[columna]);
