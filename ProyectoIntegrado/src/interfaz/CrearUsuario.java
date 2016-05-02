@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 public class CrearUsuario extends JPanel implements ActionListener{
 	Ventanas ventanaPrincipal;
@@ -172,6 +173,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	private void seleccionarGenero(JPanel panelDatos2){
 		//Grupo de botones para seleccionar el género.
 		JPanel panelGenero = new JPanel();
+		panelGenero.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelGenero);
 		
 		rdbtnMasculino = new JRadioButton("Masculino.");
@@ -188,6 +190,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	private void seleccionarActividad(JPanel panelDatos2){
 		//Grupo de botones para seleccionar la actividad física.
 		JPanel panelActividadFisica = new JPanel();
+		panelActividadFisica.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelActividadFisica);
 		
 		rdbtnSedentario = new JRadioButton("Sedentario.");
@@ -209,6 +212,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	private void seleccionarObjetivo(JPanel panelDatos2){
 		//Grupo de botones para seleccionar el género.
 		JPanel panelObjetivo = new JPanel();
+		panelObjetivo.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelObjetivo);
 		
 		rdbtnAdelgazar = new JRadioButton("Adelgazar.");
