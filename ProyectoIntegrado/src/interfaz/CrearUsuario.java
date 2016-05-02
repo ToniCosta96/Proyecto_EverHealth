@@ -34,7 +34,6 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	private JRadioButton rdbtnAdelgazar;
 	private JRadioButton rdbtnEngordar;
 
-
 	/**
 	 * Create the frame.
 	 */
