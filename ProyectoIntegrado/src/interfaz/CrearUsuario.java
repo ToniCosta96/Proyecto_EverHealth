@@ -42,7 +42,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		
 		JPanel panelDatos2 = new JPanel();
 		panelDatos.add(panelDatos2);
-		panelDatos2.setLayout(new GridLayout(7, 2, 80, 10));
+		panelDatos2.setLayout(new GridLayout(8, 2, 80, 10));
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
@@ -90,25 +90,17 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(textFieldPeso);
 		textFieldPeso.setColumns(10);
 		
+		//Seleccionar género.
 		JLabel lblGnero = new JLabel("Género:");
 		lblGnero.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblGnero);
+		seleccionarGenero(panelDatos2);
 		
-		JPanel panelGenero = new JPanel();
-		panelDatos2.add(panelGenero);
-		
-		//Grupo de botones para seleccionar el género.
-		ButtonGroup grupoRdbtGenero = new ButtonGroup();
-		JRadioButton rdbtnMasculino = new JRadioButton("Masculino.");
-		rdbtnMasculino.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		panelGenero.add(rdbtnMasculino);
-		
-		JRadioButton rdbtnFemenino = new JRadioButton("Femenino.");
-		rdbtnFemenino.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		panelGenero.add(rdbtnFemenino);
-		grupoRdbtGenero.add(rdbtnMasculino);
-		grupoRdbtGenero.add(rdbtnFemenino);
-		//Grupo de botones para seleccionar el género.
+		//Seleccionar actividad.
+		JLabel lblActividadFsica = new JLabel("Actividad física:");
+		lblActividadFsica.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
+		panelDatos2.add(lblActividadFsica);
+		seleccionarActividad(panelDatos2);
 		
 		JPanel panelBotones = new JPanel();
 		add(panelBotones, BorderLayout.SOUTH);
@@ -163,5 +155,44 @@ public class CrearUsuario extends JPanel implements ActionListener{
 			ventanaPrincipal.setTitle("Ever Health- Menu Principal");
 			//si l'insert no ha anat bé --> mostrar JOptionPane amb misssatge d'error
 		}
+	}
+	
+	private void seleccionarGenero(JPanel panelDatos2){
+		//Grupo de botones para seleccionar el género.
+		JPanel panelGenero = new JPanel();
+		panelDatos2.add(panelGenero);
+		
+		ButtonGroup grupoRdbtGenero = new ButtonGroup();
+		JRadioButton rdbtnMasculino = new JRadioButton("Masculino.");
+		rdbtnMasculino.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panelGenero.add(rdbtnMasculino);
+		
+		JRadioButton rdbtnFemenino = new JRadioButton("Femenino.");
+		rdbtnFemenino.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panelGenero.add(rdbtnFemenino);
+		grupoRdbtGenero.add(rdbtnMasculino);
+		grupoRdbtGenero.add(rdbtnFemenino);
+	}
+	
+	private void seleccionarActividad(JPanel panelDatos2){
+		//Grupo de botones para seleccionar la actividad física.
+		JPanel panelActividadFisica = new JPanel();
+		panelDatos2.add(panelActividadFisica);
+		
+		JRadioButton rdbtnActividad1 = new JRadioButton("Sedentario.");
+		rdbtnActividad1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panelActividadFisica.add(rdbtnActividad1);
+		
+		JRadioButton rdbtnActividad2 = new JRadioButton("Ligeramente activo.");
+		rdbtnActividad2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panelActividadFisica.add(rdbtnActividad2);
+		
+		JRadioButton rdbtnActividad3 = new JRadioButton("Activo.");
+		rdbtnActividad3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panelActividadFisica.add(rdbtnActividad3);
+		ButtonGroup grupoRdbtActividad = new ButtonGroup();
+		grupoRdbtActividad.add(rdbtnActividad1);
+		grupoRdbtActividad.add(rdbtnActividad2);
+		grupoRdbtActividad.add(rdbtnActividad3);
 	}
 }
