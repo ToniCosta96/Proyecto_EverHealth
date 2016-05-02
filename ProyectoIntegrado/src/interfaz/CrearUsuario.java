@@ -24,6 +24,14 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	private JPasswordField passwordFieldConfirmar;
 	private JTextField textFieldAltura;
 	private JTextField textFieldPeso;
+	
+	private JRadioButton rdbtnMasculino;
+	private JRadioButton rdbtnFemenino;
+	private JRadioButton rdbtnSedentario;
+	private JRadioButton rdbtnLigeramenteActivo;
+	private JRadioButton rdbtnActivo;
+	private JRadioButton rdbtnAdelgazar;
+	private JRadioButton rdbtnEngordar;
 
 
 	/**
@@ -42,7 +50,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		
 		JPanel panelDatos2 = new JPanel();
 		panelDatos.add(panelDatos2);
-		panelDatos2.setLayout(new GridLayout(8, 2, 80, 10));
+		panelDatos2.setLayout(new GridLayout(9, 2, 80, 10));
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
@@ -102,6 +110,12 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(lblActividadFsica);
 		seleccionarActividad(panelDatos2);
 		
+		//Seleccionar objetivo.
+		JLabel lblObjetivo = new JLabel("Objetivo:");
+		lblObjetivo.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
+		panelDatos2.add(lblObjetivo);
+		seleccionarObjetivo(panelDatos2);
+		
 		JPanel panelBotones = new JPanel();
 		add(panelBotones, BorderLayout.SOUTH);
 		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.X_AXIS));
@@ -129,8 +143,6 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		btnGuardar.setActionCommand("CrearUsuarioBtnGuardar");
 		btnGuardar.addActionListener(this);
 		panelBotonesGuardar.add(btnGuardar);
-		
-		
 		
 	}
 
@@ -162,37 +174,52 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		JPanel panelGenero = new JPanel();
 		panelDatos2.add(panelGenero);
 		
-		ButtonGroup grupoRdbtGenero = new ButtonGroup();
-		JRadioButton rdbtnMasculino = new JRadioButton("Masculino.");
+		rdbtnMasculino = new JRadioButton("Masculino.");
 		rdbtnMasculino.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panelGenero.add(rdbtnMasculino);
 		
-		JRadioButton rdbtnFemenino = new JRadioButton("Femenino.");
+		rdbtnFemenino = new JRadioButton("Femenino.");
 		rdbtnFemenino.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panelGenero.add(rdbtnFemenino);
+		ButtonGroup grupoRdbtGenero = new ButtonGroup();
 		grupoRdbtGenero.add(rdbtnMasculino);
 		grupoRdbtGenero.add(rdbtnFemenino);
 	}
-	
 	private void seleccionarActividad(JPanel panelDatos2){
 		//Grupo de botones para seleccionar la actividad física.
 		JPanel panelActividadFisica = new JPanel();
 		panelDatos2.add(panelActividadFisica);
 		
-		JRadioButton rdbtnActividad1 = new JRadioButton("Sedentario.");
-		rdbtnActividad1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		panelActividadFisica.add(rdbtnActividad1);
+		rdbtnSedentario = new JRadioButton("Sedentario.");
+		rdbtnSedentario.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panelActividadFisica.add(rdbtnSedentario);
 		
-		JRadioButton rdbtnActividad2 = new JRadioButton("Ligeramente activo.");
-		rdbtnActividad2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		panelActividadFisica.add(rdbtnActividad2);
+		rdbtnLigeramenteActivo = new JRadioButton("Ligeramente activo.");
+		rdbtnLigeramenteActivo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panelActividadFisica.add(rdbtnLigeramenteActivo);
 		
-		JRadioButton rdbtnActividad3 = new JRadioButton("Activo.");
-		rdbtnActividad3.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		panelActividadFisica.add(rdbtnActividad3);
+		rdbtnActivo = new JRadioButton("Activo.");
+		rdbtnActivo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panelActividadFisica.add(rdbtnActivo);
 		ButtonGroup grupoRdbtActividad = new ButtonGroup();
-		grupoRdbtActividad.add(rdbtnActividad1);
-		grupoRdbtActividad.add(rdbtnActividad2);
-		grupoRdbtActividad.add(rdbtnActividad3);
+		grupoRdbtActividad.add(rdbtnSedentario);
+		grupoRdbtActividad.add(rdbtnLigeramenteActivo);
+		grupoRdbtActividad.add(rdbtnActivo);
+	}
+	private void seleccionarObjetivo(JPanel panelDatos2){
+		//Grupo de botones para seleccionar el género.
+		JPanel panelObjetivo = new JPanel();
+		panelDatos2.add(panelObjetivo);
+		
+		rdbtnAdelgazar = new JRadioButton("Adelgazar.");
+		rdbtnAdelgazar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panelObjetivo.add(rdbtnAdelgazar);
+		
+		rdbtnEngordar = new JRadioButton("Engordar.");
+		rdbtnEngordar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panelObjetivo.add(rdbtnEngordar);
+		ButtonGroup grupoRdbtObjetivo = new ButtonGroup();
+		grupoRdbtObjetivo.add(rdbtnAdelgazar);
+		grupoRdbtObjetivo.add(rdbtnEngordar);
 	}
 }
