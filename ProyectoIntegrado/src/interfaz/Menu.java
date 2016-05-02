@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Color;
+import java.awt.Dimension;
 
 public class Menu extends JPanel implements ActionListener{
 	private JTextField txtCaloriasRestantes;
@@ -116,14 +117,14 @@ public class Menu extends JPanel implements ActionListener{
 		
 		//Crear y mostrar la tabla de la planificación
 		String nombresColumnas[]= {"Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"};
-		String[] datosTabla= new String[nombresColumnas.length];
+		String[] datosTabla= new String[8];
 		DefaultTableModel dtm= new DefaultTableModel();
 		dtm.addColumn("");
 		for(int columna=0;columna<nombresColumnas.length;columna++){
 			dtm.addColumn(nombresColumnas[columna]);
 		}
 		for(int fila=0;fila<10;fila++){
-			for(int columna=0;columna<datosTabla.length;columna++){
+			for(int columna=1;columna<datosTabla.length;columna++){
 				datosTabla[columna]="Celda "+fila+", "+columna;
 			}
 			dtm.addRow(datosTabla);
