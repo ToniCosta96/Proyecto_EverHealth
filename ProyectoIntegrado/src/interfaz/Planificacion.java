@@ -165,7 +165,7 @@ public class Planificacion extends JPanel implements ActionListener{
 		}else if(accio.compareTo("siguiente")==0){
 			cl.next(panelCard);
 			numeroDia+=1;
-			if(numeroDia>=7){
+			if(numeroDia>6){
 				numeroDia=0;
 			}
 			textFieldDia.setText(dia[numeroDia].getNomDia());
