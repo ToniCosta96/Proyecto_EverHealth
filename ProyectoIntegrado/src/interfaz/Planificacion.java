@@ -177,6 +177,5 @@ public class Planificacion extends JPanel implements ActionListener{
 			}
 			textFieldDia.setText(dia[numeroDia].getNomDia());
 		}
-		System.out.println(numeroDia);
 	}
 }
