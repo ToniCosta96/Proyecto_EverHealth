@@ -12,13 +12,19 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
+import BDD.conexio;
 
 public class ConsultarAlimentos extends JPanel {
 	
 	Ventanas ventanaPrincipal;
 	private JTextField textFieldBusqueda;
+	public DefaultTableModel dtm;
+	public JTable tablaAlimentos;
 
 	public ConsultarAlimentos(Ventanas v) {
 		setLayout(new BorderLayout(0, 0));
@@ -68,6 +74,38 @@ public class ConsultarAlimentos extends JPanel {
 		panel_2.setBackground(new Color(255, 255, 153));
 		panelBusqueda.add(panel_2);
 		
+		JPanel panelScroll = new JPanel();
+		panelScroll.setBackground(new Color(255, 255, 204));
+		panelCentroConsultaAlimentos.add(panelScroll, BorderLayout.CENTER);
+		panelScroll.setLayout(new GridLayout(1, 1, 15, 15));
+		
+		
+		
+		JButton btnBusqueda = new JButton("Buscar");
+		btnBusqueda.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				panelScroll.removeAll();
+				dtm=new DefaultTableModel();
+				dtm.addColumn("Alimento");
+				dtm.addColumn("Kcal");
+					
+		        new conexio(dtm);
+				tablaAlimentos=new JTable(dtm);	
+				tablaAlimentos.setBackground(new Color(255, 255, 200));
+				
+				JScrollPane scrollPaneAlimentos = new JScrollPane(tablaAlimentos);
+				scrollPaneAlimentos.setBackground(new Color(255, 255, 220));
+				panelScroll.add(scrollPaneAlimentos);
+				panelScroll.updateUI();
+				
+				
+			}
+		});
+		panel_2.add(btnBusqueda);
+		
 		JButton buttonAtras = new JButton("Atras");
 		buttonAtras.addActionListener(new ActionListener() {			
 			@Override
@@ -81,14 +119,6 @@ public class ConsultarAlimentos extends JPanel {
 		buttonAtras.setAlignmentX(1.0f);
 		panel_2.add(buttonAtras);
 		
-		JPanel panelScroll = new JPanel();
-		panelScroll.setBackground(new Color(255, 255, 204));
-		panelCentroConsultaAlimentos.add(panelScroll, BorderLayout.CENTER);
-		panelScroll.setLayout(new GridLayout(1, 1, 15, 15));
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBackground(new Color(255, 255, 204));
-		panelScroll.add(scrollPane);
 		ventanaPrincipal=v;
 	}
 
