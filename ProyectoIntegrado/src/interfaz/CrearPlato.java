@@ -115,11 +115,18 @@ public class CrearPlato extends JPanel {
 		gbc_scrollPane.gridy = 5;
 		Añadir_Ingrediente.add(scrollPane, gbc_scrollPane);
 		
+		JButton BotonAtras = new JButton("Atras");
+		GridBagConstraints gbc_BotonAtras = new GridBagConstraints();
+		gbc_BotonAtras.insets = new Insets(0, 0, 5, 5);
+		gbc_BotonAtras.gridx = 0;
+		gbc_BotonAtras.gridy = 8;
+		Añadir_Ingrediente.add(BotonAtras, gbc_BotonAtras);
+		
 		JButton Guardar = new JButton("Guardar");
 		GridBagConstraints gbc_Guardar = new GridBagConstraints();
 		gbc_Guardar.insets = new Insets(0, 0, 5, 5);
 		gbc_Guardar.gridx = 1;
-		gbc_Guardar.gridy = 6;
+		gbc_Guardar.gridy = 8;
 		Añadir_Ingrediente.add(Guardar, gbc_Guardar);
 		ventanaPrincipal=v;
 		
