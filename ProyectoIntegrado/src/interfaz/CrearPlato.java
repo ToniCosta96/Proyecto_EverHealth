@@ -1,24 +1,20 @@
 package interfaz;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import javax.swing.BoxLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
-import java.awt.CardLayout;
-import java.awt.Color;
 import javax.swing.JScrollPane;
-import javax.swing.JButton;
-import java.awt.Font;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.JTextField;
 
 public class CrearPlato extends JPanel {
 	private JTextField txtCaloriasRestantes;
@@ -120,6 +116,12 @@ public class CrearPlato extends JPanel {
 		gbc_BotonAtras.insets = new Insets(0, 0, 5, 5);
 		gbc_BotonAtras.gridx = 0;
 		gbc_BotonAtras.gridy = 8;
+		BotonAtras.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ventanaPrincipal.cambiapanel("Menu");
+			}
+		});
 		Añadir_Ingrediente.add(BotonAtras, gbc_BotonAtras);
 		
 		JButton Guardar = new JButton("Guardar");
