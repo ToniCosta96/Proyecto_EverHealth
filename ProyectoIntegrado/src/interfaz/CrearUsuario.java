@@ -22,6 +22,7 @@ import javax.swing.border.BevelBorder;
 
 public class CrearUsuario extends JPanel implements ActionListener{
 	Ventanas ventanaPrincipal;
+	private char modoVentana='c';
 	private JTextField textFieldnombre;
 	private JTextField textFieldCorreo;
 	private JPasswordField passwordField;
@@ -183,9 +184,14 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		String accio = e.getActionCommand();
 
 		if(accio.compareTo("CrearUsuarioBtnAtras")==0){
-			InicioDeSesion frame = new InicioDeSesion();
-			frame.setVisible(true);
-			ventanaPrincipal.dispose();
+			if(modoVentana=='c'){
+				InicioDeSesion frame = new InicioDeSesion();
+				frame.setVisible(true);
+				ventanaPrincipal.dispose();
+			}else{
+				ventanaPrincipal.cambiapanel("Menu");
+				ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+			}
 		}
 		if(accio.compareTo("CrearUsuarioBtnGuardar")==0){
 			
@@ -255,5 +261,8 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		ButtonGroup grupoRdbtObjetivo = new ButtonGroup();
 		grupoRdbtObjetivo.add(rdbtnAdelgazar);
 		grupoRdbtObjetivo.add(rdbtnEngordar);
+	}
+	public void cambiarModoVentana(char modoVentana){
+		this.modoVentana=modoVentana;
 	}
 }

@@ -81,7 +81,7 @@ public class Menu extends JPanel implements ActionListener{
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventanaPrincipal.cambiapanel("PerfilDeUsuario");
+				ventanaPrincipal.cambiapanel("CrearUsuario");
 				ventanaPrincipal.setTitle("Ever Health- Perfil de usuario");
 			}
 		});

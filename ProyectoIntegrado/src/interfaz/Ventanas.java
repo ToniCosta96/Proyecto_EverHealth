@@ -12,6 +12,7 @@ public class Ventanas extends JFrame{
 	private Menu menu;
 	private Planificacion planificacion;
 	private CrearPlato crearPlato;
+	private CrearUsuario crearUsuario;
 	/**
 	 * Create the frame.
 	 */
@@ -25,18 +26,18 @@ public class Ventanas extends JFrame{
 		contentPane=new JPanel();
 		
 		//Crear paneles del cardLayout
-		CrearUsuario crearUsuario= new CrearUsuario(Ventanas.this);
+		crearUsuario= new CrearUsuario(Ventanas.this);
 		menu = new Menu(Ventanas.this);
 		planificacion= new Planificacion(Ventanas.this);
 		crearPlato= new CrearPlato(Ventanas.this);
 		
 		//Preparar paneles del cardLayout
 		if(ventanaDeInicio=='c'){
-			cl.addLayoutComponent(crearUsuario, "Crear Usuario");
+			cl.addLayoutComponent(crearUsuario, "CrearUsuario");
 			cl.addLayoutComponent(menu, "Menu");
 		}else if(ventanaDeInicio=='m'){
 			cl.addLayoutComponent(menu, "Menu");
-			cl.addLayoutComponent(crearUsuario, "Crear Usuario");
+			cl.addLayoutComponent(crearUsuario, "CrearUsuario");
 		}
 		cl.addLayoutComponent(planificacion, "Planificacion");
 		cl.addLayoutComponent(crearPlato, "CrearPlato");
@@ -54,6 +55,7 @@ public class Ventanas extends JFrame{
 		if(nombre.equals("Menu")){
 			cl.show(contentPane, "Menu");
 		}else if(nombre.equals("CrearUsuario")){
+			crearUsuario.cambiarModoVentana('p');
 			cl.show(contentPane, "CrearUsuario");
 		}else if(nombre.equals("Planificacion")){
 			cl.show(contentPane, "Planificacion");
@@ -69,11 +71,6 @@ public class Ventanas extends JFrame{
 			cl.addLayoutComponent(consultarAlimentos, "ConsultarAlimentos");
 			contentPane.add(consultarAlimentos);
 			cl.show(contentPane, "ConsultarAlimentos");
-		}else if(nombre.equals("PerfilDeUsuario")){
-			PerfilDeUsuario perfilDeUsuario=new PerfilDeUsuario(Ventanas.this);
-			cl.addLayoutComponent(perfilDeUsuario, "PerfilDeUsuario");
-			contentPane.add(perfilDeUsuario);
-			cl.show(contentPane, "PerfilDeUsuario");
 		}
 	}
 }
