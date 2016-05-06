@@ -92,7 +92,7 @@ public class ConsultarAlimentos extends JPanel {
 				dtm=new DefaultTableModel();
 				dtm.addColumn("Alimento");
 				dtm.addColumn("Kcal");
-					
+				//cridem a la conexio pasantli els parametros de select que torna la clase consultas	
 		        new conexio(new Consultas().consultarAlimentos(),dtm);
 				tablaAlimentos=new JTable(dtm);	
 				tablaAlimentos.setBackground(new Color(255, 255, 200));
