@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -14,7 +15,9 @@ public class conexio {
 	Connection con = null;
 	Object[] dadesBBDD;
 	DefaultTableModel dtmBBDD;
-	public conexio(DefaultTableModel dtm2){
+	ArrayList<String> select;
+	public conexio(ArrayList<String> select2,DefaultTableModel dtm2){
+		select=select2;
 		dtmBBDD=dtm2;
 		registraDriver();
 		
