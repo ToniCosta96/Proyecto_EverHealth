@@ -1,6 +1,7 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -16,6 +17,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 
 public class CrearUsuario extends JPanel implements ActionListener{
 	Ventanas ventanaPrincipal;
@@ -33,12 +36,14 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	private JRadioButton rdbtnActivo;
 	private JRadioButton rdbtnAdelgazar;
 	private JRadioButton rdbtnEngordar;
+	private JTextField textFieldCaloriasRecomendadas;
 
 	/**
 	 * Create the frame.
 	 */
 	public CrearUsuario(Ventanas v) {
 		final int tamanyoLetraLabels= 20;
+		final int tamanyoLetraFieldsTexts= 16;
 		ventanaPrincipal=v;
 		
 		setLayout(new BorderLayout(0, 0));
@@ -50,13 +55,14 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		
 		JPanel panelDatos2 = new JPanel();
 		panelDatos.add(panelDatos2);
-		panelDatos2.setLayout(new GridLayout(9, 2, 80, 10));
+		panelDatos2.setLayout(new GridLayout(10, 2, 80, 10));
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblNombre);
 		
 		textFieldnombre = new JTextField();
+		textFieldnombre.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(textFieldnombre);
 		textFieldnombre.setColumns(10);
 		
@@ -65,6 +71,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(lblCorreoElectrnico);
 		
 		textFieldCorreo = new JTextField();
+		textFieldCorreo.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(textFieldCorreo);
 		textFieldCorreo.setColumns(10);
 		
@@ -73,6 +80,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(lblPass);
 		
 		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(passwordField);
 		
 		JLabel lblConfirmarPass = new JLabel("Confirmar contrase\u00F1a:");
@@ -80,6 +88,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(lblConfirmarPass);
 		
 		passwordFieldConfirmar = new JPasswordField();
+		passwordFieldConfirmar.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(passwordFieldConfirmar);
 		
 		JLabel lblAltura = new JLabel("Altura:");
@@ -87,6 +96,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(lblAltura);
 		
 		textFieldAltura = new JTextField();
+		textFieldAltura.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(textFieldAltura);
 		textFieldAltura.setColumns(10);
 		
@@ -95,6 +105,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(lblPeso);
 		
 		textFieldPeso = new JTextField();
+		textFieldPeso.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(textFieldPeso);
 		textFieldPeso.setColumns(10);
 		
@@ -115,6 +126,26 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		lblObjetivo.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblObjetivo);
 		seleccionarObjetivo(panelDatos2);
+		
+		JLabel lblVacio = new JLabel("");
+		panelDatos2.add(lblVacio);
+		
+		JPanel panelCaloriasRecomendadas = new JPanel();
+		panelCaloriasRecomendadas.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panelDatos2.add(panelCaloriasRecomendadas);
+		panelCaloriasRecomendadas.setLayout(new GridLayout(1, 2, 0, 0));
+		
+		JLabel lblCalorasRecomendadas = new JLabel("Calorías recomendadas:");
+		lblCalorasRecomendadas.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panelCaloriasRecomendadas.add(lblCalorasRecomendadas);
+		
+		textFieldCaloriasRecomendadas = new JTextField();
+		textFieldCaloriasRecomendadas.setHorizontalAlignment(SwingConstants.CENTER);
+		textFieldCaloriasRecomendadas.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
+		textFieldCaloriasRecomendadas.setEditable(false);
+		panelCaloriasRecomendadas.add(textFieldCaloriasRecomendadas);
+		textFieldCaloriasRecomendadas.setColumns(10);
+		textFieldCaloriasRecomendadas.setText("Calorias");
 		
 		JPanel panelBotones = new JPanel();
 		add(panelBotones, BorderLayout.SOUTH);

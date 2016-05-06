@@ -2,6 +2,7 @@ package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -141,15 +142,15 @@ public class Menu extends JPanel implements ActionListener{
 			public void changeSelection(int rowIndex, int columnIndex,
 					boolean toggle, boolean extend) {
 				if (columnIndex == 0)
-					// Podemos llamar a changeSelecion() incrementando la columna en 1
-		            // o bien podríamos hacer directamente un return.
 					super.changeSelection(rowIndex, columnIndex + 1, toggle, extend);
 				else
 					super.changeSelection(rowIndex, columnIndex, toggle, extend);
 					}
 				};
 		datos.getColumnModel().getColumn(0).setCellRenderer(datos.getTableHeader().getDefaultRenderer());
+		
 		JScrollPane scrollPane = new JScrollPane(datos);
+		scrollPane.setPreferredSize(new Dimension(500, 500));
 		panelTabla.add(scrollPane);
 		panelDivisor.add(panelTabla);
 	}

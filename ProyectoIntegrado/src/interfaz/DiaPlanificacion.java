@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
 public class DiaPlanificacion extends JPanel {
-//
+	
 	private String dia;
 	private JTextField textFieldCaloriasDesayuno;
 	private JTextField textFieldCaloriasComida;
