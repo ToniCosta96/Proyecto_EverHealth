@@ -1,6 +1,8 @@
 package interfaz;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
@@ -24,13 +26,6 @@ public class Planificacion extends JPanel implements ActionListener{
 	private JTextField textFieldCalRestantes;
 	private JTextField textFieldDia;
 	
-	private DiaPlanificacion dia1;
-	private DiaPlanificacion dia2;
-	private DiaPlanificacion dia3;
-	private DiaPlanificacion dia4;
-	private DiaPlanificacion dia5;
-	private DiaPlanificacion dia6;
-	private DiaPlanificacion dia7;
 	private DiaPlanificacion dia[];
 	private int numeroDia=0;
 	
@@ -95,7 +90,8 @@ public class Planificacion extends JPanel implements ActionListener{
 		crearCardLayout(panelCard);
 		panelCard.setLayout(cl);
 		
-		panelCentral.add(panelCard, BorderLayout.CENTER);
+		JScrollPane panelScroll= new JScrollPane(panelCard);
+		panelCentral.add(panelScroll, BorderLayout.CENTER);
 		
 		JPanel panelInferior = new JPanel();
 		add(panelInferior, BorderLayout.SOUTH);
@@ -137,26 +133,14 @@ public class Planificacion extends JPanel implements ActionListener{
 		dia[5]=new DiaPlanificacion("Sábado");
 		dia[6]=new DiaPlanificacion("Domingo");
 		
-		cl.addLayoutComponent(dia[0], "1");
-		cl.addLayoutComponent(dia[1], "2");
-		cl.addLayoutComponent(dia[2], "3");
-		cl.addLayoutComponent(dia[3], "4");
-		cl.addLayoutComponent(dia[4], "5");
-		cl.addLayoutComponent(dia[5], "6");
-		cl.addLayoutComponent(dia[6], "7");
-		
-		panelCard.add(dia[0]);
-		panelCard.add(dia[1]);
-		panelCard.add(dia[2]);
-		panelCard.add(dia[3]);
-		panelCard.add(dia[4]);
-		panelCard.add(dia[5]);
-		panelCard.add(dia[6]);
+		for(int i=0;i<7;i++){
+			cl.addLayoutComponent(dia[i], ""+(i+1));
+			panelCard.add(dia[i]);
+		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		String accio=e.getActionCommand();
 		if(accio.compareTo("btnAtras")==0){
 			ventanaPrincipal.cambiapanel("Menu");
