@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import BDD.Consultas;
 import BDD.conexio;
 
 public class ConsultarAlimentos extends JPanel {
@@ -92,7 +93,7 @@ public class ConsultarAlimentos extends JPanel {
 				dtm.addColumn("Alimento");
 				dtm.addColumn("Kcal");
 					
-		        new conexio(dtm);
+		        new conexio(new Consultas().consultarAlimentos(),dtm);
 				tablaAlimentos=new JTable(dtm);	
 				tablaAlimentos.setBackground(new Color(255, 255, 200));
 				
