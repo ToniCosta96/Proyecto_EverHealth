@@ -195,7 +195,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		}
 		if(accio.compareTo("CrearUsuarioBtnGuardar")==0){
 			
-			//Comprovem que les dadesson correctes/
+			//Comprovem que les dadesson correctes
 			//Si tot esta correcte
 				//obrir connexio
 				//fer un insert
