@@ -3,6 +3,7 @@ package BDD;
 import java.util.ArrayList;
 
 public class Consultas {
+//	
 	ArrayList<String> select;
 	public Consultas(){
 	

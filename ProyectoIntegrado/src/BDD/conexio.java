@@ -17,7 +17,7 @@ public class conexio {
 	DefaultTableModel dtmBBDD;
 	ArrayList<String> select;
 	public conexio(ArrayList<String> select2,DefaultTableModel dtm2){
-		//strings pasados por la clase consultas
+		//strings pasados por la clase consultas.
 		select=select2;
 		dtmBBDD=dtm2;
 		registraDriver();
