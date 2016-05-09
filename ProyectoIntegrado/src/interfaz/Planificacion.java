@@ -91,6 +91,8 @@ public class Planificacion extends JPanel implements ActionListener{
 		panelCard.setLayout(cl);
 		
 		JScrollPane panelScroll= new JScrollPane(panelCard);
+		panelScroll.getVerticalScrollBar().setUnitIncrement(10);
+		panelScroll.getHorizontalScrollBar().setUnitIncrement(10);
 		panelCentral.add(panelScroll, BorderLayout.CENTER);
 		
 		JPanel panelInferior = new JPanel();
