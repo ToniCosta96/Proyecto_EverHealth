@@ -21,6 +21,7 @@ import BDD.Conexio;
 
 public class InicioDeSesion extends JFrame {
 
+	private static Conexio conexio;
 	private JPanel contentPane;
 	private JLabel lblNombreDeUsuario;
 	private JTextField textFieldNombre;
@@ -32,6 +33,7 @@ public class InicioDeSesion extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		conexio=new Conexio();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -119,7 +121,7 @@ public class InicioDeSesion extends JFrame {
 	}
 	
 	public void ventanas(char ventana){
-		Ventanas frame = new Ventanas(ventana, new Conexio());
+		Ventanas frame = new Ventanas(ventana, conexio);
 		frame.setVisible(true);
 	}
 }
