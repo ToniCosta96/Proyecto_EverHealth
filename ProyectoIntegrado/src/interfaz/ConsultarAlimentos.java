@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -88,19 +89,11 @@ public class ConsultarAlimentos extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				panelScroll.removeAll();
-				dtm=new DefaultTableModel();
-				dtm.addColumn("Alimento");
-				dtm.addColumn("Kcal");
-				//cridem a la conexio pasantli els parametros de select que torna la clase consultas.	
-		        new conexio(new Consultas().consultarAlimentos(),dtm);
-				tablaAlimentos=new JTable(dtm);	
-				tablaAlimentos.setBackground(new Color(255, 255, 200));
 				
-				JScrollPane scrollPaneAlimentos = new JScrollPane(tablaAlimentos);
-				scrollPaneAlimentos.setBackground(new Color(255, 255, 220));
-				panelScroll.add(scrollPaneAlimentos);
-				panelScroll.updateUI();
+				
+				cargarAlimentos(panelScroll);
+		        
+				
 				
 				
 			}
@@ -121,6 +114,26 @@ public class ConsultarAlimentos extends JPanel {
 		panel_2.add(buttonAtras);
 		
 		ventanaPrincipal=v;
+		cargarAlimentos(panelScroll);
+	}
+	private void cargarAlimentos(JPanel panelScroll){
+		panelScroll.removeAll();
+		dtm=new DefaultTableModel();
+		dtm.addColumn("Alimento");
+		dtm.addColumn("Kcal");
+		
+		
+		Consultas cons=new Consultas();
+		cons.consultarAlimentos();
+		cons.consultarDades(textFieldBusqueda.getText(),dtm);
+		
+		tablaAlimentos=new JTable(dtm);	
+		tablaAlimentos.setBackground(new Color(255, 255, 200));
+		
+		JScrollPane scrollPaneAlimentos = new JScrollPane(tablaAlimentos);
+		scrollPaneAlimentos.setBackground(new Color(255, 255, 220));
+		panelScroll.add(scrollPaneAlimentos);
+		panelScroll.updateUI();
 	}
 
 }

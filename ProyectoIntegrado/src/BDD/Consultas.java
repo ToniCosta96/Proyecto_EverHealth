@@ -1,19 +1,52 @@
 package BDD;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Consultas {
-//	
+import javax.swing.table.DefaultTableModel;
+
+public class Consultas extends conexio{
 	ArrayList<String> select;
+	DefaultTableModel dtmBBDD;
+	Object valores[];
+	String busqueda;
 	public Consultas(){
 	
 	}
-	public ArrayList<String> consultarAlimentos(){
+	public void consultarAlimentos(){
 		select=new ArrayList<String>();
 		select.add("SELECT Nombre,Kcal FROM alimentos");
 		select.add("Nombre");
 		select.add("Kcal");
-		return select;
 		
+		
+	}
+	
+	public void consultarDades(String busq,DefaultTableModel dtm2){
+		//strings pasados por la clase consultas.
+				valores=new Object[select.size()-1];
+				dtmBBDD=dtm2;
+				busqueda=busq;
+
+		try {
+			ResultSet rs = null;
+			Statement cmd = null;
+			cmd = (Statement) con.createStatement();
+			rs = cmd.executeQuery(select.get(0)+" WHERE "+select.get(1)+" LIKE "+"'%"+busqueda+"%'");
+			
+			while (rs.next()) {
+				for(int i=0;i<valores.length;i++){
+					valores[i]=rs.getString(select.get(i+1));
+				}
+				
+				dtmBBDD.addRow(valores);
+				
+
+				}
+
+				rs.close();
+		}catch(Exception e){
+		}
 	}
 }

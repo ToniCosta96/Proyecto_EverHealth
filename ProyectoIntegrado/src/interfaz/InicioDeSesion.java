@@ -17,6 +17,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import BDD.conexio;
+
 public class InicioDeSesion extends JFrame {
 
 	private JPanel contentPane;
@@ -30,6 +32,7 @@ public class InicioDeSesion extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		new conexio();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
