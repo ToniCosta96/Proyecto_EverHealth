@@ -5,8 +5,11 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import BDD.Conexio;
+
 public class Ventanas extends JFrame{
 
+	private Conexio conexio;
 	private JPanel contentPane;
 	private CardLayout cl;
 	private Menu menu;
@@ -16,7 +19,8 @@ public class Ventanas extends JFrame{
 	/**
 	 * Create the frame.
 	 */
-	public Ventanas(char ventanaDeInicio) {
+	public Ventanas(char ventanaDeInicio, Conexio conexio) {
+		this.conexio= conexio;
 		cl=new CardLayout();
 		
 		setTitle("Ever Health- Crear usuario");
@@ -67,7 +71,7 @@ public class Ventanas extends JFrame{
 			contentPane.add(consultarPlatos);
 			cl.show(contentPane, "ConsultarPlatos");
 		}else if(nombre.equals("ConsultarAlimentos")){
-			ConsultarAlimentos consultarAlimentos=new ConsultarAlimentos(Ventanas.this);
+			ConsultarAlimentos consultarAlimentos=new ConsultarAlimentos(Ventanas.this,conexio);
 			cl.addLayoutComponent(consultarAlimentos, "ConsultarAlimentos");
 			contentPane.add(consultarAlimentos);
 			cl.show(contentPane, "ConsultarAlimentos");

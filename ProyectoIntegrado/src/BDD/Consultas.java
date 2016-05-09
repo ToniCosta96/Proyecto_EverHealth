@@ -6,14 +6,19 @@ import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
-public class Consultas extends conexio{
+import com.mysql.jdbc.Connection;
+
+public class Consultas{
+	Connection con;
 	ArrayList<String> select;
 	DefaultTableModel dtmBBDD;
 	Object valores[];
 	String busqueda;
-	public Consultas(){
 	
+	public Consultas(Conexio conexio){
+		con= conexio.getConexio();
 	}
+	
 	public void consultarAlimentos(){
 		select=new ArrayList<String>();
 		select.add("SELECT Nombre,Kcal FROM alimentos");

@@ -19,16 +19,18 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import BDD.Consultas;
-import BDD.conexio;
+import BDD.Conexio;
 
 public class ConsultarAlimentos extends JPanel {
 	
-	Ventanas ventanaPrincipal;
+	private Conexio conexio;
+	private Ventanas ventanaPrincipal;
 	private JTextField textFieldBusqueda;
 	public DefaultTableModel dtm;
 	public JTable tablaAlimentos;
 
-	public ConsultarAlimentos(Ventanas v) {
+	public ConsultarAlimentos(Ventanas v, Conexio conexio) {
+		this.conexio=conexio;
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelTituloConsultaAlimentos = new JPanel();
@@ -123,7 +125,7 @@ public class ConsultarAlimentos extends JPanel {
 		dtm.addColumn("Kcal");
 		
 		
-		Consultas cons=new Consultas();
+		Consultas cons=new Consultas(conexio);
 		cons.consultarAlimentos();
 		cons.consultarDades(textFieldBusqueda.getText(),dtm);
 		

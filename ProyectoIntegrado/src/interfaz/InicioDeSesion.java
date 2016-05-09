@@ -17,7 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import BDD.conexio;
+import BDD.Conexio;
 
 public class InicioDeSesion extends JFrame {
 
@@ -32,7 +32,6 @@ public class InicioDeSesion extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		new conexio();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -120,7 +119,7 @@ public class InicioDeSesion extends JFrame {
 	}
 	
 	public void ventanas(char ventana){
-		Ventanas frame = new Ventanas(ventana);
+		Ventanas frame = new Ventanas(ventana, new Conexio());
 		frame.setVisible(true);
 	}
 }

@@ -1,23 +1,26 @@
 package BDD;
 
-import java.sql.Connection;
+
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.mysql.jdbc.Connection;
 
-public class conexio {
+
+public class Conexio {
 	
 	Connection con = null;
 	
 	
-	public conexio(){
+	public Conexio(){
 		registraDriver();
 	}
 
 	public void registraDriver(){
 		//...
 				try {
-				con = DriverManager.getConnection("jdbc:mysql://localhost/everhealth?user=root&password=");
+				con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/everhealth?user=root&password=");
 				// Otros y operaciones sobre la base de datos...
 				} catch (SQLException ex) {
 				// Mantener el control sobre el tipo de error
@@ -32,6 +35,9 @@ public class conexio {
 		}					
 	}
 	
+	public Connection getConexio(){
+		return con;
+	}
 	
 }
 	
