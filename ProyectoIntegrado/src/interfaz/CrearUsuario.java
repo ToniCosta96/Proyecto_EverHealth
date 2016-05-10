@@ -21,6 +21,8 @@ import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
 import BDD.Conexio;
+import BDD.Consultas;
+
 import java.awt.Color;
 
 public class CrearUsuario extends JPanel implements ActionListener{
@@ -207,6 +209,31 @@ public class CrearUsuario extends JPanel implements ActionListener{
 			//Comprovem que les dades son correctes
 			
 			if(comprobarCampos()){
+				String campos[]= new String[3];
+				int camposInt[]= new int[5];
+				campos[0]=textFieldnombre.getText();
+				campos[1]=textFieldCorreo.getText();
+				campos[2]=String.valueOf(passwordField.getPassword());
+				if(rdbtnMasculino.isSelected()){
+					camposInt[0]=0;
+				}else{
+					camposInt[0]=1;
+				}
+				camposInt[1]=Integer.parseInt(textFieldAltura.getText());
+				camposInt[2]=Integer.parseInt(textFieldPeso.getText());
+				if(rdbtnAdelgazar.isSelected()){
+					camposInt[3]=0;
+				}else{
+					camposInt[3]=1;
+				}
+				if(rdbtnLigeramenteActivo.isSelected()){
+					camposInt[4]=0;
+				}else if(rdbtnActivo.isSelected()){
+					camposInt[4]=1;
+				}else{
+					camposInt[4]=2;
+				}
+				new Consultas(conexio).registrarUsuario(campos, camposInt);
 				ventanaPrincipal.cambiapanel("Menu");
 				ventanaPrincipal.setTitle("Ever Health- Menu Principal");
 			}
