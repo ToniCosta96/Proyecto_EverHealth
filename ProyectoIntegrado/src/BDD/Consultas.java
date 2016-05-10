@@ -14,7 +14,9 @@ public class Consultas{
 	DefaultTableModel dtmBBDD;
 	Object valores[];
 	String busqueda;
-	
+	String[] dat;
+	int[] datint;
+	char existe;
 	public Consultas(Conexio conexio){
 		con= conexio.getConexio();
 	}
@@ -52,6 +54,40 @@ public class Consultas{
 
 				rs.close();
 		}catch(Exception e){
+		}
+	}
+	public void registrarUsuario(String[] datos,int[] datosint){
+		//strings pasados por la clase consultas.
+		dat=datos;
+		datint=datosint;
+		existe='n';
+		try {
+			ResultSet rs = null;
+			Statement cmd = null;
+			cmd = (Statement) con.createStatement();
+			rs = cmd.executeQuery("SELECT Nombre FROM Usuario");
+			
+			while (rs.next()) {
+				if(dat[0].equals(rs.getString("Nombre"))){
+					existe='s';
+				}
+				
+			}
+			if(existe=='n'){
+				
+			cmd.executeQuery("INSERT INTO Usuario(Nombre,Email,Contraseña) "+
+					"VALUES ("+dat[0]+","+dat[1]+","+dat[2]+")");
+			
+			cmd.executeQuery("INSERT INTO Usuario(Genero,Altura_cm,Peso_kg,Objetivo,Actividad) "+
+					"VALUES ("+datint[0]+","+datint[1]+","+datint[2]+","+datint[3]+","+datint[4]+")");
+			
+			System.out.println("Se ha registrado el usuario");
+			}else{
+				System.out.println("El usuario ya existe");
+			}
+			
+		}catch(Exception e){
+			System.out.println("Ha habido algun problema en el registro");
 		}
 	}
 }
