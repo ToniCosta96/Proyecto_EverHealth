@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -19,8 +20,12 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
+import BDD.Conexio;
+import java.awt.Color;
+
 public class CrearUsuario extends JPanel implements ActionListener{
-	Ventanas ventanaPrincipal;
+	private Conexio conexio;
+	private Ventanas ventanaPrincipal;
 	private char modoVentana='c';
 	private JTextField textFieldnombre;
 	private JTextField textFieldCorreo;
@@ -28,6 +33,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	private JPasswordField passwordFieldConfirmar;
 	private JTextField textFieldAltura;
 	private JTextField textFieldPeso;
+	private JLabel lblError;
 	
 	private JRadioButton rdbtnMasculino;
 	private JRadioButton rdbtnFemenino;
@@ -41,9 +47,10 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public CrearUsuario(Ventanas v) {
+	public CrearUsuario(Ventanas v, Conexio conexio) {
 		final int tamanyoLetraLabels= 20;
 		final int tamanyoLetraFieldsTexts= 16;
+		this.conexio=conexio;
 		ventanaPrincipal=v;
 		
 		setLayout(new BorderLayout(0, 0));
@@ -66,7 +73,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(textFieldnombre);
 		textFieldnombre.setColumns(10);
 		
-		JLabel lblCorreoElectrnico = new JLabel("Correo electrÃ³nico:");
+		JLabel lblCorreoElectrnico = new JLabel("Correo electrónico:");
 		lblCorreoElectrnico.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblCorreoElectrnico);
 		
@@ -109,14 +116,14 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(textFieldPeso);
 		textFieldPeso.setColumns(10);
 		
-		//Seleccionar gï¿½nero.
-		JLabel lblGnero = new JLabel("GÃ©nero:");
+		//Seleccionar género.
+		JLabel lblGnero = new JLabel("Género:");
 		lblGnero.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblGnero);
 		seleccionarGenero(panelDatos2);
 		
 		//Seleccionar actividad.
-		JLabel lblActividadFsica = new JLabel("Actividad fÃ­sica:");
+		JLabel lblActividadFsica = new JLabel("Actividad física:");
 		lblActividadFsica.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblActividadFsica);
 		seleccionarActividad(panelDatos2);
@@ -127,37 +134,15 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(lblObjetivo);
 		seleccionarObjetivo(panelDatos2);
 		
+		JLabel lblVacio = new JLabel("");
+		panelDatos2.add(lblVacio);
 		
-		//Seleccionar idioma
-		JPanel panelIdioma = new JPanel();
-
-		
-		panelIdioma.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		panelDatos2.add(panelIdioma);
-		
-		ButtonGroup idiomaGrupo = new ButtonGroup();
-		JRadioButton rdbtnCastellano = new JRadioButton("Castellano");rdbtnCastellano.setSelected(true);
-		rdbtnCastellano.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		JRadioButton rdbtnIngles = new JRadioButton("InglÃ©s");
-		rdbtnIngles.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		//AÃ±ado al grupo para solo poder seleccionar uno de los dos
-		idiomaGrupo.add(rdbtnIngles);
-		idiomaGrupo.add(rdbtnCastellano);
-		
-		panelIdioma.add(rdbtnIngles);
-		panelIdioma.add(rdbtnCastellano);
-		
-
-		
-		
-		
-		//CalorÃ­as recomendadas
 		JPanel panelCaloriasRecomendadas = new JPanel();
 		panelCaloriasRecomendadas.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panelDatos2.add(panelCaloriasRecomendadas);
 		panelCaloriasRecomendadas.setLayout(new GridLayout(1, 2, 0, 0));
 		
-		JLabel lblCalorasRecomendadas = new JLabel("CalorÃ­as recomendadas:");
+		JLabel lblCalorasRecomendadas = new JLabel("Calorías recomendadas:");
 		lblCalorasRecomendadas.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panelCaloriasRecomendadas.add(lblCalorasRecomendadas);
 		
@@ -169,7 +154,6 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		textFieldCaloriasRecomendadas.setColumns(10);
 		textFieldCaloriasRecomendadas.setText("Calorias");
 		
-		//BOTONES INFERIORES
 		JPanel panelBotones = new JPanel();
 		add(panelBotones, BorderLayout.SOUTH);
 		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.X_AXIS));
@@ -181,7 +165,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		fl_panelBotonesAtras.setAlignment(FlowLayout.LEFT);
 		panelBotones.add(panelBotonesAtras);
 		
-		JButton btnAtras = new JButton("AtrÃ¡s");
+		JButton btnAtras = new JButton("Atrás");
 		panelBotonesAtras.add(btnAtras);
 		btnAtras.setActionCommand("CrearUsuarioBtnAtras");
 		btnAtras.addActionListener(this);
@@ -196,6 +180,10 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.setActionCommand("CrearUsuarioBtnGuardar");
 		btnGuardar.addActionListener(this);
+		
+		lblError = new JLabel("");
+		lblError.setForeground(Color.RED);
+		panelBotonesGuardar.add(lblError);
 		panelBotonesGuardar.add(btnGuardar);
 		
 	}
@@ -216,20 +204,23 @@ public class CrearUsuario extends JPanel implements ActionListener{
 			}
 		}
 		if(accio.compareTo("CrearUsuarioBtnGuardar")==0){
+			//Comprovem que les dades son correctes
 			
-			//Comprovem que les dadesson correctes
+			if(comprobarCampos()){
+				ventanaPrincipal.cambiapanel("Menu");
+				ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+			}
 			//Si tot esta correcte
 				//obrir connexio
 				//fer un insert
-				//si l'insert ha anat bï¿½ --> 
-			ventanaPrincipal.cambiapanel("Menu");
-			ventanaPrincipal.setTitle("Ever Health- Menu Principal");
-			//si l'insert no ha anat bï¿½ --> mostrar JOptionPane amb misssatge d'error
+				//si l'insert ha anat bé --> 
+			
+			//si l'insert no ha anat bé --> mostrar JOptionPane amb misssatge d'error
 		}
 	}
 	
 	private void seleccionarGenero(JPanel panelDatos2){
-		//Grupo de botones para seleccionar el gï¿½nero.
+		//Grupo de botones para seleccionar el género.
 		JPanel panelGenero = new JPanel();
 		panelGenero.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelGenero);
@@ -246,7 +237,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		grupoRdbtGenero.add(rdbtnFemenino);
 	}
 	private void seleccionarActividad(JPanel panelDatos2){
-		//Grupo de botones para seleccionar la actividad fï¿½sica.
+		//Grupo de botones para seleccionar la actividad física.
 		JPanel panelActividadFisica = new JPanel();
 		panelActividadFisica.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelActividadFisica);
@@ -268,7 +259,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		grupoRdbtActividad.add(rdbtnActivo);
 	}
 	private void seleccionarObjetivo(JPanel panelDatos2){
-		//Grupo de botones para seleccionar el gï¿½nero.
+		//Grupo de botones para seleccionar el género.
 		JPanel panelObjetivo = new JPanel();
 		panelObjetivo.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelObjetivo);
@@ -283,6 +274,51 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		ButtonGroup grupoRdbtObjetivo = new ButtonGroup();
 		grupoRdbtObjetivo.add(rdbtnAdelgazar);
 		grupoRdbtObjetivo.add(rdbtnEngordar);
+	}
+	private boolean comprobarCampos(){
+		String mensajeError="";
+		if(!textFieldnombre.getText().isEmpty()){
+			if(passwordField.getPassword().length>0 && passwordFieldConfirmar.getPassword().length>0){
+				if(passwordField.getPassword().length>=4 && passwordFieldConfirmar.getPassword().length>=4){
+					if(Arrays.equals(passwordField.getPassword(), passwordFieldConfirmar.getPassword())){
+						//Contraseña introducida.
+						if(!textFieldAltura.getText().isEmpty() && !textFieldPeso.getText().isEmpty()){
+							if(comprobarNumero(textFieldAltura.getText()) && comprobarNumero(textFieldPeso.getText())){
+								//Correcto.
+								mensajeError="";
+								lblError.setText("");
+							}else{
+								mensajeError="El peso o la altura no se han introducido correctamente.";
+							}
+						}else{
+							mensajeError="Faltan campos por introducir.";
+						}
+					}else{
+						mensajeError="Las contraseñas no coinciden.";
+					}
+				}else{
+					mensajeError="La contraseña tiene que tener al menos una longitud de 4 caracteres.";
+				}
+			}else{
+				mensajeError="No se ha introducido ninguna contraseña.";
+			}
+		}else{
+			mensajeError="No se ha introducido el nombre.";
+		}
+		if(mensajeError.compareTo("")!=0){
+			lblError.setText(mensajeError);
+			return false;
+		}else{
+			return true;
+		}
+	}
+	private boolean comprobarNumero(String numero){
+		try{
+			Integer.parseInt(numero);
+			return true;
+		}catch(NumberFormatException nfe){
+			return false;
+		}
 	}
 	public void cambiarModoVentana(char modoVentana){
 		this.modoVentana=modoVentana;
