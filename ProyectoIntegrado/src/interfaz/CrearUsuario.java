@@ -66,7 +66,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(textFieldnombre);
 		textFieldnombre.setColumns(10);
 		
-		JLabel lblCorreoElectrnico = new JLabel("Correo electrónico:");
+		JLabel lblCorreoElectrnico = new JLabel("Correo electrÃ³nico:");
 		lblCorreoElectrnico.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblCorreoElectrnico);
 		
@@ -109,14 +109,14 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(textFieldPeso);
 		textFieldPeso.setColumns(10);
 		
-		//Seleccionar género.
-		JLabel lblGnero = new JLabel("Género:");
+		//Seleccionar gï¿½nero.
+		JLabel lblGnero = new JLabel("GÃ©nero:");
 		lblGnero.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblGnero);
 		seleccionarGenero(panelDatos2);
 		
 		//Seleccionar actividad.
-		JLabel lblActividadFsica = new JLabel("Actividad física:");
+		JLabel lblActividadFsica = new JLabel("Actividad fÃ­sica:");
 		lblActividadFsica.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblActividadFsica);
 		seleccionarActividad(panelDatos2);
@@ -127,15 +127,37 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(lblObjetivo);
 		seleccionarObjetivo(panelDatos2);
 		
-		JLabel lblVacio = new JLabel("");
-		panelDatos2.add(lblVacio);
 		
+		//Seleccionar idioma
+		JPanel panelIdioma = new JPanel();
+
+		
+		panelIdioma.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		panelDatos2.add(panelIdioma);
+		
+		ButtonGroup idiomaGrupo = new ButtonGroup();
+		JRadioButton rdbtnCastellano = new JRadioButton("Castellano");rdbtnCastellano.setSelected(true);
+		rdbtnCastellano.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		JRadioButton rdbtnIngles = new JRadioButton("InglÃ©s");
+		rdbtnIngles.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		//AÃ±ado al grupo para solo poder seleccionar uno de los dos
+		idiomaGrupo.add(rdbtnIngles);
+		idiomaGrupo.add(rdbtnCastellano);
+		
+		panelIdioma.add(rdbtnIngles);
+		panelIdioma.add(rdbtnCastellano);
+		
+
+		
+		
+		
+		//CalorÃ­as recomendadas
 		JPanel panelCaloriasRecomendadas = new JPanel();
 		panelCaloriasRecomendadas.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panelDatos2.add(panelCaloriasRecomendadas);
 		panelCaloriasRecomendadas.setLayout(new GridLayout(1, 2, 0, 0));
 		
-		JLabel lblCalorasRecomendadas = new JLabel("Calorías recomendadas:");
+		JLabel lblCalorasRecomendadas = new JLabel("CalorÃ­as recomendadas:");
 		lblCalorasRecomendadas.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panelCaloriasRecomendadas.add(lblCalorasRecomendadas);
 		
@@ -147,6 +169,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		textFieldCaloriasRecomendadas.setColumns(10);
 		textFieldCaloriasRecomendadas.setText("Calorias");
 		
+		//BOTONES INFERIORES
 		JPanel panelBotones = new JPanel();
 		add(panelBotones, BorderLayout.SOUTH);
 		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.X_AXIS));
@@ -158,7 +181,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		fl_panelBotonesAtras.setAlignment(FlowLayout.LEFT);
 		panelBotones.add(panelBotonesAtras);
 		
-		JButton btnAtras = new JButton("Atrás");
+		JButton btnAtras = new JButton("AtrÃ¡s");
 		panelBotonesAtras.add(btnAtras);
 		btnAtras.setActionCommand("CrearUsuarioBtnAtras");
 		btnAtras.addActionListener(this);
@@ -198,15 +221,15 @@ public class CrearUsuario extends JPanel implements ActionListener{
 			//Si tot esta correcte
 				//obrir connexio
 				//fer un insert
-				//si l'insert ha anat bé --> 
+				//si l'insert ha anat bï¿½ --> 
 			ventanaPrincipal.cambiapanel("Menu");
 			ventanaPrincipal.setTitle("Ever Health- Menu Principal");
-			//si l'insert no ha anat bé --> mostrar JOptionPane amb misssatge d'error
+			//si l'insert no ha anat bï¿½ --> mostrar JOptionPane amb misssatge d'error
 		}
 	}
 	
 	private void seleccionarGenero(JPanel panelDatos2){
-		//Grupo de botones para seleccionar el género.
+		//Grupo de botones para seleccionar el gï¿½nero.
 		JPanel panelGenero = new JPanel();
 		panelGenero.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelGenero);
@@ -223,7 +246,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		grupoRdbtGenero.add(rdbtnFemenino);
 	}
 	private void seleccionarActividad(JPanel panelDatos2){
-		//Grupo de botones para seleccionar la actividad física.
+		//Grupo de botones para seleccionar la actividad fï¿½sica.
 		JPanel panelActividadFisica = new JPanel();
 		panelActividadFisica.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelActividadFisica);
@@ -245,7 +268,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		grupoRdbtActividad.add(rdbtnActivo);
 	}
 	private void seleccionarObjetivo(JPanel panelDatos2){
-		//Grupo de botones para seleccionar el género.
+		//Grupo de botones para seleccionar el gï¿½nero.
 		JPanel panelObjetivo = new JPanel();
 		panelObjetivo.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelObjetivo);

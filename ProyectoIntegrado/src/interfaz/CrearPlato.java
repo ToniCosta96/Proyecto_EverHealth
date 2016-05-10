@@ -46,15 +46,15 @@ public class CrearPlato extends JPanel {
 		CaloriasTotales.setForeground(new Color(139, 0, 0));
 		panelSuperior.add(CaloriasTotales);
 		
-		JPanel Añadir_Ingrediente = new JPanel();
-		Añadir_Ingrediente.setBackground(new Color(255, 140, 0));
-		add(Añadir_Ingrediente, BorderLayout.CENTER);
-		GridBagLayout gbl_Añadir_Ingrediente = new GridBagLayout();
-		gbl_Añadir_Ingrediente.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_Añadir_Ingrediente.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_Añadir_Ingrediente.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_Añadir_Ingrediente.rowWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		Añadir_Ingrediente.setLayout(gbl_Añadir_Ingrediente);
+		JPanel AÃ±adir_Ingrediente = new JPanel();
+		AÃ±adir_Ingrediente.setBackground(new Color(255, 140, 0));
+		add(AÃ±adir_Ingrediente, BorderLayout.CENTER);
+		GridBagLayout gbl_AÃ±adir_Ingrediente = new GridBagLayout();
+		gbl_AÃ±adir_Ingrediente.columnWidths = new int[]{0, 0, 0, 0};
+		gbl_AÃ±adir_Ingrediente.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_AÃ±adir_Ingrediente.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_AÃ±adir_Ingrediente.rowWeights = new double[]{1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		AÃ±adir_Ingrediente.setLayout(gbl_AÃ±adir_Ingrediente);
 		
 		JLabel Cantidad = new JLabel("Buscador");
 		Cantidad.setForeground(new Color(255, 255, 0));
@@ -63,7 +63,7 @@ public class CrearPlato extends JPanel {
 		BuscadorPanel.anchor = GridBagConstraints.EAST;
 		BuscadorPanel.gridx = 0;
 		BuscadorPanel.gridy = 1;
-		Añadir_Ingrediente.add(Cantidad, BuscadorPanel);
+		AÃ±adir_Ingrediente.add(Cantidad, BuscadorPanel);
 		
 		textField = new JTextField();
 		GridBagConstraints BuscadorTxt = new GridBagConstraints();
@@ -71,7 +71,7 @@ public class CrearPlato extends JPanel {
 		BuscadorTxt.insets = new Insets(0, 0, 5, 5);
 		BuscadorTxt.gridx = 1;
 		BuscadorTxt.gridy = 1;
-		Añadir_Ingrediente.add(textField, BuscadorTxt);
+		AÃ±adir_Ingrediente.add(textField, BuscadorTxt);
 		textField.setColumns(10);
 		
 		JLabel lblAadir = new JLabel("+ A\u00F1adir");
@@ -81,7 +81,7 @@ public class CrearPlato extends JPanel {
 		AnadirTxt.insets = new Insets(0, 0, 5, 0);
 		AnadirTxt.gridx = 2;
 		AnadirTxt.gridy = 2;
-		Añadir_Ingrediente.add(lblAadir, AnadirTxt);
+		AÃ±adir_Ingrediente.add(lblAadir, AnadirTxt);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints ScrollBuscador = new GridBagConstraints();
@@ -90,7 +90,7 @@ public class CrearPlato extends JPanel {
 		ScrollBuscador.fill = GridBagConstraints.BOTH;
 		ScrollBuscador.gridx = 1;
 		ScrollBuscador.gridy = 2;
-		Añadir_Ingrediente.add(scrollPane, ScrollBuscador);
+		AÃ±adir_Ingrediente.add(scrollPane, ScrollBuscador);
 		
 		JButton BotonAtras = new JButton("Atras");
 		GridBagConstraints gbc_BotonAtras = new GridBagConstraints();
@@ -111,8 +111,8 @@ public class CrearPlato extends JPanel {
 		BorrarTxt.insets = new Insets(0, 0, 5, 0);
 		BorrarTxt.gridx = 2;
 		BorrarTxt.gridy = 9;
-		Añadir_Ingrediente.add(lblBorrar, BorrarTxt);
-		Añadir_Ingrediente.add(BotonAtras, gbc_BotonAtras);
+		AÃ±adir_Ingrediente.add(lblBorrar, BorrarTxt);
+		AÃ±adir_Ingrediente.add(BotonAtras, gbc_BotonAtras);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		GridBagConstraints ScrollAnadir = new GridBagConstraints();
@@ -120,7 +120,7 @@ public class CrearPlato extends JPanel {
 		ScrollAnadir.fill = GridBagConstraints.BOTH;
 		ScrollAnadir.gridx = 1;
 		ScrollAnadir.gridy = 10;
-		Añadir_Ingrediente.add(scrollPane_1, ScrollAnadir);
+		AÃ±adir_Ingrediente.add(scrollPane_1, ScrollAnadir);
 		
 		table = new JTable();
 		scrollPane_1.setViewportView(table);
@@ -130,7 +130,7 @@ public class CrearPlato extends JPanel {
 		gbc_btnGuardar.insets = new Insets(0, 0, 5, 0);
 		gbc_btnGuardar.gridx = 2;
 		gbc_btnGuardar.gridy = 10;
-		Añadir_Ingrediente.add(btnGuardar, gbc_btnGuardar);
+		AÃ±adir_Ingrediente.add(btnGuardar, gbc_btnGuardar);
 		ventanaPrincipal=v;
 		
 	
