@@ -22,6 +22,7 @@ public class EmailVentana extends JDialog {
 		setBounds(400, 200, 300, 180);
 		setResizable(false);
 		setModalityType(DEFAULT_MODALITY_TYPE);
+		setTitle("Confirmar correo electrónico");
 		getContentPane().setLayout(new BorderLayout());
 		{
 			JLabel lblPregunta = new JLabel("\u00BFDeseas enviar la planificaci\u00F3n al siguiente correo?");
@@ -47,13 +48,13 @@ public class EmailVentana extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Enviar");
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
