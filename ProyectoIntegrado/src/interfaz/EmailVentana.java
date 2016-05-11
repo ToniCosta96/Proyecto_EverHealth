@@ -21,7 +21,12 @@ public class EmailVentana extends JDialog {
 	public EmailVentana() {
 		setBounds(400, 200, 300, 180);
 		setResizable(false);
+		setModalityType(DEFAULT_MODALITY_TYPE);
 		getContentPane().setLayout(new BorderLayout());
+		{
+			JLabel lblPregunta = new JLabel("\u00BFDeseas enviar la planificaci\u00F3n al siguiente correo?");
+			getContentPane().add(lblPregunta, BorderLayout.NORTH);
+		}
 		FlowLayout fl_contentPanel = new FlowLayout();
 		fl_contentPanel.setHgap(10);
 		fl_contentPanel.setVgap(45);
