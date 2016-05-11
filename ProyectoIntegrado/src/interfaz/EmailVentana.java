@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
-public class EmailVentana extends JPanel {
+public class EmailVentana extends javax.swing.JDialog  {
 	Email em = new Email();
 	
 	private JTextField EmailTxT;
@@ -21,17 +21,17 @@ public class EmailVentana extends JPanel {
 	 */
 	public EmailVentana() {
 		setBackground(new Color(255, 215, 0));
-		setLayout(null);
+		getContentPane().setLayout(null);
 		
 		JLabel LabelEmail = new JLabel("Email:");
 		LabelEmail.setForeground(new Color(255, 69, 0));
 		LabelEmail.setBackground(new Color(255, 69, 0));
 		LabelEmail.setBounds(85, 74, 46, 14);
-		add(LabelEmail);
+		getContentPane().add(LabelEmail);
 		
 		EmailTxT = new JTextField();
 		EmailTxT.setBounds(182, 71, 86, 20);
-		add(EmailTxT);
+		getContentPane().add(EmailTxT);
 		EmailTxT.setColumns(10);
 		
 		
@@ -41,16 +41,16 @@ public class EmailVentana extends JPanel {
 				em.ConectaMail(EmailTxT.getText());
 			}
 		});
-		BotonEnviar.setBounds(290, 242, 89, 23);
-		add(BotonEnviar);
+		BotonEnviar.setBounds(273, 212, 89, 23);
+		getContentPane().add(BotonEnviar);
 		
 		JButton BotonAtras = new JButton("Atras");
 		BotonAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		BotonAtras.setBounds(42, 242, 89, 23);
-		add(BotonAtras);
+		BotonAtras.setBounds(77, 212, 89, 23);
+		getContentPane().add(BotonAtras);
 
 	}
 	
