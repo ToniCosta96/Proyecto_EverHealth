@@ -3,14 +3,18 @@ package interfaz;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import BDD.Email;
+
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
 public class EmailVentana extends JPanel {
+	Email em = new Email();
+	
 	private JTextField EmailTxT;
-	private JTextField PassTxT;
 
 	/**
 	 * Create the panel.
@@ -30,19 +34,11 @@ public class EmailVentana extends JPanel {
 		add(EmailTxT);
 		EmailTxT.setColumns(10);
 		
-		JLabel LabelPass = new JLabel("Contrase\u00F1a:");
-		LabelPass.setForeground(new Color(255, 69, 0));
-		LabelPass.setBounds(85, 134, 75, 14);
-		add(LabelPass);
-		
-		PassTxT = new JTextField();
-		PassTxT.setBounds(182, 131, 86, 20);
-		add(PassTxT);
-		PassTxT.setColumns(10);
 		
 		JButton BotonEnviar = new JButton("Enviar");
 		BotonEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				em.ConectaMail(EmailTxT.getText());
 			}
 		});
 		BotonEnviar.setBounds(290, 242, 89, 23);
@@ -57,4 +53,6 @@ public class EmailVentana extends JPanel {
 		add(BotonAtras);
 
 	}
+	
+
 }
