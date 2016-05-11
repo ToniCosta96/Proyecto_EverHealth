@@ -14,12 +14,14 @@ public class Email {
 	private final Properties prop = new Properties();
 	
 	
+	public String Email;
+	public String Pass;
 
 	private Session sesion; // CLASE ENCARGADA DE RECOGER LAS VARIABLES DE LA
 							// CLASE PROPERTIES Y CONSTRUIRA UNA SESION CON
 							// ELLAS
 
-	private void ConectaMail() {
+	private void ConectaMail(String mail) {
 
 		prop.put("mail.smtp.host", "mail.gmail.com"); // smtp ES EL SERVIDOR RESERVADO PARA ENVIO DE EMAILS
 		prop.put("mail.smtp.starttls.enable", "true"); // INSTANCIAMOS EL SERVIDOR COMO TRUE
@@ -31,8 +33,8 @@ public class Email {
 
 		
 
-		sesion = Session.getDefaultInstance(prop,
-		   		 new javax.mail.Authenticator() {
+		sesion = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+			
  protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
    				 
    	 return new javax.mail.PasswordAuthentication("everhealthdam@gmail.com","alpatodam");
@@ -48,7 +50,7 @@ public class Email {
 			MimeMessage prueba = new MimeMessage(sesion); // LLAMAR DESDE UNA CLASE MIMESSAGE LLAMADA prueba A LA SESION PREV CREADA
 			
 			prueba.setFrom(new InternetAddress("everhealthdam@gmailcom")); 
-			prueba.addRecipient(Message.RecipientType.TO, new InternetAddress());// RECIBE LA DIRECC DEL EMISOR TIPO INTERN.ADRESS, PASA EL CONTEN. A STRING
+			prueba.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail));// RECIBE LA DIRECC DEL EMISOR TIPO INTERN.ADRESS, PASA EL CONTEN. A STRING
 			
 			prueba.setSubject("PRUEBA"); // ASUNTO
 			prueba.setText("TEXTO A VER QUE SALE"); // CONTENIDO DEL MAIL
