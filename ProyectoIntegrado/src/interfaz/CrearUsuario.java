@@ -179,14 +179,18 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		fl_panelBotonesGuardar.setAlignment(FlowLayout.RIGHT);
 		panelBotones.add(panelBotonesGuardar);
 		
-		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.setActionCommand("CrearUsuarioBtnGuardar");
-		btnGuardar.addActionListener(this);
+		JPanel panelBoxBotonesGuardar = new JPanel();
+		panelBotonesGuardar.add(panelBoxBotonesGuardar);
+		panelBoxBotonesGuardar.setLayout(new BoxLayout(panelBoxBotonesGuardar, BoxLayout.X_AXIS));
 		
 		lblError = new JLabel("");
+		panelBoxBotonesGuardar.add(lblError);
 		lblError.setForeground(Color.RED);
-		panelBotonesGuardar.add(lblError);
-		panelBotonesGuardar.add(btnGuardar);
+		
+		JButton btnGuardar = new JButton("Guardar");
+		panelBoxBotonesGuardar.add(btnGuardar);
+		btnGuardar.setActionCommand("CrearUsuarioBtnGuardar");
+		btnGuardar.addActionListener(this);
 		
 	}
 

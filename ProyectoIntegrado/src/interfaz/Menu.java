@@ -85,6 +85,9 @@ public class Menu extends JPanel implements ActionListener{
 				ventanaPrincipal.setTitle("Ever Health- Perfil de usuario");
 			}
 		});
+		
+		JButton btnEnviarPlanificacin = new JButton("Enviar planificaci\u00F3n por correo");
+		panelIrAlPerfil.add(btnEnviarPlanificacin);
 		panelIrAlPerfil.add(lblIrAlPerfil);
 		
 		JPanel panelDivisor = new JPanel();
