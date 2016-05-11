@@ -87,6 +87,8 @@ public class Menu extends JPanel implements ActionListener{
 		});
 		
 		JButton btnEnviarPlanificacin = new JButton("Enviar planificaci\u00F3n por correo");
+		btnEnviarPlanificacin.setActionCommand("btnEnviarPlanificacin");
+		btnEnviarPlanificacin.addActionListener(this);
 		panelIrAlPerfil.add(btnEnviarPlanificacin);
 		panelIrAlPerfil.add(lblIrAlPerfil);
 		
@@ -173,6 +175,8 @@ public class Menu extends JPanel implements ActionListener{
 		}else if(accio.compareTo("MenuBtnCrearPlato")==0){
 			ventanaPrincipal.cambiapanel("CrearPlato");
 			ventanaPrincipal.setTitle("Ever Health- Crear plato");
+		}else if(accio.compareTo("btnEnviarPlanificacin")==0){
+			
 		}
 	}
 }
