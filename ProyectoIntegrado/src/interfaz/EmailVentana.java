@@ -1,58 +1,58 @@
 package interfaz;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import BDD.Email;
-
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
-public class EmailVentana extends javax.swing.JDialog  {
-	Email em = new Email();
-	
-	private JTextField EmailTxT;
+public class EmailVentana extends JDialog {
+
+	private final JPanel contentPanel = new JPanel();
+	private JTextField textFieldCorreo;
 
 	/**
-	 * Create the panel.
+	 * Create the dialog.
 	 */
 	public EmailVentana() {
-		setBackground(new Color(255, 215, 0));
-		getContentPane().setLayout(null);
-		
-		JLabel LabelEmail = new JLabel("Email:");
-		LabelEmail.setForeground(new Color(255, 69, 0));
-		LabelEmail.setBackground(new Color(255, 69, 0));
-		LabelEmail.setBounds(85, 74, 46, 14);
-		getContentPane().add(LabelEmail);
-		
-		EmailTxT = new JTextField();
-		EmailTxT.setBounds(182, 71, 86, 20);
-		getContentPane().add(EmailTxT);
-		EmailTxT.setColumns(10);
-		
-		
-		JButton BotonEnviar = new JButton("Enviar");
-		BotonEnviar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				em.ConectaMail(EmailTxT.getText());
+		setBounds(400, 200, 300, 180);
+		setResizable(false);
+		getContentPane().setLayout(new BorderLayout());
+		FlowLayout fl_contentPanel = new FlowLayout();
+		fl_contentPanel.setHgap(10);
+		fl_contentPanel.setVgap(45);
+		contentPanel.setLayout(fl_contentPanel);
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		{
+			JLabel lblCorreo = new JLabel("Correo:");
+			contentPanel.add(lblCorreo);
+		}
+		{
+			textFieldCorreo = new JTextField();
+			contentPanel.add(textFieldCorreo);
+			textFieldCorreo.setColumns(10);
+		}
+		{
+			JPanel buttonPane = new JPanel();
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			{
+				JButton okButton = new JButton("OK");
+				okButton.setActionCommand("OK");
+				buttonPane.add(okButton);
+				getRootPane().setDefaultButton(okButton);
 			}
-		});
-		BotonEnviar.setBounds(273, 212, 89, 23);
-		getContentPane().add(BotonEnviar);
-		
-		JButton BotonAtras = new JButton("Atras");
-		BotonAtras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			{
+				JButton cancelButton = new JButton("Cancel");
+				cancelButton.setActionCommand("Cancel");
+				buttonPane.add(cancelButton);
 			}
-		});
-		BotonAtras.setBounds(77, 212, 89, 23);
-		getContentPane().add(BotonAtras);
-
+		}
 	}
-	
 
 }

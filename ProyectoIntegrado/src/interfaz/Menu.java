@@ -176,7 +176,7 @@ public class Menu extends JPanel implements ActionListener{
 			ventanaPrincipal.cambiapanel("CrearPlato");
 			ventanaPrincipal.setTitle("Ever Health- Crear plato");
 		}else if(accio.compareTo("btnEnviarPlanificacin")==0){
-			new EmailVentana();
+			new EmailVentana().setVisible(true);
 		}
 	}
 }
