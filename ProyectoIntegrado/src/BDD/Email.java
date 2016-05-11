@@ -21,7 +21,7 @@ public class Email {
 							// CLASE PROPERTIES Y CONSTRUIRA UNA SESION CON
 							// ELLAS
 
-	private void ConectaMail(String mail) {
+	public void ConectaMail(String mail) {
 
 		prop.put("mail.smtp.host", "mail.gmail.com"); // smtp ES EL SERVIDOR RESERVADO PARA ENVIO DE EMAILS
 		prop.put("mail.smtp.starttls.enable", "true"); // INSTANCIAMOS EL SERVIDOR COMO TRUE
@@ -56,7 +56,7 @@ public class Email {
 			prueba.setText("TEXTO A VER QUE SALE"); // CONTENIDO DEL MAIL
 			
 			Transport t = sesion.getTransport("smtp");  // CREAR INSTANCIA DE PROPOTOCOLO DE TRANSPORTE
-		
+
 			 JOptionPane.showMessageDialog(null, "Mensaje enviado");
 			t.close();
 		
