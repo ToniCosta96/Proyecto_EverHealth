@@ -1,54 +1,43 @@
 package BDD;
 
+import java.net.PasswordAuthentication;
 import java.util.Properties;
 
-
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 
 public class Email {
-
-		
-	 // CLASE ENCARGADA DE RECOGER LAS VARIABLES DE LA
-							// CLASE PROPERTIES Y CONSTRUIRA UNA SESION CON
-							// ELLAS
-
-	public void ConectaMail(String mail) {
-		Properties prop = new Properties();
-		prop.put("mail.smtp.host", "stmp.gmail.com"); // smtp ES EL SERVIDOR RESERVADO PARA ENVIO DE EMAILS
-		prop.put("mail.smtp.socketFactory.port", "465"); // PUERTO ASIGNADO A CONEXIONES ADMITIDAS POR SSL (CONEXION DE SEGURIDAD)
-		prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		prop.put("mail.smtp.auth", "true");
-		prop.put("mail.smtp.port", "true");
-
-		
-	Session sesion = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
-			
-		protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
-   				 
-   	    return new javax.mail.PasswordAuthentication("everhealthdam@gmail.com","alpatodam");
-
- }
-	 
-	 
-	    }
-	   		);
-
-		
+    
+public void ConectaMail(String email){
+    Properties props = new Properties();
+    props.put("mail.smtp.host", "smtp.gmail.com");
+    props.put("mail.smtp.socketFactory.port", "465");
+    props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+    props.put("mail.smtp.auth", "true");
+    props.put("mail.smtp.port", "true");
+    
+    Session session = Session.getDefaultInstance(
+            props, 
+            new javax.mail.Authenticator() {
+                protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
+                    
+                    return new javax.mail.PasswordAuthentication("app.everhealth@gmail.com","alpatodam");
+                                
+                }}
+            );
+    
     try {
-      	 Message message = new MimeMessage(sesion);
-      	 message.setFrom(new InternetAddress(mail));
-      	 message.setRecipients (Message.RecipientType.TO, InternetAddress.parse(mail));
-      	 message.setSubject("PUTA VES NANO");
-      	 message.setText("Hola, gracias por usar nuestra aplicacion, estamos trabajando en mejorarla");;
-      	 Transport.send(message);
-      	 JOptionPane.showMessageDialog(null, "Mensaje enviado");
-       } catch (Exception e) {
-      	 
-       }
-   }    
-   }
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress("app.everhealth@gmail.com"));
+        message.setRecipients (Message.RecipientType.TO, InternetAddress.parse(email));
+        message.setSubject("Bienvenido a Ever Health");
+        message.setText("Bienvenido a Ever Health");;
+        Transport.send(message);
+        JOptionPane.showMessageDialog(null, "Mensaje enviado");
+    } catch (Exception e) {    
+    	System.out.println("ERROR");
+    }
+    }    
+}
