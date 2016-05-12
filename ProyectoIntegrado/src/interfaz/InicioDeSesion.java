@@ -91,6 +91,7 @@ public class InicioDeSesion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//Aquí se accede a la base de datos para introducir el usuario.
 				if(new Consultas(conexio).iniciarSesionUsuario(textFieldNombre.getText(), String.valueOf(passwordField.getPassword()))){
+					conexio.setUsuario(textFieldNombre.getText());
 					ventanas('m');
 					dispose();
 				}else{
