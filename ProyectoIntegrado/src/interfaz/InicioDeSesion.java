@@ -12,6 +12,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -93,11 +94,14 @@ public class InicioDeSesion extends JFrame {
 					ventanas('m');
 					dispose();
 				}else{
+					//Mostrar mensaje de error.
+					JOptionPane.showMessageDialog(null,
+						    "Usuario o contraseña incorrectos.",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
 					//Quitar
 					ventanas('m');
 					dispose();
-					//
-					System.out.println("Usuario incorrecto");
 				}
 			}
 		});
