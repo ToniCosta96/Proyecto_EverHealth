@@ -241,7 +241,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 				}else{
 					datosDeUsuario.setActividad(2);
 				}
-				
+				//
 				new Consultas(conexio).registrarUsuario(datosDeUsuario);
 				ventanaPrincipal.cambiapanel("Menu");
 				ventanaPrincipal.setTitle("Ever Health- Menu Principal");
