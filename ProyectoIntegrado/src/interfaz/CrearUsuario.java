@@ -1,12 +1,14 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -22,8 +24,6 @@ import javax.swing.border.BevelBorder;
 
 import BDD.Conexio;
 import BDD.Consultas;
-
-import java.awt.Color;
 
 public class CrearUsuario extends JPanel implements ActionListener{
 	private Conexio conexio;
@@ -207,6 +207,8 @@ public class CrearUsuario extends JPanel implements ActionListener{
 			}else{
 				ventanaPrincipal.cambiapanel("Menu");
 				ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+				//Quitar mensaje de error.
+				lblError.setText("");
 			}
 		}
 		if(accio.compareTo("CrearUsuarioBtnGuardar")==0){
@@ -258,6 +260,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		
 		rdbtnMasculino = new JRadioButton("Masculino.");
 		rdbtnMasculino.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		rdbtnMasculino.setSelected(true);
 		panelGenero.add(rdbtnMasculino);
 		
 		rdbtnFemenino = new JRadioButton("Femenino.");
@@ -275,6 +278,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		
 		rdbtnSedentario = new JRadioButton("Sedentario.");
 		rdbtnSedentario.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		rdbtnSedentario.setSelected(true);
 		panelActividadFisica.add(rdbtnSedentario);
 		
 		rdbtnLigeramenteActivo = new JRadioButton("Ligeramente activo.");
@@ -297,6 +301,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		
 		rdbtnAdelgazar = new JRadioButton("Adelgazar.");
 		rdbtnAdelgazar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		rdbtnAdelgazar.setSelected(true);
 		panelObjetivo.add(rdbtnAdelgazar);
 		
 		rdbtnEngordar = new JRadioButton("Engordar.");
@@ -333,6 +338,14 @@ public class CrearUsuario extends JPanel implements ActionListener{
 			}else{
 				mensajeError="No se ha introducido ninguna contraseña.";
 			}
+			//Comprobar correo electrónico
+			if(textFieldCorreo.getText().isEmpty()){
+				mensajeError+=" No se ha introducido ningún correo electrónico.";
+			}else{
+				if(comprobarCorreo(textFieldCorreo.getText())==false){
+					mensajeError+=" El correo electrónico no se ha introducido correctamente.";
+				}
+			}
 		}else{
 			mensajeError="No se ha introducido el nombre.";
 		}
@@ -350,6 +363,13 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		}catch(NumberFormatException nfe){
 			return false;
 		}
+	}
+	private boolean comprobarCorreo(String correo){
+		Pattern p = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+		if (p.matcher(correo).find())
+		    return true;
+		else
+		    return false;
 	}
 	public void cambiarModoVentana(char modoVentana){
 		this.modoVentana=modoVentana;
