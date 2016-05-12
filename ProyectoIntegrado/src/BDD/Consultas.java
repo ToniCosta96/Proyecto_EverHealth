@@ -107,10 +107,10 @@ public class Consultas{
 		}
 	}
 	
-	public char iniciarSesionUsuario(String nombre, String contrasenya){
+	public boolean iniciarSesionUsuario(String nombre, String contrasenya){
 		String nom=nombre;
 		String pass=contrasenya;
-		char correcta='n';
+		boolean correcta=false;
 		
 		try {
 			ResultSet rs = null;
@@ -138,7 +138,7 @@ public class Consultas{
 					
 					while (rs.next()) {
 						if(pass.equals(rs.getString("Contraseña"))){
-							correcta='s';
+							correcta=true;
 						}					
 						
 					}			

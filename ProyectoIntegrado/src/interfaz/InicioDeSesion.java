@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import BDD.Conexio;
+import BDD.Consultas;
 
 public class InicioDeSesion extends JFrame {
 
@@ -88,8 +89,16 @@ public class InicioDeSesion extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Aquí se accede a la base de datos para introducir el usuario.
-				ventanas('m');
-				dispose();
+				if(new Consultas(conexio).iniciarSesionUsuario(textFieldNombre.getText(), lblContrasea.getText())){
+					ventanas('m');
+					dispose();
+				}else{
+					//Quitar
+					ventanas('m');
+					dispose();
+					//
+					System.out.println("Usuario incorrecto");
+				}
 			}
 		});
 		panelBotones.add(btnNewButton);
