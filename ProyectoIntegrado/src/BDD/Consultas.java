@@ -154,7 +154,7 @@ public class Consultas{
 				return correcta;
 	}
 	
-	public String[] consultarStringUsuari(String nombre){	
+	public String[] consultarStringUsuario(String nombre){	
 		String [] stringUsuario=new String[3];
 		
 		try {
@@ -178,7 +178,7 @@ public class Consultas{
 		return stringUsuario;
 	}
 	
-	public int[] consultarIntUsuari(String nombre){	
+	public int[] consultarIntUsuario(String nombre){	
 		int [] intUsuario=new int[3];
 		
 		try {
@@ -199,6 +199,21 @@ public class Consultas{
 		}catch(Exception e){
 		}
 		return intUsuario;
+	}
+	
+	public DatosDeUsuario datosUsuario(String nom){
+		DatosDeUsuario ddu=new DatosDeUsuario();
+		String sU[]=consultarStringUsuario(nom);
+		int iU[]=consultarIntUsuario(nom);
+		ddu.setNombre(sU[0]);
+		ddu.setEmail(sU[1]);
+		ddu.setContrasenya(sU[2]);
+		ddu.setGenero(iU[0]);
+		ddu.setAltura(iU[1]);
+		ddu.setPeso(iU[2]);
+		ddu.setObjetivo(iU[3]);
+		ddu.setActividad(iU[4]);
+		return ddu;
 	}
 			
 }
