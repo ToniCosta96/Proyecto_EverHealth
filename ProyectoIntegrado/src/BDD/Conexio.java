@@ -9,7 +9,7 @@ import com.mysql.jdbc.Connection;
 public class Conexio {
 	
 	Connection con = null;
-	
+	String usuario;
 	
 	public Conexio(){
 		registraDriver();
@@ -35,6 +35,13 @@ public class Conexio {
 	
 	public Connection getConexio(){
 		return con;
+	}
+	
+	public void setUsuario(String usuario){
+		this.usuario=usuario;
+	}
+	public String getUsuario(){
+		return usuario;
 	}
 	
 }
