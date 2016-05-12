@@ -9,15 +9,15 @@ import javax.swing.table.DefaultTableModel;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
+import interfaz.DatosDeUsuario;
+
 public class Consultas{
 	Connection con;
 	ArrayList<String> select;
 	DefaultTableModel dtmBBDD;
 	Object valores[];
 	String busqueda;
-	String[] dat;
-	int[] datint;
-	char existe;
+	boolean existe;
 	PreparedStatement psInsertar;
 	
 	public Consultas(Conexio conexio){
@@ -60,10 +60,8 @@ public class Consultas{
 		}
 	}
 	
-	public void registrarUsuario(String[] datos,int[] datosint){
-		dat=datos;
-		datint=datosint;
-		existe='n';
+	public void registrarUsuario(DatosDeUsuario ddu){
+		existe=false;
 		
 		try {
 			ResultSet rs = null;
@@ -73,25 +71,26 @@ public class Consultas{
 			rs = cmd.executeQuery("SELECT Nombre FROM Usuario");
 			
 			while (rs.next()) {
-				if(dat[0].equals(rs.getString("Nombre"))){
-					existe='s';
+				if(ddu.getNombre().equals(rs.getString("Nombre"))){
+					existe=true;
+					System.out.println("existe");
 				}
 				System.out.println("no existe de momento");
 				
 			}
 			
-			if(existe=='n'){
+			if(existe==false){
 				
 				psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO Usuario (Nombre,Email,Contraseña,Genero,Altura_cm,Peso_kg,Objetivo,Actividad) VALUES (?,?,?,?,?,?,?,?)");
 				
-				psInsertar.setString(1, dat[0]);
-				psInsertar.setString(2, dat[1]);
-				psInsertar.setString(3, dat[2]);
-				psInsertar.setInt(4,datint[0]);
-				psInsertar.setInt(5,datint[1]);
-				psInsertar.setInt(6,datint[2]);
-				psInsertar.setInt(7,datint[3]);
-				psInsertar.setInt(8,datint[4]);
+				psInsertar.setString(1, ddu.getNombre());
+				psInsertar.setString(2, ddu.getEmail());
+				psInsertar.setString(3, ddu.getContrasenya());
+				psInsertar.setInt(4,ddu.getGenero());
+				psInsertar.setInt(5,ddu.getAltura());
+				psInsertar.setInt(6,ddu.getPeso());
+				psInsertar.setInt(7,ddu.getObjetivo());
+				psInsertar.setInt(8,ddu.getActividad());
 				psInsertar.execute();
 			
 			
@@ -111,7 +110,7 @@ public class Consultas{
 		String nom=nombre;
 		String pass=contrasenya;
 		boolean correcta=false;
-		existe='n';
+		existe=false;
 		
 		try {
 			ResultSet rs = null;
@@ -124,13 +123,13 @@ public class Consultas{
 				
 			
 				if(nom.equals(rs.getString("Nombre"))){
-					existe='s';
+					existe=true;
 				}
 				//System.out.println("no existe de momento");
 				
 			}
 			
-			if(existe=='s'){
+			if(existe==true){
 				
 				try {
 					
@@ -153,6 +152,53 @@ public class Consultas{
 			System.out.println(e);
 		}
 				return correcta;
+	}
+	
+	public String[] consultarStringUsuari(String nombre){	
+		String [] stringUsuario=new String[3];
+		
+		try {
+			ResultSet rs = null;
+			Statement cmd = null;
+			cmd = (Statement) con.createStatement();
+			rs = cmd.executeQuery("SELECT Nombre,Email,Contraseña FROM Usuario WHERE Nombre LIKE "+"'"+nombre+"'");
+			
+			while (rs.next()) {
+				stringUsuario[0]=rs.getString("Nombre");
+				stringUsuario[1]=rs.getString("Email");
+				stringUsuario[2]=rs.getString("Contraseña");
+				
+				
+
+				}
+
+				rs.close();
+		}catch(Exception e){
+		}
+		return stringUsuario;
+	}
+	
+	public int[] consultarIntUsuari(String nombre){	
+		int [] intUsuario=new int[3];
+		
+		try {
+			ResultSet rs = null;
+			Statement cmd = null;
+			cmd = (Statement) con.createStatement();
+			rs = cmd.executeQuery("SELECT Genero,Altura_cm,Peso_kg,Objetivo,Actividad FROM Usuario WHERE Nombre LIKE "+"'"+nombre+"'");
+			
+			while (rs.next()) {
+				intUsuario[0]=rs.getInt("Genero");
+				intUsuario[1]=rs.getInt("Altura_cm");
+				intUsuario[2]=rs.getInt("Peso_kg");
+				intUsuario[2]=rs.getInt("Objetivo");
+				intUsuario[2]=rs.getInt("Actividad");
+				}
+
+				rs.close();
+		}catch(Exception e){
+		}
+		return intUsuario;
 	}
 			
 }
