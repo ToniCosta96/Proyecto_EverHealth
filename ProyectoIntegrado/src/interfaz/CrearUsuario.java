@@ -215,37 +215,19 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		}
 		if(accio.compareTo("CrearUsuarioBtnGuardar")==0){
 			//Comprovem que les dades son correctes
-			
 			if(comprobarCampos()){
-				DatosDeUsuario datosDeUsuario=new DatosDeUsuario();
-				datosDeUsuario.setNombre(textFieldnombre.getText());
-				datosDeUsuario.setEmail(textFieldCorreo.getText());
-				datosDeUsuario.setContrasenya(String.valueOf(passwordField.getPassword()));
-				if(rdbtnMasculino.isSelected()){
-					datosDeUsuario.setGenero(0);
+				if(modoVentana=='c'){
+					//Crear usuario
+					new Consultas(conexio).registrarUsuario(guardarDatosUsuario());
+					ventanaPrincipal.cambiapanel("Menu");
+					ventanaPrincipal.setTitle("Ever Health- Menu Principal");
 				}else{
-					datosDeUsuario.setGenero(1);
+					//Actualizar usuario
+					new Consultas(conexio).actualizarUsuario(guardarDatosUsuario());
+					ventanaPrincipal.cambiapanel("Menu");
+					ventanaPrincipal.setTitle("Ever Health- Menu Principal");
 				}
-				datosDeUsuario.setAltura(Integer.parseInt(textFieldAltura.getText()));
-				datosDeUsuario.setPeso(Integer.parseInt(textFieldPeso.getText()));
-				if(rdbtnAdelgazar.isSelected()){
-					datosDeUsuario.setObjetivo(0);
-				}else if(rdbtnMantenerse.isSelected()){
-					datosDeUsuario.setObjetivo(1);
-				}else{
-					datosDeUsuario.setObjetivo(2);
-				}
-				if(rdbtnSedentario.isSelected()){
-					datosDeUsuario.setActividad(0);
-				}else if(rdbtnLigeramenteActivo.isSelected()){
-					datosDeUsuario.setActividad(1);
-				}else{
-					datosDeUsuario.setActividad(2);
-				}
-				//
-				new Consultas(conexio).registrarUsuario(datosDeUsuario);
-				ventanaPrincipal.cambiapanel("Menu");
-				ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+				
 			}
 			//Si tot esta correcte
 				//obrir connexio
@@ -320,6 +302,34 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		grupoRdbtObjetivo.add(rdbtnMantenerse);
 		grupoRdbtObjetivo.add(rdbtnEngordar);
 	}
+	private DatosDeUsuario guardarDatosUsuario(){
+		DatosDeUsuario datosDeUsuario=new DatosDeUsuario();
+		datosDeUsuario.setNombre(textFieldnombre.getText());
+		datosDeUsuario.setEmail(textFieldCorreo.getText());
+		datosDeUsuario.setContrasenya(String.valueOf(passwordField.getPassword()));
+		if(rdbtnMasculino.isSelected()){
+			datosDeUsuario.setGenero(0);
+		}else{
+			datosDeUsuario.setGenero(1);
+		}
+		datosDeUsuario.setAltura(Integer.parseInt(textFieldAltura.getText()));
+		datosDeUsuario.setPeso(Integer.parseInt(textFieldPeso.getText()));
+		if(rdbtnAdelgazar.isSelected()){
+			datosDeUsuario.setObjetivo(0);
+		}else if(rdbtnMantenerse.isSelected()){
+			datosDeUsuario.setObjetivo(1);
+		}else{
+			datosDeUsuario.setObjetivo(2);
+		}
+		if(rdbtnSedentario.isSelected()){
+			datosDeUsuario.setActividad(0);
+		}else if(rdbtnLigeramenteActivo.isSelected()){
+			datosDeUsuario.setActividad(1);
+		}else{
+			datosDeUsuario.setActividad(2);
+		}
+		return datosDeUsuario;
+	}
 	private boolean comprobarCampos(){
 		String mensajeError="";
 		if(!textFieldnombre.getText().isEmpty()){
@@ -382,6 +392,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	}
 	public void cambiarModoVentana(char modoVentana){
 		this.modoVentana=modoVentana;
+		textFieldnombre.setEditable(false);
 		
 		ddu=new Consultas(conexio).datosUsuario(conexio.getUsuario());
 		textFieldnombre.setText(ddu.getNombre());
