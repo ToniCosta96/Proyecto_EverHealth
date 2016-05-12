@@ -23,14 +23,14 @@ public void ConectaMail(String email){
             new javax.mail.Authenticator() {
                 protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
                     
-                    return new javax.mail.PasswordAuthentication("app.everhealth@gmail.com","alpatodam");
+                    return new javax.mail.PasswordAuthentication("everhealthdam@gmail.com","alpatodam");
                                 
                 }}
             );
     
     try {
         Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress("app.everhealth@gmail.com"));
+        message.setFrom(new InternetAddress("everhealthdam@gmail.com"));
         message.setRecipients (Message.RecipientType.TO, InternetAddress.parse(email));
         message.setSubject("Bienvenido a Ever Health");
         message.setText("Bienvenido a Ever Health");;
