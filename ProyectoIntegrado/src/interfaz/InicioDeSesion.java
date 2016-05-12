@@ -93,10 +93,10 @@ public class InicioDeSesion extends JFrame {
 					ventanas('m');
 					dispose();
 				}else{
-					//Quitar
+					/*Quitar
 					ventanas('m');
 					dispose();
-					//
+					*/
 					System.out.println("Usuario incorrecto");
 				}
 			}

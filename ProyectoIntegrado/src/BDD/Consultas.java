@@ -111,6 +111,7 @@ public class Consultas{
 		String nom=nombre;
 		String pass=contrasenya;
 		boolean correcta=false;
+		existe='n';
 		
 		try {
 			ResultSet rs = null;
@@ -134,7 +135,7 @@ public class Consultas{
 				try {
 					
 					cmd = (Statement) con.createStatement();
-					rs = cmd.executeQuery("SELECT contraseña FROM Usuario WHERE Nombre LIKE "+nom);
+					rs = cmd.executeQuery("SELECT contraseña FROM Usuario WHERE Nombre LIKE "+"'"+nom+"'");
 					
 					while (rs.next()) {
 						if(pass.equals(rs.getString("Contraseña"))){
