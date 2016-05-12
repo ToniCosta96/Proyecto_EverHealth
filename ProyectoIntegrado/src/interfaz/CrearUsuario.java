@@ -29,6 +29,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	private Conexio conexio;
 	private Ventanas ventanaPrincipal;
 	private char modoVentana='c';
+	private DatosDeUsuario ddu;
 	private JTextField textFieldnombre;
 	private JTextField textFieldCorreo;
 	private JPasswordField passwordField;
@@ -381,5 +382,32 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	}
 	public void cambiarModoVentana(char modoVentana){
 		this.modoVentana=modoVentana;
+		
+		ddu=new Consultas(conexio).datosUsuario(conexio.getUsuario());
+		textFieldnombre.setText(ddu.getNombre());
+		textFieldCorreo.setText(ddu.getEmail());
+		passwordField.setText(ddu.getContrasenya());
+		passwordFieldConfirmar.setText(ddu.getContrasenya());
+		textFieldAltura.setText(String.valueOf(ddu.getAltura()));
+		textFieldPeso.setText(String.valueOf(ddu.getPeso()));
+		if(ddu.getGenero()==0){
+			rdbtnMasculino.isSelected();
+		}else{
+			rdbtnFemenino.isSelected();
+		}
+		if(ddu.getActividad()==0){
+			rdbtnSedentario.setSelected(true);
+		}else if(ddu.getActividad()==1){
+			rdbtnLigeramenteActivo.setSelected(true);
+		}else{
+			rdbtnActivo.setSelected(true);
+		}
+		if(ddu.getObjetivo()==0){
+			rdbtnAdelgazar.setSelected(true);
+		}else if(ddu.getActividad()==1){
+			rdbtnMantenerse.setSelected(true);
+		}else{
+			rdbtnEngordar.setSelected(true);
+		}
 	}
 }
