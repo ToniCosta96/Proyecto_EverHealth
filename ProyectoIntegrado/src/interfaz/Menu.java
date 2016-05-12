@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class Menu extends JPanel implements ActionListener{
@@ -122,13 +123,17 @@ public class Menu extends JPanel implements ActionListener{
 		
 		//Crear y mostrar la tabla de la planificación
 		String nombresColumnas[]= {"Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"};
+		String nombresFilas[]= {"Desayuno (Plato1)","Desayuno (Plato2)","Desayuno (Plato3)","Almuerzo (Plato 1)",
+				"Almuerzo (Plato 2)","Almuerzo (Plato 3)","Comida (Plato 1)","Comida (Plato 2)","Comida (Plato 3)",
+				"Merienda (Plato 1)","Merienda (Plato 2)","Merienda (Plato 3)","Cena (Plato 1)","Cena (Plato 2)","Cena (Plato 3)"};
 		String[] datosTabla= new String[8];
 		DefaultTableModel dtm= new DefaultTableModel();
 		dtm.addColumn("");
 		for(int columna=0;columna<nombresColumnas.length;columna++){
 			dtm.addColumn(nombresColumnas[columna]);
 		}
-		for(int fila=0;fila<10;fila++){
+		for(int fila=0;fila<nombresFilas.length;fila++){
+			datosTabla[0]=nombresFilas[fila];
 			for(int columna=1;columna<datosTabla.length;columna++){
 				datosTabla[columna]="Celda "+fila+", "+columna;
 			}
@@ -152,10 +157,16 @@ public class Menu extends JPanel implements ActionListener{
 					super.changeSelection(rowIndex, columnIndex, toggle, extend);
 					}
 				};
-		datos.getColumnModel().getColumn(0).setCellRenderer(datos.getTableHeader().getDefaultRenderer());
+		//Se cambia el aspecto de la primera columna y se alinea su texto a la izquierda.
+		DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+		tcr=(DefaultTableCellRenderer) datos.getTableHeader().getDefaultRenderer();
+		tcr.setHorizontalAlignment(JTextField.LEFT);
+		datos.getColumnModel().getColumn(0).setCellRenderer(tcr);
+		//datos.getColumnModel().getColumn(0).setCellRenderer(datos.getTableHeader().getDefaultRenderer());
+		datos.getColumnModel().getColumn(0).setPreferredWidth(150);
 		
 		JScrollPane scrollPane = new JScrollPane(datos);
-		scrollPane.setPreferredSize(new Dimension(500, 500));
+		scrollPane.setPreferredSize(new Dimension(600, 500));
 		panelTabla.add(scrollPane);
 		panelDivisor.add(panelTabla);
 	}
