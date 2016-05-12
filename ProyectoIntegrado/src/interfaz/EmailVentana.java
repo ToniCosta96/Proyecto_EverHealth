@@ -2,18 +2,21 @@ package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-
+import BDD.Email;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class EmailVentana extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldCorreo;
+	Email em = new Email();
 
 	/**
 	 * Create the dialog.
@@ -49,6 +52,12 @@ public class EmailVentana extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Enviar");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						em.ConectaMail(textFieldCorreo.getText());
+						
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
