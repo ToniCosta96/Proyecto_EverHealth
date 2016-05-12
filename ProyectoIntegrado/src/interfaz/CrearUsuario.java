@@ -43,6 +43,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	private JRadioButton rdbtnLigeramenteActivo;
 	private JRadioButton rdbtnActivo;
 	private JRadioButton rdbtnAdelgazar;
+	private JRadioButton rdbtnMantenerse;
 	private JRadioButton rdbtnEngordar;
 	private JTextField textFieldCaloriasRecomendadas;
 
@@ -215,31 +216,33 @@ public class CrearUsuario extends JPanel implements ActionListener{
 			//Comprovem que les dades son correctes
 			
 			if(comprobarCampos()){
-				String campos[]= new String[3];
-				int camposInt[]= new int[5];
-				campos[0]=textFieldnombre.getText();
-				campos[1]=textFieldCorreo.getText();
-				campos[2]=String.valueOf(passwordField.getPassword());
+				DatosDeUsuario datosDeUsuario=new DatosDeUsuario();
+				datosDeUsuario.setNombre(textFieldnombre.getText());
+				datosDeUsuario.setEmail(textFieldCorreo.getText());
+				datosDeUsuario.setContrasenya(String.valueOf(passwordField.getPassword()));
 				if(rdbtnMasculino.isSelected()){
-					camposInt[0]=0;
+					datosDeUsuario.setGenero(0);
 				}else{
-					camposInt[0]=1;
+					datosDeUsuario.setGenero(1);
 				}
-				camposInt[1]=Integer.parseInt(textFieldAltura.getText());
-				camposInt[2]=Integer.parseInt(textFieldPeso.getText());
+				datosDeUsuario.setAltura(Integer.parseInt(textFieldAltura.getText()));
+				datosDeUsuario.setPeso(Integer.parseInt(textFieldPeso.getText()));
 				if(rdbtnAdelgazar.isSelected()){
-					camposInt[3]=0;
+					datosDeUsuario.setObjetivo(0);
+				}else if(rdbtnMantenerse.isSelected()){
+					datosDeUsuario.setObjetivo(1);
 				}else{
-					camposInt[3]=1;
+					datosDeUsuario.setObjetivo(2);
 				}
-				if(rdbtnLigeramenteActivo.isSelected()){
-					camposInt[4]=0;
-				}else if(rdbtnActivo.isSelected()){
-					camposInt[4]=1;
+				if(rdbtnSedentario.isSelected()){
+					datosDeUsuario.setActividad(0);
+				}else if(rdbtnLigeramenteActivo.isSelected()){
+					datosDeUsuario.setActividad(1);
 				}else{
-					camposInt[4]=2;
+					datosDeUsuario.setActividad(2);
 				}
-				new Consultas(conexio).registrarUsuario(campos, camposInt);
+				
+				new Consultas(conexio).registrarUsuario(datosDeUsuario);
 				ventanaPrincipal.cambiapanel("Menu");
 				ventanaPrincipal.setTitle("Ever Health- Menu Principal");
 			}
@@ -304,11 +307,16 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		rdbtnAdelgazar.setSelected(true);
 		panelObjetivo.add(rdbtnAdelgazar);
 		
+		rdbtnMantenerse = new JRadioButton("Mantenerse.");
+		rdbtnMantenerse.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		panelObjetivo.add(rdbtnMantenerse);
+		
 		rdbtnEngordar = new JRadioButton("Engordar.");
 		rdbtnEngordar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panelObjetivo.add(rdbtnEngordar);
 		ButtonGroup grupoRdbtObjetivo = new ButtonGroup();
 		grupoRdbtObjetivo.add(rdbtnAdelgazar);
+		grupoRdbtObjetivo.add(rdbtnMantenerse);
 		grupoRdbtObjetivo.add(rdbtnEngordar);
 	}
 	private boolean comprobarCampos(){
