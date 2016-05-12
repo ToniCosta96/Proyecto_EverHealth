@@ -223,7 +223,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 					ventanaPrincipal.setTitle("Ever Health- Menu Principal");
 				}else{
 					//Actualizar usuario
-					new Consultas(conexio).actualizarUsuario(guardarDatosUsuario());
+					////////////////////////////////new Consultas(conexio).actualizarUsuario(guardarDatosUsuario());
 					ventanaPrincipal.cambiapanel("Menu");
 					ventanaPrincipal.setTitle("Ever Health- Menu Principal");
 				}
