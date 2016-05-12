@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import com.mysql.jdbc.Connection;
@@ -97,6 +98,8 @@ public class Consultas{
 			System.out.println("Se ha registrado el usuario");
 			}else{
 				System.out.println("El usuario ya existe");
+				JOptionPane.showMessageDialog(null,
+					    "El Nombre de Usuario ya existe");
 			}
 			
 			
@@ -179,7 +182,7 @@ public class Consultas{
 	}
 	
 	public int[] consultarIntUsuario(String nombre){	
-		int [] intUsuario=new int[3];
+		int [] intUsuario=new int[5];
 		
 		try {
 			ResultSet rs = null;
@@ -191,8 +194,8 @@ public class Consultas{
 				intUsuario[0]=rs.getInt("Genero");
 				intUsuario[1]=rs.getInt("Altura_cm");
 				intUsuario[2]=rs.getInt("Peso_kg");
-				intUsuario[2]=rs.getInt("Objetivo");
-				intUsuario[2]=rs.getInt("Actividad");
+				intUsuario[3]=rs.getInt("Objetivo");
+				intUsuario[4]=rs.getInt("Actividad");
 				}
 
 				rs.close();
