@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -30,7 +31,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	private Ventanas ventanaPrincipal;
 	private char modoVentana='c';
 	private DatosDeUsuario ddu;
-	private JTextField textFieldnombre;
+	private JTextField textFieldNombre;
 	private JTextField textFieldCorreo;
 	private JPasswordField passwordField;
 	private JPasswordField passwordFieldConfirmar;
@@ -72,10 +73,10 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblNombre);
 		
-		textFieldnombre = new JTextField();
-		textFieldnombre.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
-		panelDatos2.add(textFieldnombre);
-		textFieldnombre.setColumns(10);
+		textFieldNombre = new JTextField();
+		textFieldNombre.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
+		panelDatos2.add(textFieldNombre);
+		textFieldNombre.setColumns(10);
 		
 		JLabel lblCorreoElectrnico = new JLabel("Correo electrónico:");
 		lblCorreoElectrnico.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
@@ -218,9 +219,15 @@ public class CrearUsuario extends JPanel implements ActionListener{
 			if(comprobarCampos()){
 				if(modoVentana=='c'){
 					//Crear usuario
-					new Consultas(conexio).registrarUsuario(guardarDatosUsuario());
-					ventanaPrincipal.cambiapanel("Menu");
-					ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+					if(new Consultas(conexio).registrarUsuario(guardarDatosUsuario())){
+						//Se guarda el nombre del usuario dentro de "conexion".
+						conexio.setUsuario(textFieldNombre.getText());
+						//Abrir la ventana Menu.
+						ventanaPrincipal.cambiapanel("Menu");
+						ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+					}else{
+						JOptionPane.showMessageDialog(null,"El Nombre de Usuario ya existe");
+					}
 				}else{
 					//Actualizar usuario
 					////////////////////////////////new Consultas(conexio).actualizarUsuario(guardarDatosUsuario());
@@ -304,7 +311,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	}
 	private DatosDeUsuario guardarDatosUsuario(){
 		DatosDeUsuario datosDeUsuario=new DatosDeUsuario();
-		datosDeUsuario.setNombre(textFieldnombre.getText());
+		datosDeUsuario.setNombre(textFieldNombre.getText());
 		datosDeUsuario.setEmail(textFieldCorreo.getText());
 		datosDeUsuario.setContrasenya(String.valueOf(passwordField.getPassword()));
 		if(rdbtnMasculino.isSelected()){
@@ -332,7 +339,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	}
 	private boolean comprobarCampos(){
 		String mensajeError="";
-		if(!textFieldnombre.getText().isEmpty()){
+		if(!textFieldNombre.getText().trim().isEmpty()){
 			if(passwordField.getPassword().length>0 && passwordFieldConfirmar.getPassword().length>0){
 				if(passwordField.getPassword().length>=4 && passwordFieldConfirmar.getPassword().length>=4){
 					if(Arrays.equals(passwordField.getPassword(), passwordFieldConfirmar.getPassword())){
@@ -392,10 +399,10 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	}
 	public void cambiarModoVentana(char modoVentana){
 		this.modoVentana=modoVentana;
-		textFieldnombre.setEditable(false);
+		textFieldNombre.setEditable(false);
 		
 		ddu=new Consultas(conexio).datosUsuario(conexio.getUsuario());
-		textFieldnombre.setText(ddu.getNombre());
+		textFieldNombre.setText(ddu.getNombre());
 		textFieldCorreo.setText(ddu.getEmail());
 		passwordField.setText(ddu.getContrasenya());
 		passwordFieldConfirmar.setText(ddu.getContrasenya());

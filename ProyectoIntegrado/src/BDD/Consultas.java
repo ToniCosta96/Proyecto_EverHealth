@@ -61,7 +61,7 @@ public class Consultas{
 		}
 	}
 	
-	public void registrarUsuario(DatosDeUsuario ddu){
+	public boolean registrarUsuario(DatosDeUsuario ddu){
 		existe=false;
 		
 		try {
@@ -96,16 +96,17 @@ public class Consultas{
 			
 			
 			System.out.println("Se ha registrado el usuario");
+			return true;
 			}else{
 				System.out.println("El usuario ya existe");
-				JOptionPane.showMessageDialog(null,
-					    "El Nombre de Usuario ya existe");
+				return false;
 			}
 			
 			
 		}catch(Exception e){
 			System.out.println("Ha habido algun problema en el registro");
 			System.out.println(e);
+			return false;
 		}
 	}
 	
