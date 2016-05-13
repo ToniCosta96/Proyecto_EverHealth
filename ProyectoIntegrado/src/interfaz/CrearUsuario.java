@@ -24,6 +24,7 @@ import javax.swing.border.BevelBorder;
 
 import BDD.Conexio;
 import BDD.Consultas;
+import calculos.CalcularCalorias;
 
 public class CrearUsuario extends JPanel implements ActionListener{
 	private Conexio conexio;
@@ -235,6 +236,9 @@ public class CrearUsuario extends JPanel implements ActionListener{
 				}
 			}
 		}
+		if(accio.compareTo("rdbtnMasculino")==0 || accio.compareTo("rdbtnFemenino")==0){
+			new CalcularCalorias(guardarDatosUsuario());
+		}
 	}
 	
 	private void seleccionarGenero(JPanel panelDatos2){
@@ -246,10 +250,14 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		rdbtnMasculino = new JRadioButton("Masculino.");
 		rdbtnMasculino.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rdbtnMasculino.setSelected(true);
+		rdbtnMasculino.setActionCommand("rdbtnMasculino");
+		rdbtnMasculino.addActionListener(this);
 		panelGenero.add(rdbtnMasculino);
 		
 		rdbtnFemenino = new JRadioButton("Femenino.");
 		rdbtnFemenino.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		rdbtnFemenino.setActionCommand("rdbtnFemenino");
+		rdbtnFemenino.addActionListener(this);
 		panelGenero.add(rdbtnFemenino);
 		ButtonGroup grupoRdbtGenero = new ButtonGroup();
 		grupoRdbtGenero.add(rdbtnMasculino);
@@ -264,14 +272,20 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		rdbtnSedentario = new JRadioButton("Sedentario.");
 		rdbtnSedentario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rdbtnSedentario.setSelected(true);
+		rdbtnSedentario.setActionCommand("rdbtnSedentario");
+		rdbtnSedentario.addActionListener(this);
 		panelActividadFisica.add(rdbtnSedentario);
 		
 		rdbtnLigeramenteActivo = new JRadioButton("Ligeramente activo.");
 		rdbtnLigeramenteActivo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		rdbtnLigeramenteActivo.setActionCommand("rdbtnLigeramenteActivo");
+		rdbtnLigeramenteActivo.addActionListener(this);
 		panelActividadFisica.add(rdbtnLigeramenteActivo);
 		
 		rdbtnActivo = new JRadioButton("Activo.");
 		rdbtnActivo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		rdbtnActivo.setActionCommand("rdbtnActivo");
+		rdbtnActivo.addActionListener(this);
 		panelActividadFisica.add(rdbtnActivo);
 		ButtonGroup grupoRdbtActividad = new ButtonGroup();
 		grupoRdbtActividad.add(rdbtnSedentario);
@@ -287,14 +301,20 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		rdbtnAdelgazar = new JRadioButton("Adelgazar.");
 		rdbtnAdelgazar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rdbtnAdelgazar.setSelected(true);
+		rdbtnAdelgazar.setActionCommand("rdbtnAdelgazar");
+		rdbtnAdelgazar.addActionListener(this);
 		panelObjetivo.add(rdbtnAdelgazar);
 		
 		rdbtnMantenerse = new JRadioButton("Mantenerse.");
 		rdbtnMantenerse.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		rdbtnMantenerse.setActionCommand("rdbtnMantenerse");
+		rdbtnMantenerse.addActionListener(this);
 		panelObjetivo.add(rdbtnMantenerse);
 		
 		rdbtnEngordar = new JRadioButton("Engordar.");
 		rdbtnEngordar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		rdbtnEngordar.setActionCommand("rdbtnEngordar");
+		rdbtnEngordar.addActionListener(this);
 		panelObjetivo.add(rdbtnEngordar);
 		ButtonGroup grupoRdbtObjetivo = new ButtonGroup();
 		grupoRdbtObjetivo.add(rdbtnAdelgazar);
