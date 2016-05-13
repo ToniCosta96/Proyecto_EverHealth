@@ -227,18 +227,13 @@ public class CrearUsuario extends JPanel implements ActionListener{
 					}
 				}else{
 					//Actualizar usuario
-					////////////////////////////////new Consultas(conexio).actualizarUsuario(guardarDatosUsuario());
-					ventanaPrincipal.cambiapanel("Menu");
-					ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+					if(new Consultas(conexio).actualizarUsuario(guardarDatosUsuario())){
+						//Abrir la ventana Menu.
+						ventanaPrincipal.cambiapanel("Menu");
+						ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+					}
 				}
-				
 			}
-			//Si tot esta correcte
-				//obrir connexio
-				//fer un insert
-				//si l'insert ha anat bé --> 
-			
-			//si l'insert no ha anat bé --> mostrar JOptionPane amb misssatge d'error
 		}
 	}
 	
