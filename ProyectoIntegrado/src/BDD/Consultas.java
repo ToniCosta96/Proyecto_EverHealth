@@ -31,6 +31,14 @@ public class Consultas{
 		
 		
 	}
+	public void consultarPlatos(){
+		select=new ArrayList<String>();
+		select.add("SELECT Nombre,Tipo FROM alimentos");
+		select.add("Nombre");
+		select.add("Tipo");
+		
+		
+	}
 	
 	public void consultarDades(String busqueda,DefaultTableModel dtmBBDD){
 		//strings pasados por la clase consultas.
