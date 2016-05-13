@@ -27,6 +27,7 @@ public class CalcularCalorias {
 				kiloCal+=500;
 			}
 		}
+		//Se cambia el texto del textField de calorias
 		textFieldCaloriasRecomendadas.setText(String.valueOf(kiloCal));
 	}
 	
