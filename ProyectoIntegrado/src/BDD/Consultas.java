@@ -111,18 +111,24 @@ public class Consultas{
 		existe=false;
 		
 		try {		
-				
-				psInsertar=(PreparedStatement) con.prepareStatement("UPDATE Usuario SET Email='?',Contraseña='?',Genero='?',Altura_cm='?',Peso_kg='?',Objetivo='?',Actividad='?' WHERE Nombre LIKE '?'");
-				
-				
+				psInsertar=(PreparedStatement) con.prepareStatement("UPDATE Usuario SET Email=?,Contraseña=?,Genero=?,Altura_cm=?,Peso_kg=?,Objetivo=?,Actividad=? WHERE Nombre LIKE ?");
+				System.out.println(ddu.getEmail());
 				psInsertar.setString(1, ddu.getEmail());
+				System.out.println(psInsertar);
 				psInsertar.setString(2, ddu.getContrasenya());
+				System.out.println(psInsertar);
 				psInsertar.setInt(3,ddu.getGenero());
+				System.out.println(psInsertar);
 				psInsertar.setInt(4,ddu.getAltura());
+				System.out.println(psInsertar);
 				psInsertar.setInt(5,ddu.getPeso());
+				System.out.println(psInsertar);
 				psInsertar.setInt(6,ddu.getObjetivo());
+				System.out.println(psInsertar);
 				psInsertar.setInt(7,ddu.getActividad());
+				System.out.println(psInsertar);
 				psInsertar.setString(8, ddu.getNombre());
+				System.out.println(psInsertar);
 				psInsertar.execute();
 			
 			
