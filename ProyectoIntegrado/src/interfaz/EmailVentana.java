@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
 import java.sql.ResultSet;
 
+import javax.mail.BodyPart;
+import javax.mail.internet.MimeBodyPart;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -30,7 +32,7 @@ public class EmailVentana extends JDialog {
 	 * Create the dialog.
 	 */
 	public EmailVentana(Conexio con) {
-		c=con;
+		c = con;
 		setBounds(400, 200, 300, 180);
 		setResizable(false);
 		setModalityType(DEFAULT_MODALITY_TYPE);
@@ -63,35 +65,38 @@ public class EmailVentana extends JDialog {
 				JButton okButton = new JButton("Enviar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						String [] txt=new String[7];
+						/*
+						 * String[] adjunto = new String[7];
 
 						try {
-						ResultSet rs=null;
-						Statement cmd= null;
-						rs= cmd.executeQuery("SELECT Nombre, Email, Contrasenya, Genero, Altura, Peso, Objetivo, Actividad FROM Usuario"
-								+ "  WHERE Nombre like "+c.getUsuario());	
-						while (rs.next()) {
-						txt[0]=rs.getString("Nombre");
-						txt[1]=rs.getString("Email");
-						txt[2]=rs.getString("Contrasenya");
-						txt[3]=rs.getString("Genero");
-						txt[4]=rs.getString("Altura");
-						txt[5]=rs.getString("Peso");						
-						txt[6]=rs.getString("Objetivo");
-						txt[7]=rs.getString("Actividad");
+							ResultSet rs = null;
+							Statement cmd = null;
+							rs = cmd.executeQuery(
+									"SELECT Nombre, Email, Contrasenya, Genero, Altura, Peso, Objetivo, Actividad FROM Usuario"
+											+ "  WHERE Nombre like " + c.getUsuario());
+
+							while (rs.next()) {
+								adjunto[0] = rs.getString("Nombre");
+								adjunto[1] = rs.getString("Email");
+								adjunto[2] = rs.getString("Contrasenya");
+								adjunto[3] = rs.getString("Genero");
+								adjunto[4] = rs.getString("Altura");
+								adjunto[5] = rs.getString("Peso");
+								adjunto[6] = rs.getString("Objetivo");
+								adjunto[7] = rs.getString("Actividad");
+								
+					
+
+							}
+
 							
-						}
-						
-						
-						//Consulta per a obtindre les dades d'usuari des de l'identificador d'usuari c.getUsuario();
-						// Nombre, sltur, edad, peso, estat fisic
-		
-						}catch(Exception e) {
+
+						} catch (Exception e) {
 							e.getMessage();
 						}
-						
-						em.ConectaMail(textFieldCorreo.getText(),txt);
-						
+	*/
+						em.ConectaMail(textFieldCorreo.getText()/*, adjunto*/);
+
 					}
 				});
 				okButton.setActionCommand("OK");
