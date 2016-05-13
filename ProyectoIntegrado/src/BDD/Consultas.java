@@ -78,7 +78,7 @@ public class Consultas{
 			
 			if(existe==false){
 				
-				psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO Usuario (Nombre,Email,Contraseña,Genero,Altura_cm,Peso_kg,Objetivo,Actividad) VALUES (?,?,?,?,?,?,?,?)");
+				psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO Usuario (Nombre,Email,Contraseña,Genero,Altura_cm,Peso_kg,Objetivo,Actividad,Edad) VALUES (?,?,?,?,?,?,?,?,?)");
 				
 				psInsertar.setString(1, ddu.getNombre());
 				psInsertar.setString(2, ddu.getEmail());
@@ -88,6 +88,7 @@ public class Consultas{
 				psInsertar.setInt(6,ddu.getPeso());
 				psInsertar.setInt(7,ddu.getObjetivo());
 				psInsertar.setInt(8,ddu.getActividad());
+				psInsertar.setInt(9, ddu.getEdad());
 				psInsertar.execute();
 			
 			
@@ -111,7 +112,7 @@ public class Consultas{
 		existe=false;
 		
 		try {		
-				psInsertar=(PreparedStatement) con.prepareStatement("UPDATE Usuario SET Email=?,Contraseña=?,Genero=?,Altura_cm=?,Peso_kg=?,Objetivo=?,Actividad=? WHERE Nombre LIKE ?");
+				psInsertar=(PreparedStatement) con.prepareStatement("UPDATE Usuario SET Email=?,Contraseña=?,Genero=?,Altura_cm=?,Peso_kg=?,Objetivo=?,Actividad=?,Edad=? WHERE Nombre LIKE ?");
 				System.out.println(ddu.getEmail());
 				psInsertar.setString(1, ddu.getEmail());
 				System.out.println(psInsertar);
@@ -127,7 +128,8 @@ public class Consultas{
 				System.out.println(psInsertar);
 				psInsertar.setInt(7,ddu.getActividad());
 				System.out.println(psInsertar);
-				psInsertar.setString(8, ddu.getNombre());
+				psInsertar.setInt(8, ddu.getEdad());
+				psInsertar.setString(9, ddu.getNombre());
 				System.out.println(psInsertar);
 				psInsertar.execute();
 			
@@ -214,13 +216,13 @@ public class Consultas{
 	}
 	
 	public int[] consultarIntUsuario(String nombre){	
-		int [] intUsuario=new int[5];
+		int [] intUsuario=new int[6];
 		
 		try {
 			ResultSet rs = null;
 			Statement cmd = null;
 			cmd = (Statement) con.createStatement();
-			rs = cmd.executeQuery("SELECT Genero,Altura_cm,Peso_kg,Objetivo,Actividad FROM Usuario WHERE Nombre LIKE "+"'"+nombre+"'");
+			rs = cmd.executeQuery("SELECT Genero,Altura_cm,Peso_kg,Objetivo,Actividad,Edad FROM Usuario WHERE Nombre LIKE "+"'"+nombre+"'");
 			
 			while (rs.next()) {
 				intUsuario[0]=rs.getInt("Genero");
@@ -228,6 +230,8 @@ public class Consultas{
 				intUsuario[2]=rs.getInt("Peso_kg");
 				intUsuario[3]=rs.getInt("Objetivo");
 				intUsuario[4]=rs.getInt("Actividad");
+				intUsuario[5]=rs.getInt("Edad");
+				
 				}
 
 				rs.close();
@@ -248,6 +252,7 @@ public class Consultas{
 		ddu.setPeso(iU[2]);
 		ddu.setObjetivo(iU[3]);
 		ddu.setActividad(iU[4]);
+		ddu.setEdad(iU[5]);
 		return ddu;
 	}
 			
