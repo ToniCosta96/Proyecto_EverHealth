@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -111,6 +113,20 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		textFieldAltura.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(textFieldAltura);
 		textFieldAltura.setColumns(10);
+		textFieldAltura.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(comprobarCampos()){
+					new CalcularCalorias(guardarDatosUsuario());
+				}
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
 		
 		JLabel lblPeso = new JLabel("Peso:");
 		lblPeso.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
@@ -120,6 +136,20 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		textFieldPeso.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(textFieldPeso);
 		textFieldPeso.setColumns(10);
+		textFieldPeso.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(comprobarCampos()){
+					new CalcularCalorias(guardarDatosUsuario());
+				}
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
 		
 		//Seleccionar género.
 		JLabel lblGnero = new JLabel("Género:");
@@ -236,8 +266,12 @@ public class CrearUsuario extends JPanel implements ActionListener{
 				}
 			}
 		}
-		if(accio.compareTo("rdbtnMasculino")==0 || accio.compareTo("rdbtnFemenino")==0){
-			new CalcularCalorias(guardarDatosUsuario());
+		if(accio.compareTo("rdbtnMasculino")==0 || accio.compareTo("rdbtnFemenino")==0 || accio.compareTo("rdbtnSedentario")==0 ||
+				accio.compareTo("rdbtnLigeramenteActivo")==0 || accio.compareTo("rdbtnActivo")==0 ||
+				accio.compareTo("rdbtnAdelgazar")==0 || accio.compareTo("rdbtnMantenerse")==0 || accio.compareTo("rdbtnEngordar")==0){
+			if(comprobarCampos()){
+				new CalcularCalorias(guardarDatosUsuario());
+			}
 		}
 	}
 	
