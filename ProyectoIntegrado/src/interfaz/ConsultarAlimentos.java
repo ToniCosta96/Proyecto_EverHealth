@@ -117,6 +117,15 @@ public class ConsultarAlimentos extends JPanel {
 		
 		ventanaPrincipal=v;
 		cargarAlimentos(panelScroll);
+		
+		JLabel lblBordeIzquierda = new JLabel("     ");
+		panelCentroConsultaAlimentos.add(lblBordeIzquierda, BorderLayout.WEST);
+		
+		JLabel lblBordeDerecho = new JLabel("     ");
+		panelCentroConsultaAlimentos.add(lblBordeDerecho, BorderLayout.EAST);
+		
+		JLabel labelBordeInferior = new JLabel("     ");
+		panelCentroConsultaAlimentos.add(labelBordeInferior, BorderLayout.SOUTH);
 	}
 	private void cargarAlimentos(JPanel panelScroll){
 		panelScroll.removeAll();

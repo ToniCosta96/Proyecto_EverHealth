@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import BDD.Conexio;
 import BDD.Consultas;
+import java.awt.Color;
 
 public class InicioDeSesion extends JFrame {
 
@@ -58,11 +59,13 @@ public class InicioDeSesion extends JFrame {
 		setBounds(100, 100, 400, 150);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		
 		JPanel panelCampos = new JPanel();
+		panelCampos.setOpaque(false);
 		contentPane.add(panelCampos);
 		panelCampos.setLayout(new GridLayout(2, 2, 0, 0));
 		
@@ -82,6 +85,7 @@ public class InicioDeSesion extends JFrame {
 		panelCampos.add(passwordField);
 		
 		JPanel panelBotones = new JPanel();
+		panelBotones.setOpaque(false);
 		contentPane.add(panelBotones);
 		
 		JButton btnNewButton = new JButton("Iniciar sesión.");

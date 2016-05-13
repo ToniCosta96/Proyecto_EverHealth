@@ -32,16 +32,19 @@ public class Menu extends JPanel implements ActionListener{
 	 * Create the frame.
 	 */
 	public Menu(Ventanas v,Conexio conexio) {
+		setBackground(new Color(255, 255, 153));
 		ventanaPrincipal=v;
 		this.conexio=conexio;
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelCabezera = new JPanel();
+		panelCabezera.setOpaque(false);
 		add(panelCabezera, BorderLayout.NORTH);
 		panelCabezera.setLayout(new GridLayout(1, 2, 0, 0));
 		
 		JPanel panelCalorias = new JPanel();
+		panelCalorias.setOpaque(false);
 		FlowLayout flowLayout = (FlowLayout) panelCalorias.getLayout();
 		flowLayout.setVgap(10);
 		flowLayout.setHgap(25);
@@ -58,6 +61,7 @@ public class Menu extends JPanel implements ActionListener{
 		txtCaloriasRestantes.setEditable(false);
 		
 		JPanel panelIrAlPerfil = new JPanel();
+		panelIrAlPerfil.setOpaque(false);
 		FlowLayout flowLayout_1 = (FlowLayout) panelIrAlPerfil.getLayout();
 		flowLayout_1.setHgap(25);
 		flowLayout_1.setVgap(15);
@@ -98,10 +102,12 @@ public class Menu extends JPanel implements ActionListener{
 		panelIrAlPerfil.add(lblIrAlPerfil);
 		
 		JPanel panelDivisor = new JPanel();
+		panelDivisor.setOpaque(false);
 		add(panelDivisor, BorderLayout.CENTER);
 		panelDivisor.setLayout(new BoxLayout(panelDivisor, BoxLayout.X_AXIS));
 		
 		JPanel panelBotones = new JPanel();
+		panelBotones.setOpaque(false);
 		panelBotones.setLayout(new GridLayout(4, 1, 0, 0));
 		panelDivisor.add(panelBotones);
 		
@@ -145,6 +151,7 @@ public class Menu extends JPanel implements ActionListener{
 		}
 		
 		JPanel panelTabla = new JPanel();
+		panelTabla.setOpaque(false);
 		JTable datos= new JTable(dtm) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -170,6 +177,7 @@ public class Menu extends JPanel implements ActionListener{
 		datos.getColumnModel().getColumn(0).setPreferredWidth(150);
 		
 		JScrollPane scrollPane = new JScrollPane(datos);
+		scrollPane.setOpaque(false);
 		scrollPane.setPreferredSize(new Dimension(600, 500));
 		panelTabla.add(scrollPane);
 		panelDivisor.add(panelTabla);
