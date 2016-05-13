@@ -130,7 +130,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if(comprobarCampos()){
-					new CalcularCalorias(guardarDatosUsuario());
+					new CalcularCalorias(textFieldCaloriasRecomendadas,guardarDatosUsuario());
 				}
 			}
 			@Override
@@ -153,7 +153,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 			@Override
 			public void keyReleased(KeyEvent e) {
 				if(comprobarCampos()){
-					new CalcularCalorias(guardarDatosUsuario());
+					new CalcularCalorias(textFieldCaloriasRecomendadas,guardarDatosUsuario());
 				}
 			}
 			@Override
@@ -197,7 +197,6 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		textFieldCaloriasRecomendadas.setEditable(false);
 		panelCaloriasRecomendadas.add(textFieldCaloriasRecomendadas);
 		textFieldCaloriasRecomendadas.setColumns(10);
-		textFieldCaloriasRecomendadas.setText("Calorias");
 		
 		JPanel panelBotones = new JPanel();
 		add(panelBotones, BorderLayout.SOUTH);
@@ -280,7 +279,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 				accio.compareTo("rdbtnLigeramenteActivo")==0 || accio.compareTo("rdbtnActivo")==0 ||
 				accio.compareTo("rdbtnAdelgazar")==0 || accio.compareTo("rdbtnMantenerse")==0 || accio.compareTo("rdbtnEngordar")==0){
 			if(comprobarCampos()){
-				new CalcularCalorias(guardarDatosUsuario());
+				new CalcularCalorias(textFieldCaloriasRecomendadas,guardarDatosUsuario());
 			}
 		}
 	}
