@@ -15,9 +15,7 @@ import interfaz.DatosDeUsuario;
 public class Consultas{
 	Connection con;
 	ArrayList<String> select;
-	DefaultTableModel dtmBBDD;
 	Object valores[];
-	String busqueda;
 	boolean existe;
 	PreparedStatement psInsertar;
 	
@@ -34,11 +32,9 @@ public class Consultas{
 		
 	}
 	
-	public void consultarDades(String busq,DefaultTableModel dtm2){
+	public void consultarDades(String busqueda,DefaultTableModel dtmBBDD){
 		//strings pasados por la clase consultas.
 				valores=new Object[select.size()-1];
-				dtmBBDD=dtm2;
-				busqueda=busq;
 
 		try {
 			ResultSet rs = null;
@@ -106,6 +102,36 @@ public class Consultas{
 			
 		}catch(Exception e){
 			System.out.println("Ha habido algun problema en el registro");
+			System.out.println(e);
+			return false;
+		}
+	}
+	
+	public boolean actualizarUsuario(DatosDeUsuario ddu){
+		existe=false;
+		
+		try {		
+				
+				psInsertar=(PreparedStatement) con.prepareStatement("UPDATE Usuario SET Email='?',Contraseña='?',Genero='?',Altura_cm='?',Peso_kg='?',Objetivo='?',Actividad='?' WHERE Nombre LIKE '?'");
+				
+				
+				psInsertar.setString(1, ddu.getEmail());
+				psInsertar.setString(2, ddu.getContrasenya());
+				psInsertar.setInt(3,ddu.getGenero());
+				psInsertar.setInt(4,ddu.getAltura());
+				psInsertar.setInt(5,ddu.getPeso());
+				psInsertar.setInt(6,ddu.getObjetivo());
+				psInsertar.setInt(7,ddu.getActividad());
+				psInsertar.setString(8, ddu.getNombre());
+				psInsertar.execute();
+			
+			
+			System.out.println("Se ha actualizado el usuario");
+			return true;
+			
+			
+		}catch(Exception e){
+			System.out.println("Ha habido algun problema con la actualizacion");
 			System.out.println(e);
 			return false;
 		}
