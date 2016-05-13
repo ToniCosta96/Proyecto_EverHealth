@@ -26,12 +26,14 @@ import BDD.Conexio;
 public class Menu extends JPanel implements ActionListener{
 	private JTextField txtCaloriasRestantes;
 	Ventanas ventanaPrincipal;
+	Conexio conexio;
 
 	/**
 	 * Create the frame.
 	 */
-	public Menu(Ventanas v) {
+	public Menu(Ventanas v,Conexio conexio) {
 		ventanaPrincipal=v;
+		this.conexio=conexio;
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
 		
@@ -189,7 +191,7 @@ public class Menu extends JPanel implements ActionListener{
 			ventanaPrincipal.cambiapanel("CrearPlato");
 			ventanaPrincipal.setTitle("Ever Health- Crear plato");
 		}else if(accio.compareTo("btnEnviarPlanificacin")==0){
-			new EmailVentana(null).setVisible(true);
+			new EmailVentana(conexio).setVisible(true);
 		}
 	}
 }

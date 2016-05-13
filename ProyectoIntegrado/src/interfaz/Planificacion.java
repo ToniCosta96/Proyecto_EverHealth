@@ -1,25 +1,27 @@
 package interfaz;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import BDD.Conexio;
 
 public class Planificacion extends JPanel implements ActionListener{
 
-	Ventanas ventanaPrincipal;
+	private Ventanas ventanaPrincipal;
+	private Conexio conexio;
 	private CardLayout cl;
 	private JPanel panelCard;
 	private JTextField textFieldCalRecomendadas;
@@ -29,8 +31,9 @@ public class Planificacion extends JPanel implements ActionListener{
 	private DiaPlanificacion dia[];
 	private int numeroDia=0;
 	
-	public Planificacion(Ventanas v) {
+	public Planificacion(Ventanas v, Conexio conexio) {
 		ventanaPrincipal=v;
+		this.conexio=conexio;
 		
 		setLayout(new BorderLayout(0, 0));
 		
