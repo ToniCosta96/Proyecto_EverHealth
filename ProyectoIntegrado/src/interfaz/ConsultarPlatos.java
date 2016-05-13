@@ -17,14 +17,20 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import BDD.Conexio;
+
 
 public class ConsultarPlatos extends JPanel {
 	
-	Ventanas ventanaPrincipal;
+	private Ventanas ventanaPrincipal;
+	private Conexio conexio;
 	private JTextField textFieldBusqueda;
 	private JTable table;
 
-	public ConsultarPlatos(Ventanas v) {
+	public ConsultarPlatos(Ventanas v,Conexio conexio) {
+		ventanaPrincipal=v;
+		this.conexio=conexio;
+		
 		setBackground(new Color(255, 255, 153));
 		setLayout(new BorderLayout(0, 0));
 		
@@ -96,6 +102,5 @@ public class ConsultarPlatos extends JPanel {
 		table.setBackground(new Color(255, 255, 204));
 		scrollPane.setViewportView(table);
 		panelCentroConsultaPlatos.add(panelBusqueda, BorderLayout.NORTH);
-		ventanaPrincipal=v;
 	}
 }

@@ -66,7 +66,7 @@ public class Ventanas extends JFrame{
 		}else if(nombre.equals("CrearPlato")){
 			cl.show(contentPane, "CrearPlato");
 		}else if(nombre.equals("ConsultarPlatos")){
-			ConsultarPlatos consultarPlatos=new ConsultarPlatos(Ventanas.this);
+			ConsultarPlatos consultarPlatos=new ConsultarPlatos(Ventanas.this,conexio);
 			cl.addLayoutComponent(consultarPlatos, "ConsultarPlatos");
 			contentPane.add(consultarPlatos);
 			cl.show(contentPane, "ConsultarPlatos");
