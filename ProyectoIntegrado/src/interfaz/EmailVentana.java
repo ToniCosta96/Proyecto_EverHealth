@@ -44,7 +44,7 @@ public class EmailVentana extends JDialog {
 		{
 			textFieldCorreo = new JTextField();
 			contentPanel.add(textFieldCorreo);
-			textFieldCorreo.setColumns(10);
+			textFieldCorreo.setColumns(15);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -64,6 +64,11 @@ public class EmailVentana extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
