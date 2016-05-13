@@ -2,7 +2,6 @@ package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,18 +13,25 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.JTable;
-import java.awt.Component;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import BDD.Conexio;
+import BDD.Consultas;
 
 public class CrearPlato extends JPanel {
+	private Ventanas ventanaPrincipal;
+	Conexio conexio;
 	private JTextField txtCaloriasRestantes;
-	Ventanas ventanaPrincipal;
-	private JTextField textField;
+	private DefaultTableModel dtm;
+	private JTable tablaAlimentos;
+	private JTextField textFieldBusqueda;
 	private JTextField txtNombreDelPlato;
 	private JTable table;
 
-	public CrearPlato(Ventanas v) {
+	public CrearPlato(Ventanas v, Conexio conexio) {
+		this.conexio=conexio;
 		setForeground(Color.ORANGE);
 		setLayout(new BorderLayout(0, 0));
 		
@@ -65,14 +71,14 @@ public class CrearPlato extends JPanel {
 		BuscadorPanel.gridy = 1;
 		Añadir_Ingrediente.add(Cantidad, BuscadorPanel);
 		
-		textField = new JTextField();
+		textFieldBusqueda = new JTextField();
 		GridBagConstraints BuscadorTxt = new GridBagConstraints();
 		BuscadorTxt.fill = GridBagConstraints.HORIZONTAL;
 		BuscadorTxt.insets = new Insets(0, 0, 5, 5);
 		BuscadorTxt.gridx = 1;
 		BuscadorTxt.gridy = 1;
-		Añadir_Ingrediente.add(textField, BuscadorTxt);
-		textField.setColumns(10);
+		Añadir_Ingrediente.add(textFieldBusqueda, BuscadorTxt);
+		textFieldBusqueda.setColumns(10);
 		
 		JLabel lblAadir = new JLabel("+ A\u00F1adir");
 		lblAadir.setForeground(Color.BLUE);
@@ -83,7 +89,10 @@ public class CrearPlato extends JPanel {
 		AnadirTxt.gridy = 2;
 		Añadir_Ingrediente.add(lblAadir, AnadirTxt);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		dtm= new DefaultTableModel();
+		//Tabla y ScrollPane
+		tablaAlimentos= new JTable(dtm);
+		JScrollPane scrollPane = new JScrollPane(tablaAlimentos);
 		GridBagConstraints ScrollBuscador = new GridBagConstraints();
 		ScrollBuscador.gridheight = 8;
 		ScrollBuscador.insets = new Insets(0, 0, 5, 5);
@@ -91,6 +100,7 @@ public class CrearPlato extends JPanel {
 		ScrollBuscador.gridx = 1;
 		ScrollBuscador.gridy = 2;
 		Añadir_Ingrediente.add(scrollPane, ScrollBuscador);
+		Añadir_Ingrediente.updateUI();
 		
 		JButton BotonAtras = new JButton("Atras");
 		GridBagConstraints gbc_BotonAtras = new GridBagConstraints();
@@ -133,11 +143,26 @@ public class CrearPlato extends JPanel {
 		Añadir_Ingrediente.add(btnGuardar, gbc_btnGuardar);
 		ventanaPrincipal=v;
 		
-	
-		
-		
+		cargarAlimentos(Añadir_Ingrediente);
 	}
 	
-	
+	private void cargarAlimentos(JPanel panelScroll){
+		panelScroll.removeAll();
+		dtm=new DefaultTableModel();
+		dtm.addColumn("Alimento");
+		dtm.addColumn("Kcal");
+		
+		Consultas cons=new Consultas(conexio);
+		cons.consultarAlimentos();
+		cons.consultarDades(textFieldBusqueda.getText(),dtm);
+		
+		tablaAlimentos=new JTable(dtm);	
+		tablaAlimentos.setBackground(new Color(255, 255, 200));
+		
+		JScrollPane scrollPaneAlimentos = new JScrollPane(tablaAlimentos);
+		scrollPaneAlimentos.setBackground(new Color(255, 255, 220));
+		panelScroll.add(scrollPaneAlimentos);
+		panelScroll.updateUI();
+	}
 
 }
