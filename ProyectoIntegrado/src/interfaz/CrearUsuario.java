@@ -480,7 +480,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		}
 		if(ddu.getObjetivo()==0){
 			rdbtnAdelgazar.setSelected(true);
-		}else if(ddu.getActividad()==1){
+		}else if(ddu.getObjetivo()==1){
 			rdbtnMantenerse.setSelected(true);
 		}else{
 			rdbtnEngordar.setSelected(true);
