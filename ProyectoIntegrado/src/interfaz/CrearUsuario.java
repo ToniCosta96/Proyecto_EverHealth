@@ -50,6 +50,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	private JRadioButton rdbtnMantenerse;
 	private JRadioButton rdbtnEngordar;
 	private JTextField textFieldCaloriasRecomendadas;
+	private JTextField textFieldEdad;
 
 	/**
 	 * Create the frame.
@@ -69,7 +70,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		
 		JPanel panelDatos2 = new JPanel();
 		panelDatos.add(panelDatos2);
-		panelDatos2.setLayout(new GridLayout(10, 2, 80, 10));
+		panelDatos2.setLayout(new GridLayout(11, 2, 80, 10));
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
@@ -104,6 +105,15 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		passwordFieldConfirmar = new JPasswordField();
 		passwordFieldConfirmar.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(passwordFieldConfirmar);
+		
+		JLabel lblEdad = new JLabel("Edad:");
+		lblEdad.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
+		panelDatos2.add(lblEdad);
+		
+		textFieldEdad = new JTextField();
+		textFieldEdad.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
+		panelDatos2.add(textFieldEdad);
+		textFieldEdad.setColumns(10);
 		
 		JLabel lblAltura = new JLabel("Altura:");
 		lblAltura.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
@@ -365,6 +375,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		}else{
 			datosDeUsuario.setGenero(1);
 		}
+		datosDeUsuario.setEdad(Integer.parseInt(textFieldEdad.getText()));
 		datosDeUsuario.setAltura(Integer.parseInt(textFieldAltura.getText()));
 		datosDeUsuario.setPeso(Integer.parseInt(textFieldPeso.getText()));
 		if(rdbtnAdelgazar.isSelected()){
@@ -390,13 +401,13 @@ public class CrearUsuario extends JPanel implements ActionListener{
 				if(passwordField.getPassword().length>=4 && passwordFieldConfirmar.getPassword().length>=4){
 					if(Arrays.equals(passwordField.getPassword(), passwordFieldConfirmar.getPassword())){
 						//Contraseña introducida.
-						if(!textFieldAltura.getText().isEmpty() && !textFieldPeso.getText().isEmpty()){
-							if(comprobarNumero(textFieldAltura.getText()) && comprobarNumero(textFieldPeso.getText())){
+						if(!textFieldEdad.getText().isEmpty() && !textFieldAltura.getText().isEmpty() && !textFieldPeso.getText().isEmpty()){
+							if(comprobarNumero(textFieldEdad.getText()) && comprobarNumero(textFieldAltura.getText()) && comprobarNumero(textFieldPeso.getText())){
 								//Correcto.
 								mensajeError="";
 								lblError.setText("");
 							}else{
-								mensajeError="El peso o la altura no se han introducido correctamente.";
+								mensajeError="La edad, el peso o la altura no se han introducido correctamente.";
 							}
 						}else{
 							mensajeError="Faltan campos por introducir.";

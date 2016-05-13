@@ -6,6 +6,7 @@ public class DatosDeUsuario {
 	private String email;
 	private String contrasenya;
 	private int genero;
+	private int edad;
 	private int altura;
 	private int peso;
 	private int objetivo;
@@ -33,6 +34,12 @@ public class DatosDeUsuario {
 	}
 	public void setGenero(int genero) {
 		this.genero = genero;
+	}
+	public int getEdad() {
+		return edad;
+	}
+	public void setEdad(int edad) {
+		this.edad = edad;
 	}
 	public int getAltura() {
 		return altura;
