@@ -83,7 +83,6 @@ public class EmailVentana extends JDialog {
 						}
 						
 						
-						System.out.println(txt);
 						//Consulta per a obtindre les dades d'usuari des de l'identificador d'usuari c.getUsuario();
 						// Nombre, sltur, edad, peso, estat fisic
 		
