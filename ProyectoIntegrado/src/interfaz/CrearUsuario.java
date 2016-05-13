@@ -463,6 +463,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		textFieldCorreo.setText(ddu.getEmail());
 		passwordField.setText(ddu.getContrasenya());
 		passwordFieldConfirmar.setText(ddu.getContrasenya());
+		textFieldEdad.setText(String.valueOf(ddu.getEdad()));
 		textFieldAltura.setText(String.valueOf(ddu.getAltura()));
 		textFieldPeso.setText(String.valueOf(ddu.getPeso()));
 		if(ddu.getGenero()==0){
