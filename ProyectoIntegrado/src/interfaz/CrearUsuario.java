@@ -456,8 +456,6 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	public void cambiarModoVentana(char modoVentana){
 		this.modoVentana=modoVentana;
 		textFieldNombre.setEditable(false);
-		//Se calculan las calorias
-		new CalcularCalorias(textFieldCaloriasRecomendadas,guardarDatosUsuario());
 		
 		//Se cargan los datos desde la base de datos
 		ddu=new Consultas(conexio).datosUsuario(conexio.getUsuario());
@@ -487,5 +485,8 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		}else{
 			rdbtnEngordar.setSelected(true);
 		}
+		
+		//Se calculan las calorias
+		new CalcularCalorias(textFieldCaloriasRecomendadas,guardarDatosUsuario());
 	}
 }
