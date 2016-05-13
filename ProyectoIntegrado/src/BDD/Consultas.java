@@ -99,6 +99,7 @@ public class Consultas{
 			return true;
 			}else{
 				System.out.println("El usuario ya existe");
+				JOptionPane.showMessageDialog(null,"El Nombre de Usuario ya existe");
 				return false;
 			}
 			
@@ -110,9 +111,7 @@ public class Consultas{
 		}
 	}
 	
-	public boolean iniciarSesionUsuario(String nombre, String contrasenya){
-		String nom=nombre;
-		String pass=contrasenya;
+	public boolean iniciarSesionUsuario(String nom, String pass){
 		boolean correcta=false;
 		existe=false;
 		

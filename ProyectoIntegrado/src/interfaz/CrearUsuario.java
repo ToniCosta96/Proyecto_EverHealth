@@ -14,7 +14,6 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -225,8 +224,6 @@ public class CrearUsuario extends JPanel implements ActionListener{
 						//Abrir la ventana Menu.
 						ventanaPrincipal.cambiapanel("Menu");
 						ventanaPrincipal.setTitle("Ever Health- Menu Principal");
-					}else{
-						JOptionPane.showMessageDialog(null,"El Nombre de Usuario ya existe");
 					}
 				}else{
 					//Actualizar usuario
