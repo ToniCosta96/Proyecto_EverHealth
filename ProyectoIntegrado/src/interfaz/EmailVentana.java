@@ -2,26 +2,35 @@ package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import BDD.Email;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import java.sql.ResultSet;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
+
+import com.mysql.jdbc.Statement;
+
+import BDD.Conexio;
+import BDD.Email;
 
 public class EmailVentana extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldCorreo;
 	Email em = new Email();
+	Conexio c;
 
 	/**
 	 * Create the dialog.
 	 */
-	public EmailVentana() {
+	public EmailVentana(Conexio con) {
+		c=con;
 		setBounds(400, 200, 300, 180);
 		setResizable(false);
 		setModalityType(DEFAULT_MODALITY_TYPE);
@@ -54,7 +63,35 @@ public class EmailVentana extends JDialog {
 				JButton okButton = new JButton("Enviar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						em.ConectaMail(textFieldCorreo.getText());
+						String [] txt=new String[7];
+
+						try {
+						ResultSet rs=null;
+						Statement cmd= null;
+						rs= cmd.executeQuery("SELECT Nombre, Email, Contrasenya, Genero, Altura, Peso, Objetivo, Actividad FROM Usuario"
+								+ "  WHERE Nombre like "+c.getUsuario());	
+						while (rs.next()) {
+						txt[0]=rs.getString("Nombre");
+						txt[1]=rs.getString("Email");
+						txt[2]=rs.getString("Contrasenya");
+						txt[3]=rs.getString("Genero");
+						txt[4]=rs.getString("Altura");
+						txt[5]=rs.getString("Peso");						
+						txt[6]=rs.getString("Objetivo");
+						txt[7]=rs.getString("Actividad");
+							
+						}
+						
+						
+						System.out.println(txt);
+						//Consulta per a obtindre les dades d'usuari des de l'identificador d'usuari c.getUsuario();
+						// Nombre, sltur, edad, peso, estat fisic
+		
+						}catch(Exception e) {
+							e.getMessage();
+						}
+						
+						em.ConectaMail(textFieldCorreo.getText(),txt);
 						
 					}
 				});

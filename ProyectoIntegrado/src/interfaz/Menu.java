@@ -21,6 +21,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import BDD.Conexio;
+
 public class Menu extends JPanel implements ActionListener{
 	private JTextField txtCaloriasRestantes;
 	Ventanas ventanaPrincipal;
@@ -187,7 +189,7 @@ public class Menu extends JPanel implements ActionListener{
 			ventanaPrincipal.cambiapanel("CrearPlato");
 			ventanaPrincipal.setTitle("Ever Health- Crear plato");
 		}else if(accio.compareTo("btnEnviarPlanificacin")==0){
-			new EmailVentana().setVisible(true);
+			new EmailVentana(null).setVisible(true);
 		}
 	}
 }

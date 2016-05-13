@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 public class Email {
     
-public void ConectaMail(String email){
+public void ConectaMail(String email,String[] txt){
     Properties props = new Properties();
     props.put("mail.smtp.host", "smtp.gmail.com");
     props.put("mail.smtp.socketFactory.port", "465");
@@ -33,7 +33,9 @@ public void ConectaMail(String email){
         message.setFrom(new InternetAddress("everhealthdam@gmail.com"));
         message.setRecipients (Message.RecipientType.TO, InternetAddress.parse(email));
         message.setSubject("Bienvenido a Ever Health");
-        message.setText("Bienvenido a Ever Health");;
+        for (int i=0; i<7;i++) {
+        message.setText(txt[i]);;
+        }
         Transport.send(message);
         JOptionPane.showMessageDialog(null, "Mensaje enviado");
     } catch (Exception e) {    
