@@ -1,5 +1,6 @@
 package interfaz;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -9,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,7 +22,6 @@ import javax.swing.border.EmptyBorder;
 
 import BDD.Conexio;
 import BDD.Consultas;
-import java.awt.Color;
 
 public class InicioDeSesion extends JFrame {
 
@@ -58,6 +59,7 @@ public class InicioDeSesion extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 150);
 		setLocationRelativeTo(null);
+		setIconImage(new ImageIcon(".\\img\\logoEverHealth1.png").getImage());
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

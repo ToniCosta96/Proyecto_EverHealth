@@ -2,6 +2,7 @@ package interfaz;
 
 import java.awt.CardLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -27,6 +28,7 @@ public class Ventanas extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
 		setExtendedState(MAXIMIZED_BOTH);
+		setIconImage(new ImageIcon(".\\img\\logoEverHealth1.png").getImage());
 		contentPane=new JPanel();
 		
 		//Crear paneles del cardLayout
