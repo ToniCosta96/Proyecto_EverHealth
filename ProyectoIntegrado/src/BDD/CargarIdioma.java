@@ -7,38 +7,25 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import com.mysql.jdbc.Connection;
 
 public class CargarIdioma {
 	private static final String archivoConfig="./Config.properties";
+	
+	public CargarIdioma(JComboBox<String> comboBoxIdioma){
+		System.out.println(cargarProperties());
+		comboBoxIdioma.setSelectedItem(cargarProperties());
+	}
+	
 	public CargarIdioma(Conexio conexio, String arrayIdioma[]){
 		/*Se obtiene el idioma del properties y se carga el idioma de la base de datos.*/
-		String idioma=null;
+		String idioma;
 		Connection con=conexio.getConexio();
 		/*Cargar properties*/
-		FileInputStream input= null;
-		try{
-			Properties prop= new Properties();
-			input=new FileInputStream(archivoConfig);
-			prop.load(input);
-			prop.getProperty("idioma");
-			idioma=prop.getProperty("idioma");
-		}catch(IOException ex){
-			JOptionPane.showMessageDialog(null,
-				    ""+ex.getMessage(),
-				    "Error al guardar idioma",
-				    JOptionPane.ERROR_MESSAGE);
-		}finally{
-			if(input!=null){
-				try{
-					input.close();
-				}catch(IOException e){
-					e.printStackTrace();
-				}
-			}
-		}
+		idioma=cargarProperties();
 		/*Cargar idioma de la base de datos*/
 		cargarIdiomaDeLaBDD(con,idioma,arrayIdioma);
 	}
@@ -70,6 +57,32 @@ public class CargarIdioma {
 			}
 		}
 		
+	}
+	
+	private String cargarProperties(){
+		String idioma=null;
+		FileInputStream input= null;
+		try{
+			Properties prop= new Properties();
+			input=new FileInputStream(archivoConfig);
+			prop.load(input);
+			prop.getProperty("idioma");
+			idioma=prop.getProperty("idioma");
+		}catch(IOException ex){
+			JOptionPane.showMessageDialog(null,
+				    ""+ex.getMessage(),
+				    "Error al guardar idioma",
+				    JOptionPane.ERROR_MESSAGE);
+		}finally{
+			if(input!=null){
+				try{
+					input.close();
+				}catch(IOException e){
+					e.printStackTrace();
+				}
+			}
+		}
+		return idioma;
 	}
 	
 	private void cargarIdiomaDeLaBDD(Connection con,String idioma,String arrayIdioma[]){

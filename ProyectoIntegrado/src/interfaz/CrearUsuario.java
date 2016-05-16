@@ -201,6 +201,8 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		comboBoxIdioma = new JComboBox<String>();
 		comboBoxIdioma.addItem("Castellano");
 		comboBoxIdioma.addItem("Ingles");
+		//CargarIdioma->Se selecciona el idioma según el archivo Config.properties
+		new CargarIdioma(comboBoxIdioma);
 		comboBoxIdioma.setActionCommand("comboBoxIdioma");
 		comboBoxIdioma.addActionListener(this);
 		panelIdioma.add(comboBoxIdioma);
