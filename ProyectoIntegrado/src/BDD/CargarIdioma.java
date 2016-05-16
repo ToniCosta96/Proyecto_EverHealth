@@ -98,7 +98,6 @@ public class CargarIdioma {
 				for(int i=0;i<arrayIdioma.length;i++){
 					rs.next();
 					arrayIdioma[i]=rs.getString(1);
-					System.out.println(arrayIdioma[i]);
 				}
 				rs.close();
 		}catch(Exception e){
