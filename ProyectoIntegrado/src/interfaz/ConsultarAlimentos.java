@@ -131,7 +131,7 @@ public class ConsultarAlimentos extends JPanel {
 		panelScroll.removeAll();
 		dtm=new DefaultTableModel();
 		dtm.addColumn("Alimento");
-		dtm.addColumn("Kcal");
+		dtm.addColumn("Kcal (100g)");
 		
 		
 		Consultas cons=new Consultas(conexio);
