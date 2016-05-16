@@ -20,7 +20,7 @@ public class Ventanas extends JFrame{
 	/**
 	 * Create the frame.
 	 */
-	public Ventanas(char ventanaDeInicio, Conexio conexio) {
+	public Ventanas(char ventanaDeInicio, Conexio conexio, String arrayIdioma[]) {
 		this.conexio= conexio;
 		cl=new CardLayout();
 		
@@ -32,9 +32,9 @@ public class Ventanas extends JFrame{
 		contentPane=new JPanel();
 		
 		//Crear paneles del cardLayout
-		crearUsuario= new CrearUsuario(Ventanas.this, conexio);
-		menu = new Menu(Ventanas.this, conexio);
-		planificacion= new Planificacion(Ventanas.this, conexio);
+		crearUsuario= new CrearUsuario(Ventanas.this, conexio, arrayIdioma);
+		menu = new Menu(Ventanas.this, conexio, arrayIdioma);
+		planificacion= new Planificacion(Ventanas.this, conexio, arrayIdioma);
 		crearPlato= new CrearPlato(Ventanas.this, conexio);
 		
 		//Preparar paneles del cardLayout

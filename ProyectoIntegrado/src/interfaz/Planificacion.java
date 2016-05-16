@@ -22,6 +22,7 @@ public class Planificacion extends JPanel implements ActionListener{
 
 	private Ventanas ventanaPrincipal;
 	private Conexio conexio;
+	private String arrayIdiomas[];
 	private CardLayout cl;
 	private JPanel panelCard;
 	private JTextField textFieldCalRecomendadas;
@@ -31,8 +32,9 @@ public class Planificacion extends JPanel implements ActionListener{
 	private DiaPlanificacion dia[];
 	private int numeroDia=0;
 	
-	public Planificacion(Ventanas v, Conexio conexio) {
+	public Planificacion(Ventanas v, Conexio conexio, String arrayIdiomas[]) {
 		ventanaPrincipal=v;
+		this.arrayIdiomas=arrayIdiomas;
 		this.conexio=conexio;
 		
 		setLayout(new BorderLayout(0, 0));

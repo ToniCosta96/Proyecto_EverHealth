@@ -20,13 +20,14 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import BDD.CargarIdioma;
 import BDD.Conexio;
 import BDD.Consultas;
 
 public class InicioDeSesion extends JFrame {
 
 	private static Conexio conexio;
-	private static String idioma[];
+	private static String arrayIdioma[];
 	private JPanel contentPane;
 	private JLabel lblNombreDeUsuario;
 	private JTextField textFieldNombre;
@@ -39,6 +40,7 @@ public class InicioDeSesion extends JFrame {
 	 */
 	public static void main(String[] args) {
 		conexio=new Conexio();
+		new CargarIdioma(conexio, arrayIdioma);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -142,7 +144,7 @@ public class InicioDeSesion extends JFrame {
 	}
 	
 	public void ventanas(char ventana){
-		Ventanas frame = new Ventanas(ventana, conexio);
+		Ventanas frame = new Ventanas(ventana, conexio, arrayIdioma);
 		frame.setVisible(true);
 	}
 }

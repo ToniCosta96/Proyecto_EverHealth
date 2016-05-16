@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -26,13 +27,14 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
+import BDD.CargarIdioma;
 import BDD.Conexio;
 import BDD.Consultas;
 import calculos.CalcularCalorias;
-import javax.swing.JComboBox;
 
 public class CrearUsuario extends JPanel implements ActionListener{
 	private Conexio conexio;
+	private String arrayIdioma[];
 	private Ventanas ventanaPrincipal;
 	private char modoVentana='c';
 	private DatosDeUsuario ddu;
@@ -54,15 +56,17 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	private JRadioButton rdbtnEngordar;
 	private JTextField textFieldCaloriasRecomendadas;
 	private JTextField textFieldEdad;
+	private JComboBox<String> comboBoxIdioma;
 
 	/**
 	 * Create the frame.
 	 */
-	public CrearUsuario(Ventanas v, Conexio conexio) {
+	public CrearUsuario(Ventanas v, Conexio conexio, String arrayIdioma[]) {
 		final int tamanyoLetraLabels= 20;
 		final int tamanyoLetraFieldsTexts= 16;
 		this.conexio=conexio;
 		ventanaPrincipal=v;
+		this.arrayIdioma=arrayIdioma;
 		
 		setLayout(new BorderLayout(0, 0));
 		
@@ -194,7 +198,11 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		JLabel lblEligeIdioma = new JLabel("Elige idioma:");
 		panelIdioma.add(lblEligeIdioma);
 		
-		JComboBox comboBoxIdioma = new JComboBox();
+		comboBoxIdioma = new JComboBox<String>();
+		comboBoxIdioma.addItem("Castellano");
+		comboBoxIdioma.addItem("Ingles");
+		comboBoxIdioma.setActionCommand("comboBoxIdioma");
+		comboBoxIdioma.addActionListener(this);
 		panelIdioma.add(comboBoxIdioma);
 		
 		JPanel panelCaloriasRecomendadas = new JPanel();
@@ -296,6 +304,9 @@ public class CrearUsuario extends JPanel implements ActionListener{
 			if(comprobarCampos()){
 				new CalcularCalorias(textFieldCaloriasRecomendadas,guardarDatosUsuario());
 			}
+		}
+		if(accio.compareTo("comboBoxIdioma")==0){
+			new CargarIdioma(conexio, comboBoxIdioma.getSelectedItem().toString(), arrayIdioma);
 		}
 	}
 	

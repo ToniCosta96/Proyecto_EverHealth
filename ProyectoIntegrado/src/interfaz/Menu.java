@@ -25,16 +25,18 @@ import BDD.Conexio;
 
 public class Menu extends JPanel implements ActionListener{
 	private JTextField txtCaloriasRestantes;
-	Ventanas ventanaPrincipal;
-	Conexio conexio;
+	private Ventanas ventanaPrincipal;
+	private Conexio conexio;
+	private String arrayIdioma[];
 
 	/**
 	 * Create the frame.
 	 */
-	public Menu(Ventanas v,Conexio conexio) {
-		setBackground(new Color(255, 255, 153));
+	public Menu(Ventanas v,Conexio conexio, String arrayIdioma[]) {
 		ventanaPrincipal=v;
+		this.arrayIdioma=arrayIdioma;
 		this.conexio=conexio;
+		setBackground(new Color(255, 255, 153));
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
 		
