@@ -26,6 +26,7 @@ import BDD.Consultas;
 public class InicioDeSesion extends JFrame {
 
 	private static Conexio conexio;
+	private static String idioma[];
 	private JPanel contentPane;
 	private JLabel lblNombreDeUsuario;
 	private JTextField textFieldNombre;

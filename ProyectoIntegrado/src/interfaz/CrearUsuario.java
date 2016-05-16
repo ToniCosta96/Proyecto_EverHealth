@@ -29,6 +29,7 @@ import javax.swing.border.BevelBorder;
 import BDD.Conexio;
 import BDD.Consultas;
 import calculos.CalcularCalorias;
+import javax.swing.JComboBox;
 
 public class CrearUsuario extends JPanel implements ActionListener{
 	private Conexio conexio;
@@ -187,8 +188,14 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(lblObjetivo);
 		seleccionarObjetivo(panelDatos2);
 		
-		JLabel lblVacio = new JLabel("");
-		panelDatos2.add(lblVacio);
+		JPanel panelIdioma = new JPanel();
+		panelDatos2.add(panelIdioma);
+		
+		JLabel lblEligeIdioma = new JLabel("Elige idioma:");
+		panelIdioma.add(lblEligeIdioma);
+		
+		JComboBox comboBoxIdioma = new JComboBox();
+		panelIdioma.add(comboBoxIdioma);
 		
 		JPanel panelCaloriasRecomendadas = new JPanel();
 		panelCaloriasRecomendadas.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
