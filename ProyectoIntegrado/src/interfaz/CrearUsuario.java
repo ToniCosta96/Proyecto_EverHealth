@@ -194,8 +194,10 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		
 		JPanel panelIdioma = new JPanel();
 		panelDatos2.add(panelIdioma);
+		panelIdioma.setLayout(new GridLayout(1, 2, 0, 0));
 		
-		JLabel lblEligeIdioma = new JLabel("Elige idioma:");
+		JLabel lblEligeIdioma = new JLabel("Seleccionar idioma:");
+		lblEligeIdioma.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelIdioma.add(lblEligeIdioma);
 		
 		comboBoxIdioma = new JComboBox<String>();
