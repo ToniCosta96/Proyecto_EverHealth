@@ -19,7 +19,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
@@ -66,15 +68,21 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		JPanel panelDatos = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panelDatos.getLayout();
 		flowLayout.setVgap(50);
-		add(panelDatos, BorderLayout.CENTER);
+		
 		
 		JPanel panelDatos2 = new JPanel();
 		panelDatos.add(panelDatos2);
-		panelDatos2.setLayout(new GridLayout(11, 2, 80, 10));
+		panelDatos2.setLayout(new GridLayout(11, 2, 75, 10));
+		
+		//ScrollPane
+		JScrollPane panelScroll= new JScrollPane(panelDatos);
+		panelScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		panelScroll.getVerticalScrollBar().setUnitIncrement(10);
+		add(panelScroll);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
-		panelDatos2.add(lblNombre);
+		panelDatos2.add(lblNombre, BorderLayout.CENTER);
 		
 		textFieldNombre = new JTextField();
 		textFieldNombre.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
