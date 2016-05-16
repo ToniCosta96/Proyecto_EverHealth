@@ -93,12 +93,12 @@ public class InicioDeSesion extends JFrame {
 		panelBotones.setOpaque(false);
 		contentPane.add(panelBotones);
 		
-		JButton btnNewButton = new JButton("Iniciar sesión.");
+		JButton btnNewButton = new JButton(arrayIdioma[1]);
 		btnNewButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Aquí se accede a la base de datos para introducir el usuario.
+				//Aquï¿½ se accede a la base de datos para introducir el usuario.
 				if(new Consultas(conexio).iniciarSesionUsuario(textFieldNombre.getText(), String.valueOf(passwordField.getPassword()))){
 					conexio.setUsuario(textFieldNombre.getText());
 					ventanas('m');
@@ -106,7 +106,7 @@ public class InicioDeSesion extends JFrame {
 				}else{
 					//Mostrar mensaje de error.
 					JOptionPane.showMessageDialog(null,
-						    "Usuario o contraseña incorrectos.",
+						    "Usuario o contraseï¿½a incorrectos.",
 						    "Error",
 						    JOptionPane.ERROR_MESSAGE);
 					//Quitar
