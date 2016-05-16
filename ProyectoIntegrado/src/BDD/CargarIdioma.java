@@ -11,10 +11,10 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
 
 public class CargarIdioma {
 	private static final String archivoConfig="./Config.properties";
+	private String arrayIdioma[];
 	
 	public CargarIdioma(JComboBox<String> comboBoxIdioma){
 		comboBoxIdioma.setSelectedItem(cargarProperties());
@@ -57,8 +57,6 @@ public class CargarIdioma {
 			}
 		}
 		
-		
-		
 	}
 	
 	private String cargarProperties(){
@@ -87,7 +85,7 @@ public class CargarIdioma {
 		return idioma;
 	}
 	
-	private void cargarIdiomaDeLaBDD(Connection con,String idioma,String arrayIdioma[]){
+	private void cargarIdiomaDeLaBDD(Connection con,String idioma, String arrayIdioma[]){
 		try{
 			ResultSet rs = null;
 			Statement cmd = null;
@@ -100,11 +98,16 @@ public class CargarIdioma {
 				for(int i=0;i<arrayIdioma.length;i++){
 					rs.next();
 					arrayIdioma[i]=rs.getString(1);
+					System.out.println(arrayIdioma[i]);
 				}
-
 				rs.close();
 		}catch(Exception e){
 			System.out.println(e);
 		}
+		this.arrayIdioma=arrayIdioma;
+	}
+	
+	public String[] getArrayIdioma(){
+		return arrayIdioma;
 	}
 }

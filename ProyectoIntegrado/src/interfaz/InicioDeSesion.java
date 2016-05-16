@@ -27,7 +27,7 @@ import BDD.Consultas;
 public class InicioDeSesion extends JFrame {
 
 	private static Conexio conexio;
-	private static String arrayIdioma[];
+	private String arrayIdioma[];
 	private JPanel contentPane;
 	private JLabel lblNombreDeUsuario;
 	private JTextField textFieldNombre;
@@ -39,8 +39,7 @@ public class InicioDeSesion extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		conexio=new Conexio();
-		new CargarIdioma(conexio, arrayIdioma);
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -57,7 +56,9 @@ public class InicioDeSesion extends JFrame {
 	 * Create the frame.
 	 */
 	public InicioDeSesion() {
-		setTitle("Iniciar sesi\u00F3n.");
+		conexio=new Conexio();
+		arrayIdioma=new CargarIdioma(conexio, arrayIdioma).getArrayIdioma();
+		setTitle(arrayIdioma[0]);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 150);
@@ -74,7 +75,7 @@ public class InicioDeSesion extends JFrame {
 		contentPane.add(panelCampos);
 		panelCampos.setLayout(new GridLayout(2, 2, 0, 0));
 		
-		lblNombreDeUsuario = new JLabel("Nombre de usuario:");
+		lblNombreDeUsuario = new JLabel(arrayIdioma[1]);
 		lblNombreDeUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panelCampos.add(lblNombreDeUsuario);
 		
@@ -82,7 +83,7 @@ public class InicioDeSesion extends JFrame {
 		panelCampos.add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
-		lblContrasea = new JLabel("Contrase\u00F1a:");
+		lblContrasea = new JLabel(arrayIdioma[2]);
 		lblContrasea.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panelCampos.add(lblContrasea);
 		
@@ -93,7 +94,7 @@ public class InicioDeSesion extends JFrame {
 		panelBotones.setOpaque(false);
 		contentPane.add(panelBotones);
 		
-		JButton btnNewButton = new JButton(arrayIdioma[1]);
+		JButton btnNewButton = new JButton(arrayIdioma[0]);
 		btnNewButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -117,7 +118,7 @@ public class InicioDeSesion extends JFrame {
 		});
 		panelBotones.add(btnNewButton);
 		
-		lblCrearUsuario = new JLabel("Crear usuario.");
+		lblCrearUsuario = new JLabel(arrayIdioma[3]);
 		lblCrearUsuario.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -128,11 +129,11 @@ public class InicioDeSesion extends JFrame {
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblCrearUsuario.setText("Crear usuario.");
+				lblCrearUsuario.setText(arrayIdioma[3]);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblCrearUsuario.setText("<html><u>Crear usuario.</u></html>");
+				lblCrearUsuario.setText("<html><u>"+arrayIdioma[3]+"</u></html>");
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
