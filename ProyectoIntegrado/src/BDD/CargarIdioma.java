@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
 
 public class CargarIdioma {
 	private static final String archivoConfig="./Config.properties";
@@ -56,6 +57,8 @@ public class CargarIdioma {
 			}
 		}
 		
+		
+		
 	}
 	
 	private String cargarProperties(){
@@ -89,9 +92,19 @@ public class CargarIdioma {
 			ResultSet rs = null;
 			Statement cmd = null;
 			cmd = (Statement) con.createStatement();
-			
+			rs=cmd.executeQuery("SELECT COUNT(id) FROM idiomas");
+			rs.next();
+			arrayIdioma=new String[rs.getInt(1)];
+			String cargarIdioma = "SELECT "+idioma+" FROM idiomas";
+			rs= cmd.executeQuery(cargarIdioma);
+				for(int i=0;i<arrayIdioma.length;i++){
+					rs.next();
+					arrayIdioma[i]=rs.getString(1);
+				}
+
+				rs.close();
 		}catch(Exception e){
-			
+			System.out.println(e);
 		}
 	}
 }

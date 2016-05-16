@@ -86,7 +86,7 @@ public class Consultas{
 			
 			if(existe==false){
 				
-				psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO Usuario (Nombre,Email,Contraseña,Genero,Altura_cm,Peso_kg,Objetivo,Actividad,Edad) VALUES (?,?,?,?,?,?,?,?,?)");
+				psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO Usuario (Nombre,Email,Contraseï¿½a,Genero,Altura_cm,Peso_kg,Objetivo,Actividad,Edad) VALUES (?,?,?,?,?,?,?,?,?)");
 				
 				psInsertar.setString(1, ddu.getNombre());
 				psInsertar.setString(2, ddu.getEmail());
@@ -120,7 +120,7 @@ public class Consultas{
 		existe=false;
 		
 		try {		
-				psInsertar=(PreparedStatement) con.prepareStatement("UPDATE Usuario SET Email=?,Contraseña=?,Genero=?,Altura_cm=?,Peso_kg=?,Objetivo=?,Actividad=?,Edad=? WHERE Nombre LIKE ?");
+				psInsertar=(PreparedStatement) con.prepareStatement("UPDATE Usuario SET Email=?,Contraseï¿½a=?,Genero=?,Altura_cm=?,Peso_kg=?,Objetivo=?,Actividad=?,Edad=? WHERE Nombre LIKE ?");
 				System.out.println(ddu.getEmail());
 				psInsertar.setString(1, ddu.getEmail());
 				System.out.println(psInsertar);
@@ -179,10 +179,10 @@ public class Consultas{
 				try {
 					
 					cmd = (Statement) con.createStatement();
-					rs = cmd.executeQuery("SELECT contraseña FROM Usuario WHERE Nombre LIKE "+"'"+nom+"'");
+					rs = cmd.executeQuery("SELECT contraseï¿½a FROM Usuario WHERE Nombre LIKE "+"'"+nom+"'");
 					
 					while (rs.next()) {
-						if(pass.equals(rs.getString("Contraseña"))){
+						if(pass.equals(rs.getString("Contraseï¿½a"))){
 							correcta=true;
 						}					
 						
@@ -206,12 +206,12 @@ public class Consultas{
 			ResultSet rs = null;
 			Statement cmd = null;
 			cmd = (Statement) con.createStatement();
-			rs = cmd.executeQuery("SELECT Nombre,Email,Contraseña FROM Usuario WHERE Nombre LIKE "+"'"+nombre+"'");
+			rs = cmd.executeQuery("SELECT Nombre,Email,Contraseï¿½a FROM Usuario WHERE Nombre LIKE "+"'"+nombre+"'");
 			
 			while (rs.next()) {
 				stringUsuario[0]=rs.getString("Nombre");
 				stringUsuario[1]=rs.getString("Email");
-				stringUsuario[2]=rs.getString("Contraseña");
+				stringUsuario[2]=rs.getString("Contraseï¿½a");
 				
 				
 
@@ -263,5 +263,6 @@ public class Consultas{
 		ddu.setEdad(iU[5]);
 		return ddu;
 	}
+	
 			
 }
