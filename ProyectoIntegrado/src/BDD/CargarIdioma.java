@@ -16,7 +16,6 @@ public class CargarIdioma {
 	private static final String archivoConfig="./Config.properties";
 	
 	public CargarIdioma(JComboBox<String> comboBoxIdioma){
-		System.out.println(cargarProperties());
 		comboBoxIdioma.setSelectedItem(cargarProperties());
 	}
 	
