@@ -35,7 +35,7 @@ public class CargarIdioma {
 		/*Cargar properties*/
 		idioma=cargarProperties();
 		/*Cargar idioma de la base de datos*/
-		arrayIdioma=cargarIdiomaDeLaBDD(con,idioma,arrayIdioma);
+		this.arrayIdioma=cargarIdiomaDeLaBDD(con,idioma,arrayIdioma);
 	}
 	
 	public CargarIdioma(Conexio conexio, String idioma, String arrayIdioma[]){
@@ -64,7 +64,7 @@ public class CargarIdioma {
 				}
 			}
 		}
-		
+		this.arrayIdioma=arrayIdioma;
 	}
 	
 	private String cargarProperties(){
