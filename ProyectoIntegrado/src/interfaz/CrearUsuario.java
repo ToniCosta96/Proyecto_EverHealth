@@ -83,17 +83,6 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		ventanaPrincipal=v;
 		this.arrayIdioma=arrayIdioma;
 		
-		lblNombre=new JLabel("");
-		lblCorreoElectrnico=new JLabel("");
-		lblPass=new JLabel("");
-		lblConfirmarPass=new JLabel("");
-		lblEdad=new JLabel("");
-		lblAltura=new JLabel("");
-		lblPeso=new JLabel("");
-		lblGnero=new JLabel("");
-		lblObjetivo=new JLabel("");
-		lblActividadFsica=new JLabel("");
-		
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelDatos = new JPanel();
@@ -111,6 +100,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelScroll.getVerticalScrollBar().setUnitIncrement(10);
 		add(panelScroll);
 		
+		lblNombre=new JLabel("");
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblNombre, BorderLayout.CENTER);
 		
@@ -119,6 +109,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
+		lblCorreoElectrnico=new JLabel("");
 		lblCorreoElectrnico.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblCorreoElectrnico);
 		
@@ -127,6 +118,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(textFieldCorreo);
 		textFieldCorreo.setColumns(10);
 		
+		lblPass=new JLabel("");
 		lblPass.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblPass);
 		
@@ -134,6 +126,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(passwordField);
 		
+		lblConfirmarPass=new JLabel("");
 		lblConfirmarPass.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblConfirmarPass);
 		
@@ -141,6 +134,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		passwordFieldConfirmar.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(passwordFieldConfirmar);
 		
+		lblEdad=new JLabel("");
 		lblEdad.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblEdad);
 		
@@ -149,6 +143,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(textFieldEdad);
 		textFieldEdad.setColumns(10);
 		
+		lblAltura=new JLabel("");
 		lblAltura.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblAltura);
 		
@@ -171,6 +166,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 			}
 		});
 		
+		lblPeso=new JLabel("");
 		lblPeso.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblPeso);
 		
@@ -194,16 +190,19 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		});
 		
 		//Seleccionar género.
+		lblGnero=new JLabel("");
 		lblGnero.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblGnero);
 		seleccionarGenero(panelDatos2);
 		
 		//Seleccionar actividad.
+		lblActividadFsica=new JLabel("");
 		lblActividadFsica.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblActividadFsica);
 		seleccionarActividad(panelDatos2);
 		
 		//Seleccionar objetivo.
+		lblObjetivo=new JLabel("");
 		lblObjetivo.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblObjetivo);
 		seleccionarObjetivo(panelDatos2);
