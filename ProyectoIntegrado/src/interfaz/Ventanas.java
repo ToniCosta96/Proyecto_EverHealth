@@ -24,7 +24,6 @@ public class Ventanas extends JFrame{
 		this.conexio= conexio;
 		cl=new CardLayout();
 		
-		setTitle("Ever Health- Crear usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
 		setExtendedState(MAXIMIZED_BOTH);
@@ -39,9 +38,11 @@ public class Ventanas extends JFrame{
 		
 		//Preparar paneles del cardLayout
 		if(ventanaDeInicio=='c'){
+			setTitle(arrayIdioma[41]);
 			cl.addLayoutComponent(crearUsuario, "CrearUsuario");
 			cl.addLayoutComponent(menu, "Menu");
 		}else if(ventanaDeInicio=='m'){
+			setTitle("Ever Health- Menu Principal");
 			cl.addLayoutComponent(menu, "Menu");
 			cl.addLayoutComponent(crearUsuario, "CrearUsuario");
 		}

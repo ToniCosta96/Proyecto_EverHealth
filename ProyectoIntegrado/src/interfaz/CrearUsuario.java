@@ -85,7 +85,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelScroll.getVerticalScrollBar().setUnitIncrement(10);
 		add(panelScroll);
 		
-		JLabel lblNombre = new JLabel("Nombre:");
+		JLabel lblNombre = new JLabel(arrayIdioma[43]);
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblNombre, BorderLayout.CENTER);
 		
@@ -94,7 +94,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
-		JLabel lblCorreoElectrnico = new JLabel("Correo electrónico:");
+		JLabel lblCorreoElectrnico = new JLabel(arrayIdioma[44]);
 		lblCorreoElectrnico.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblCorreoElectrnico);
 		
@@ -103,7 +103,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(textFieldCorreo);
 		textFieldCorreo.setColumns(10);
 		
-		JLabel lblPass = new JLabel("Contrase\u00F1a:");
+		JLabel lblPass = new JLabel(arrayIdioma[45]);
 		lblPass.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblPass);
 		
@@ -111,7 +111,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(passwordField);
 		
-		JLabel lblConfirmarPass = new JLabel("Confirmar contrase\u00F1a:");
+		JLabel lblConfirmarPass = new JLabel(arrayIdioma[46]);
 		lblConfirmarPass.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblConfirmarPass);
 		
@@ -119,7 +119,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		passwordFieldConfirmar.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(passwordFieldConfirmar);
 		
-		JLabel lblEdad = new JLabel("Edad:");
+		JLabel lblEdad = new JLabel(arrayIdioma[47]);
 		lblEdad.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblEdad);
 		
@@ -128,7 +128,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(textFieldEdad);
 		textFieldEdad.setColumns(10);
 		
-		JLabel lblAltura = new JLabel("Altura:");
+		JLabel lblAltura = new JLabel(arrayIdioma[48]);
 		lblAltura.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblAltura);
 		
@@ -151,7 +151,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 			}
 		});
 		
-		JLabel lblPeso = new JLabel("Peso:");
+		JLabel lblPeso = new JLabel(arrayIdioma[49]);
 		lblPeso.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblPeso);
 		
@@ -175,19 +175,19 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		});
 		
 		//Seleccionar género.
-		JLabel lblGnero = new JLabel("Género:");
+		JLabel lblGnero = new JLabel(arrayIdioma[50]);
 		lblGnero.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblGnero);
 		seleccionarGenero(panelDatos2);
 		
 		//Seleccionar actividad.
-		JLabel lblActividadFsica = new JLabel("Actividad física:");
+		JLabel lblActividadFsica = new JLabel(arrayIdioma[51]);
 		lblActividadFsica.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblActividadFsica);
 		seleccionarActividad(panelDatos2);
 		
 		//Seleccionar objetivo.
-		JLabel lblObjetivo = new JLabel("Objetivo:");
+		JLabel lblObjetivo = new JLabel(arrayIdioma[52]);
 		lblObjetivo.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelDatos2.add(lblObjetivo);
 		seleccionarObjetivo(panelDatos2);
@@ -196,7 +196,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(panelIdioma);
 		panelIdioma.setLayout(new GridLayout(1, 2, 0, 0));
 		
-		JLabel lblEligeIdioma = new JLabel("Seleccionar idioma:");
+		JLabel lblEligeIdioma = new JLabel(arrayIdioma[61]);
 		lblEligeIdioma.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
 		panelIdioma.add(lblEligeIdioma);
 		
@@ -214,7 +214,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelDatos2.add(panelCaloriasRecomendadas);
 		panelCaloriasRecomendadas.setLayout(new GridLayout(1, 2, 0, 0));
 		
-		JLabel lblCalorasRecomendadas = new JLabel("Calorías recomendadas:");
+		JLabel lblCalorasRecomendadas = new JLabel(arrayIdioma[60]);
 		lblCalorasRecomendadas.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panelCaloriasRecomendadas.add(lblCalorasRecomendadas);
 		
@@ -236,7 +236,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		fl_panelBotonesAtras.setAlignment(FlowLayout.LEFT);
 		panelBotones.add(panelBotonesAtras);
 		
-		JButton btnAtras = new JButton("Atrás");
+		JButton btnAtras = new JButton(arrayIdioma[62]);
 		panelBotonesAtras.add(btnAtras);
 		btnAtras.setActionCommand("CrearUsuarioBtnAtras");
 		btnAtras.addActionListener(this);
@@ -256,7 +256,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelBoxBotonesGuardar.add(lblError);
 		lblError.setForeground(Color.RED);
 		
-		JButton btnGuardar = new JButton("Guardar");
+		JButton btnGuardar = new JButton(arrayIdioma[63]);
 		panelBoxBotonesGuardar.add(btnGuardar);
 		btnGuardar.setActionCommand("CrearUsuarioBtnGuardar");
 		btnGuardar.addActionListener(this);
@@ -320,14 +320,14 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelGenero.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelGenero);
 		
-		rdbtnMasculino = new JRadioButton("Masculino.");
+		rdbtnMasculino = new JRadioButton(arrayIdioma[53]);
 		rdbtnMasculino.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rdbtnMasculino.setSelected(true);
 		rdbtnMasculino.setActionCommand("rdbtnMasculino");
 		rdbtnMasculino.addActionListener(this);
 		panelGenero.add(rdbtnMasculino);
 		
-		rdbtnFemenino = new JRadioButton("Femenino.");
+		rdbtnFemenino = new JRadioButton(arrayIdioma[54]);
 		rdbtnFemenino.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rdbtnFemenino.setActionCommand("rdbtnFemenino");
 		rdbtnFemenino.addActionListener(this);
@@ -342,20 +342,20 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelActividadFisica.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelActividadFisica);
 		
-		rdbtnSedentario = new JRadioButton("Sedentario.");
+		rdbtnSedentario = new JRadioButton(arrayIdioma[53]);
 		rdbtnSedentario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rdbtnSedentario.setSelected(true);
 		rdbtnSedentario.setActionCommand("rdbtnSedentario");
 		rdbtnSedentario.addActionListener(this);
 		panelActividadFisica.add(rdbtnSedentario);
 		
-		rdbtnLigeramenteActivo = new JRadioButton("Ligeramente activo.");
+		rdbtnLigeramenteActivo = new JRadioButton(arrayIdioma[54]);
 		rdbtnLigeramenteActivo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rdbtnLigeramenteActivo.setActionCommand("rdbtnLigeramenteActivo");
 		rdbtnLigeramenteActivo.addActionListener(this);
 		panelActividadFisica.add(rdbtnLigeramenteActivo);
 		
-		rdbtnActivo = new JRadioButton("Activo.");
+		rdbtnActivo = new JRadioButton(arrayIdioma[55]);
 		rdbtnActivo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rdbtnActivo.setActionCommand("rdbtnActivo");
 		rdbtnActivo.addActionListener(this);
@@ -371,20 +371,20 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		panelObjetivo.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelObjetivo);
 		
-		rdbtnAdelgazar = new JRadioButton("Adelgazar.");
+		rdbtnAdelgazar = new JRadioButton(arrayIdioma[56]);
 		rdbtnAdelgazar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rdbtnAdelgazar.setSelected(true);
 		rdbtnAdelgazar.setActionCommand("rdbtnAdelgazar");
 		rdbtnAdelgazar.addActionListener(this);
 		panelObjetivo.add(rdbtnAdelgazar);
 		
-		rdbtnMantenerse = new JRadioButton("Mantenerse.");
+		rdbtnMantenerse = new JRadioButton(arrayIdioma[57]);
 		rdbtnMantenerse.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rdbtnMantenerse.setActionCommand("rdbtnMantenerse");
 		rdbtnMantenerse.addActionListener(this);
 		panelObjetivo.add(rdbtnMantenerse);
 		
-		rdbtnEngordar = new JRadioButton("Engordar.");
+		rdbtnEngordar = new JRadioButton(arrayIdioma[58]);
 		rdbtnEngordar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rdbtnEngordar.setActionCommand("rdbtnEngordar");
 		rdbtnEngordar.addActionListener(this);
