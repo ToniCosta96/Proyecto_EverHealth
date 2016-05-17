@@ -110,9 +110,6 @@ public class InicioDeSesion extends JFrame {
 						    "Usuario o contrase�a incorrectos.",
 						    "Error",
 						    JOptionPane.ERROR_MESSAGE);
-					//Quitar
-					ventanas('m');
-					dispose();
 				}
 			}
 		});
