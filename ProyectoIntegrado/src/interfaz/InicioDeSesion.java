@@ -57,7 +57,7 @@ public class InicioDeSesion extends JFrame {
 	 */
 	public InicioDeSesion() {
 		conexio=new Conexio();
-		arrayIdioma=new CargarIdioma(conexio, arrayIdioma).getArrayIdioma();
+		arrayIdioma=new CargarIdioma(conexio).getArrayIdioma();
 		setTitle(arrayIdioma[0]);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -16,6 +16,14 @@ public class CargarIdioma {
 	private static final String archivoConfig="./Config.properties";
 	private String arrayIdioma[];
 	
+	public CargarIdioma(Conexio conexio){
+		/*Se carga el array con el idioma de la base de datos*/
+		String idioma;
+		Connection con=conexio.getConexio();
+		idioma=cargarProperties();
+		this.arrayIdioma=cargarIdiomaDeLaBDD(con, idioma, arrayIdioma);
+	}
+	
 	public CargarIdioma(JComboBox<String> comboBoxIdioma){
 		comboBoxIdioma.setSelectedItem(cargarProperties());
 	}
@@ -27,14 +35,14 @@ public class CargarIdioma {
 		/*Cargar properties*/
 		idioma=cargarProperties();
 		/*Cargar idioma de la base de datos*/
-		cargarIdiomaDeLaBDD(con,idioma,arrayIdioma);
+		arrayIdioma=cargarIdiomaDeLaBDD(con,idioma,arrayIdioma);
 	}
 	
 	public CargarIdioma(Conexio conexio, String idioma, String arrayIdioma[]){
 		/*Se carga de la base de datos el idioma seleccionado y se guarda en el properties.*/
 		Connection con=conexio.getConexio();
 		/*Cargar idioma de la base de datos*/
-		cargarIdiomaDeLaBDD(con,idioma,arrayIdioma);
+		arrayIdioma=cargarIdiomaDeLaBDD(con,idioma,arrayIdioma);
 		/*Escribir properties*/
 		FileOutputStream output= null;
 		try{
@@ -85,7 +93,7 @@ public class CargarIdioma {
 		return idioma;
 	}
 	
-	private void cargarIdiomaDeLaBDD(Connection con,String idioma, String arrayIdioma[]){
+	private String[] cargarIdiomaDeLaBDD(Connection con,String idioma, String arrayIdioma[]){
 		try{
 			ResultSet rs = null;
 			Statement cmd = null;
@@ -103,7 +111,7 @@ public class CargarIdioma {
 		}catch(Exception e){
 			System.out.println(e);
 		}
-		this.arrayIdioma=arrayIdioma;
+		return arrayIdioma;
 	}
 	
 	public String[] getArrayIdioma(){
