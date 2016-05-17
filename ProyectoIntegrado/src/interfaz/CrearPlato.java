@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 
 import BDD.Conexio;
 import BDD.Consultas;
+import javax.swing.JComboBox;
 
 public class CrearPlato extends JPanel {
 	
@@ -49,11 +50,27 @@ public class CrearPlato extends JPanel {
 		panelTituloCrearPlato.add(lblTituloCrearPlato);
 		
 		textFieldTituloCrearPlato = new JTextField();
+		textFieldTituloCrearPlato.setBackground(new Color(255, 255, 153));
 		textFieldTituloCrearPlato.setSelectedTextColor(new Color(255, 255, 51));
 		textFieldTituloCrearPlato.setForeground(new Color(255, 153, 102));
 		textFieldTituloCrearPlato.setFont(new Font("SimSun", Font.BOLD, 18));
 		panelTituloCrearPlato.add(textFieldTituloCrearPlato);
 		textFieldTituloCrearPlato.setColumns(10);
+		
+		JLabel labelTipo = new JLabel("TIPO:");
+		labelTipo.setForeground(new Color(255, 160, 122));
+		labelTipo.setFont(new Font("SimSun", Font.BOLD, 18));
+		panelTituloCrearPlato.add(labelTipo);
+		
+		JComboBox<String> comboBoxTipo = new JComboBox<String>();
+		comboBoxTipo.setBackground(new Color(255, 255, 153));
+		comboBoxTipo.addItem("Desayuno");
+		comboBoxTipo.addItem("Almuerzo");
+		comboBoxTipo.addItem("Comida");
+		comboBoxTipo.addItem("Merienda");
+		comboBoxTipo.addItem("Cena");
+		
+		panelTituloCrearPlato.add(comboBoxTipo);
 		
 		JPanel panelCentroCrearPlato = new JPanel();
 		panelCentroCrearPlato.setBackground(new Color(255, 255, 153));
@@ -252,10 +269,24 @@ public class CrearPlato extends JPanel {
 		panelBordeInferior.add(panelGuardar);
 		
 		JButton buttonGuardar = new JButton("Guardar");
-		panelGuardar.add(buttonGuardar);
 		buttonGuardar.setForeground(new Color(255, 153, 51));
 		buttonGuardar.setBackground(new Color(255, 204, 51));
 		buttonGuardar.setAlignmentX(1.0f);
+		buttonGuardar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String [] ingredientes=new String[tablaIngredientes.getRowCount()];
+				for(int i=0;i<tablaIngredientes.getRowCount();i++){
+					ingredientes[1]=String.valueOf(dtm2.getValueAt(i, 0));
+				}
+				Consultas cons=new Consultas(conexio);
+				//cons.registrarPlato(textFieldTituloCrearPlato.getText(), String.valueOf(comboBoxTipo.getSelectedItem()), id_Usuario, ingredientes);
+			}
+		});
+		panelGuardar.add(buttonGuardar);
+		
 		
 		
 		

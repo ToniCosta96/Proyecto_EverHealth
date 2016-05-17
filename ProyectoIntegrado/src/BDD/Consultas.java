@@ -117,28 +117,27 @@ public class Consultas{
 	}
 	
 	public boolean actualizarUsuario(DatosDeUsuario ddu){
-		existe=false;
 		
 		try {		
 				psInsertar=(PreparedStatement) con.prepareStatement("UPDATE Usuario SET Email=?,Contraseña=?,Genero=?,Altura_cm=?,Peso_kg=?,Objetivo=?,Actividad=?,Edad=? WHERE Nombre LIKE ?");
-				System.out.println(ddu.getEmail());
+				//System.out.println(ddu.getEmail());
 				psInsertar.setString(1, ddu.getEmail());
-				System.out.println(psInsertar);
+				//System.out.println(psInsertar);
 				psInsertar.setString(2, ddu.getContrasenya());
-				System.out.println(psInsertar);
+				//System.out.println(psInsertar);
 				psInsertar.setInt(3,ddu.getGenero());
-				System.out.println(psInsertar);
+				//System.out.println(psInsertar);
 				psInsertar.setInt(4,ddu.getAltura());
-				System.out.println(psInsertar);
+				//System.out.println(psInsertar);
 				psInsertar.setInt(5,ddu.getPeso());
-				System.out.println(psInsertar);
+				//System.out.println(psInsertar);
 				psInsertar.setInt(6,ddu.getObjetivo());
-				System.out.println(psInsertar);
+				//System.out.println(psInsertar);
 				psInsertar.setInt(7,ddu.getActividad());
-				System.out.println(psInsertar);
+				//System.out.println(psInsertar);
 				psInsertar.setInt(8, ddu.getEdad());
 				psInsertar.setString(9, ddu.getNombre());
-				System.out.println(psInsertar);
+				//System.out.println(psInsertar);
 				psInsertar.execute();
 			
 			
@@ -262,6 +261,56 @@ public class Consultas{
 		ddu.setActividad(iU[4]);
 		ddu.setEdad(iU[5]);
 		return ddu;
+	}
+	
+	public void registrarPlato(String nombre,String tipo,int id_Usuario,String [] ingredientes){
+		try {		
+			psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO Plato (Nombre,Tipo,Fid_Usuario) VALUES(?,?,?)");
+			
+			psInsertar.setString(1, nombre);
+			psInsertar.setString(2, tipo);
+			psInsertar.setInt(3, id_Usuario);
+
+			psInsertar.execute();
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+			int id_plato=-1;
+			cmd = (Statement) con.createStatement();
+			rs = cmd.executeQuery("SELECT id_plato FROM Plato");
+			
+			while (rs.next()) {
+				id_plato=rs.getInt("id_plato");	
+			}
+			
+			int id_alimento=-1;
+			for(int i=0;i<ingredientes.length;i++){
+				rs = cmd.executeQuery("SELECT id_alimento FROM alimento WHERE Nombre LIKE '"+ingredientes[i]+"'");
+				
+				while (rs.next()) {
+					id_alimento=rs.getInt("id_alimento");				
+				}
+				
+				psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO alimento_plato (Fid_Alimentos,Fid_Plato) VALUES(?,?)");
+				
+				psInsertar.setInt(1, id_alimento);
+				psInsertar.setInt(2, id_plato);
+
+				psInsertar.execute();
+			}
+			
+			
+			rs.close();
+			
+			
+			
+		
+		
+		
+	}catch(Exception e){
+		System.out.println("Ha habido algun problema con el registro de plato");
+		System.out.println(e);
+	}
 	}
 	
 			
