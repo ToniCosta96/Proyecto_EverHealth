@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -24,7 +26,7 @@ import BDD.CargarIdioma;
 import BDD.Conexio;
 import BDD.Consultas;
 
-public class InicioDeSesion extends JFrame {
+public class InicioDeSesion extends JFrame implements KeyListener{
 
 	private static Conexio conexio;
 	private String arrayIdioma[];
@@ -39,7 +41,6 @@ public class InicioDeSesion extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -80,6 +81,7 @@ public class InicioDeSesion extends JFrame {
 		panelCampos.add(lblNombreDeUsuario);
 		
 		textFieldNombre = new JTextField();
+		textFieldNombre.addKeyListener(this);
 		panelCampos.add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
@@ -88,32 +90,24 @@ public class InicioDeSesion extends JFrame {
 		panelCampos.add(lblContrasea);
 		
 		passwordField = new JPasswordField();
+		passwordField.addKeyListener(this);
 		panelCampos.add(passwordField);
 		
 		JPanel panelBotones = new JPanel();
 		panelBotones.setOpaque(false);
 		contentPane.add(panelBotones);
 		
-		JButton btnNewButton = new JButton(arrayIdioma[0]);
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnIniciarSesion = new JButton(arrayIdioma[0]);
+		btnIniciarSesion.addKeyListener(this);
+		btnIniciarSesion.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Aquï¿½ se accede a la base de datos para introducir el usuario.
-				if(new Consultas(conexio).iniciarSesionUsuario(textFieldNombre.getText(), String.valueOf(passwordField.getPassword()))){
-					conexio.setUsuario(textFieldNombre.getText());
-					ventanas('m');
-					dispose();
-				}else{
-					//Mostrar mensaje de error.
-					JOptionPane.showMessageDialog(null,
-						    "Usuario o contraseï¿½a incorrectos.",
-						    "Error",
-						    JOptionPane.ERROR_MESSAGE);
-				}
+				//Aquí se accede a la base de datos para introducir el usuario.
+				iniciarSesion();
 			}
 		});
-		panelBotones.add(btnNewButton);
+		panelBotones.add(btnIniciarSesion);
 		
 		lblCrearUsuario = new JLabel(arrayIdioma[3]);
 		lblCrearUsuario.addMouseListener(new MouseListener() {
@@ -141,8 +135,36 @@ public class InicioDeSesion extends JFrame {
 		panelBotones.add(lblCrearUsuario);
 	}
 	
+	private void iniciarSesion(){
+		/*Se comprueba la conexión y se inicia sesión si los datos están correctos*/
+		if(new Consultas(conexio).iniciarSesionUsuario(textFieldNombre.getText(), String.valueOf(passwordField.getPassword()))){
+			conexio.setUsuario(textFieldNombre.getText());
+			ventanas('m');
+			dispose();
+		}else{
+			//Mostrar mensaje de error.
+			JOptionPane.showMessageDialog(null,
+				    "Usuario o contraseï¿½a incorrectos.",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
 	public void ventanas(char ventana){
 		Ventanas frame = new Ventanas(ventana, conexio, arrayIdioma);
 		frame.setVisible(true);
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if (e.getKeyCode()==KeyEvent.VK_ENTER){
+			iniciarSesion();
+		}
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
 	}
 }
