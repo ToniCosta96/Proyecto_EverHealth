@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import BDD.Conexio;
 
@@ -30,6 +31,8 @@ public class Menu extends JPanel implements ActionListener{
 	private Conexio conexio;
 	private ArrayList<String> arrayIdioma;
 	private DefaultTableModel dtm;
+	private JTable datos;
+	private JPanel panelTabla;
 	private JLabel lblNewLabelCalorias;
 	private JLabel lblIrAlPerfil;
 	private JButton btnPlanificacion;
@@ -144,10 +147,39 @@ public class Menu extends JPanel implements ActionListener{
 		
 		//Crear y mostrar la tabla de la planificación
 		
-		cargarTabla();
-		JPanel panelTabla = new JPanel();
+		dtm= new DefaultTableModel();
+		String nombresColumnas[]= new String[7];
+		for(int i=0;i<nombresColumnas.length;i++){
+			nombresColumnas[i]=arrayIdioma.get(i+24);
+		}
+		String nombresFilas[]= new String[15];
+		int plato=0;
+		int cuenta=0;
+		for(int i=0;i<nombresFilas.length;i++){
+			nombresFilas[i]=arrayIdioma.get(31+plato);
+			nombresFilas[i]+=arrayIdioma.get(13+cuenta);
+			cuenta++;
+			if(cuenta>=3){
+				cuenta=0;
+				plato++;
+			}
+		}
+		
+		String[] datosTabla= new String[8];
+		dtm.addColumn("");
+		for(int columna=0;columna<nombresColumnas.length;columna++){
+			dtm.addColumn(nombresColumnas[columna]);
+		}
+		for(int fila=0;fila<nombresFilas.length;fila++){
+			datosTabla[0]=nombresFilas[fila];
+			for(int columna=1;columna<datosTabla.length;columna++){
+				datosTabla[columna]="Celda "+fila+", "+columna;
+			}
+			dtm.addRow(datosTabla);
+		}
+		panelTabla = new JPanel();
 		panelTabla.setOpaque(false);
-		JTable datos= new JTable(dtm) {
+		datos= new JTable(dtm) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				if (0 == column)
@@ -190,8 +222,10 @@ public class Menu extends JPanel implements ActionListener{
 		btnConsultarPlatos.setText(arrayIdioma.get(9));
 		btnConsultarAlimentos.setText(arrayIdioma.get(10));
 	}
-	public void cargarTabla(){
-		dtm= new DefaultTableModel();
+	public void recargarTabla(){
+		for(int i=0;i<15;i++){
+			dtm.removeRow(0);
+		}
 		String nombresColumnas[]= new String[7];
 		for(int i=0;i<nombresColumnas.length;i++){
 			nombresColumnas[i]=arrayIdioma.get(i+24);
@@ -208,17 +242,12 @@ public class Menu extends JPanel implements ActionListener{
 				plato++;
 			}
 		}
-		for(int fila=0;fila<dtm.getRowCount();fila++){
-			for(int columna=1;columna<dtm.getColumnCount();columna++){
-				//Cambiar nombres columnas
-			}
-			dtm.removeRow(fila);
-		}
+		for(int i=0;i<nombresColumnas.length;i++){
+		TableColumn column1 = datos.getTableHeader().getColumnModel().getColumn(i);
+		column1.setHeaderValue(nombresColumnas[i]);
+		} 
+		
 		String[] datosTabla= new String[8];
-		dtm.addColumn("");
-		for(int columna=0;columna<nombresColumnas.length;columna++){
-			dtm.addColumn(nombresColumnas[columna]);
-		}
 		for(int fila=0;fila<nombresFilas.length;fila++){
 			datosTabla[0]=nombresFilas[fila];
 			for(int columna=1;columna<datosTabla.length;columna++){

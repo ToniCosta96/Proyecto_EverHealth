@@ -293,7 +293,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 				ventanaPrincipal.dispose();
 			}else{
 				ventanaPrincipal.menu.cargarNombresLabels();
-				ventanaPrincipal.menu.cargarTabla();
+				ventanaPrincipal.menu.recargarTabla();
 				ventanaPrincipal.cambiapanel("Menu");
 				ventanaPrincipal.setTitle("Ever Health- Menu Principal");
 				//Quitar mensaje de error.
