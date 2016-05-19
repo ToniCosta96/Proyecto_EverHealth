@@ -42,7 +42,7 @@ public class Ventanas extends JFrame{
 			cl.addLayoutComponent(crearUsuario, "CrearUsuario");
 			cl.addLayoutComponent(menu, "Menu");
 		}else if(ventanaDeInicio=='m'){
-			setTitle("Ever Health- Menu Principal");
+			setTitle(arrayIdioma[5]);
 			cl.addLayoutComponent(menu, "Menu");
 			cl.addLayoutComponent(crearUsuario, "CrearUsuario");
 		}

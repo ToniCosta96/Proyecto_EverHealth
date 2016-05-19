@@ -28,6 +28,14 @@ public class Menu extends JPanel implements ActionListener{
 	private Ventanas ventanaPrincipal;
 	private Conexio conexio;
 	private String arrayIdioma[];
+	private DefaultTableModel dtm;
+	private JLabel lblNewLabelCalorias;
+	private JLabel lblIrAlPerfil;
+	private JButton btnPlanificacion;
+	private JButton btnEnviarPlanificacin;
+	private JButton btnHazTuPropio;
+	private JButton btnConsultarPlatos;
+	private JButton btnConsultarAlimentos;
 
 	/**
 	 * Create the frame.
@@ -53,7 +61,7 @@ public class Menu extends JPanel implements ActionListener{
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panelCabezera.add(panelCalorias);
 		
-		JLabel lblNewLabelCalorias = new JLabel("Calorías restantes:");
+		lblNewLabelCalorias = new JLabel();
 		panelCalorias.add(lblNewLabelCalorias);
 		
 		txtCaloriasRestantes = new JTextField();
@@ -70,7 +78,7 @@ public class Menu extends JPanel implements ActionListener{
 		flowLayout_1.setAlignment(FlowLayout.RIGHT);
 		panelCabezera.add(panelIrAlPerfil);
 		
-		JLabel lblIrAlPerfil = new JLabel("Ir al perfil de usuario.");
+		lblIrAlPerfil = new JLabel();
 		lblIrAlPerfil.setForeground(Color.BLUE);
 		lblIrAlPerfil.addMouseListener(new MouseListener() {
 			
@@ -84,20 +92,20 @@ public class Menu extends JPanel implements ActionListener{
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblIrAlPerfil.setText("Ir al perfil de usuario.");
+				lblIrAlPerfil.setText(arrayIdioma[12]);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblIrAlPerfil.setText("<html><u>Ir al perfil de usuario.</html></u>");
+				lblIrAlPerfil.setText("<html><u>"+arrayIdioma[12]+"</u></html>");
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ventanaPrincipal.cambiapanel("CrearUsuario");
-				ventanaPrincipal.setTitle("Ever Health- Perfil de usuario");
+				ventanaPrincipal.setTitle(arrayIdioma[7]);
 			}
 		});
 		
-		JButton btnEnviarPlanificacin = new JButton("Enviar planificaci\u00F3n por correo");
+		btnEnviarPlanificacin = new JButton();
 		btnEnviarPlanificacin.setActionCommand("btnEnviarPlanificacin");
 		btnEnviarPlanificacin.addActionListener(this);
 		panelIrAlPerfil.add(btnEnviarPlanificacin);
@@ -113,45 +121,30 @@ public class Menu extends JPanel implements ActionListener{
 		panelBotones.setLayout(new GridLayout(4, 1, 0, 0));
 		panelDivisor.add(panelBotones);
 		
-		JButton btnPlanificacion = new JButton("Panificación");
+		btnPlanificacion = new JButton();
 		btnPlanificacion.setActionCommand("MenuBtnPlanificacion");
 		btnPlanificacion.addActionListener(this);
 		panelBotones.add(btnPlanificacion);
 		
-		JButton btnHazTuPropio = new JButton("Haz tu propio plato");
+		btnHazTuPropio = new JButton();
 		btnHazTuPropio.setActionCommand("MenuBtnCrearPlato");
 		btnHazTuPropio.addActionListener(this);
 		panelBotones.add(btnHazTuPropio);
 		
-		JButton btnConsultarPlatos = new JButton("Consultar platos");
+		btnConsultarPlatos = new JButton();
 		btnConsultarPlatos.setActionCommand("MenuBtnConsultarPlatos");
 		btnConsultarPlatos.addActionListener(this);
 		panelBotones.add(btnConsultarPlatos);
 		
-		JButton btnConsultarAlimentos = new JButton("Consultar alimentos");
+		btnConsultarAlimentos = new JButton();
 		btnConsultarAlimentos.setActionCommand("MenuBtnConsultarAlimentos");
 		btnConsultarAlimentos.addActionListener(this);
 		panelBotones.add(btnConsultarAlimentos);
 		
 		//Crear y mostrar la tabla de la planificación
-		String nombresColumnas[]= {"Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"};
-		String nombresFilas[]= {"Desayuno (Plato1)","Desayuno (Plato2)","Desayuno (Plato3)","Almuerzo (Plato 1)",
-				"Almuerzo (Plato 2)","Almuerzo (Plato 3)","Comida (Plato 1)","Comida (Plato 2)","Comida (Plato 3)",
-				"Merienda (Plato 1)","Merienda (Plato 2)","Merienda (Plato 3)","Cena (Plato 1)","Cena (Plato 2)","Cena (Plato 3)"};
-		String[] datosTabla= new String[8];
-		DefaultTableModel dtm= new DefaultTableModel();
-		dtm.addColumn("");
-		for(int columna=0;columna<nombresColumnas.length;columna++){
-			dtm.addColumn(nombresColumnas[columna]);
-		}
-		for(int fila=0;fila<nombresFilas.length;fila++){
-			datosTabla[0]=nombresFilas[fila];
-			for(int columna=1;columna<datosTabla.length;columna++){
-				datosTabla[columna]="Celda "+fila+", "+columna;
-			}
-			dtm.addRow(datosTabla);
-		}
 		
+		dtm= new DefaultTableModel();
+		cargarTabla();
 		JPanel panelTabla = new JPanel();
 		panelTabla.setOpaque(false);
 		JTable datos= new JTable(dtm) {
@@ -183,6 +176,55 @@ public class Menu extends JPanel implements ActionListener{
 		scrollPane.setPreferredSize(new Dimension(600, 500));
 		panelTabla.add(scrollPane);
 		panelDivisor.add(panelTabla);
+		
+		/*Cargar labels*/
+		cargarNombresLabels();
+	}
+	
+	private void cargarNombresLabels(){
+		lblNewLabelCalorias.setText(arrayIdioma[6]);
+		btnPlanificacion.setText(arrayIdioma[7]);
+		lblIrAlPerfil.setText(arrayIdioma[12]);
+		btnEnviarPlanificacin.setText(arrayIdioma[11]);
+		btnHazTuPropio.setText(arrayIdioma[8]);
+		btnConsultarPlatos.setText(arrayIdioma[9]);
+		btnConsultarAlimentos.setText(arrayIdioma[10]);
+	}
+	private void cargarTabla(){
+		String nombresColumnas[]= new String[7];
+		for(int i=0;i<nombresColumnas.length;i++){
+			nombresColumnas[i]=arrayIdioma[i+24];
+		}
+		String nombresFilas[]= new String[15];
+		int plato=0;
+		int cuenta=0;
+		for(int i=0;i<nombresFilas.length;i++){
+			nombresFilas[i]=arrayIdioma[31+plato];
+			nombresFilas[i]+=arrayIdioma[13+cuenta];
+			cuenta++;
+			if(cuenta>=3){
+				cuenta=0;
+				plato++;
+			}
+		}
+		for(int fila=0;fila<dtm.getRowCount();fila++){
+			for(int columna=1;columna<dtm.getColumnCount();columna++){
+				//Cambiar nombres columnas
+			}
+			dtm.removeRow(fila);
+		}
+		String[] datosTabla= new String[8];
+		dtm.addColumn("");
+		for(int columna=0;columna<nombresColumnas.length;columna++){
+			dtm.addColumn(nombresColumnas[columna]);
+		}
+		for(int fila=0;fila<nombresFilas.length;fila++){
+			datosTabla[0]=nombresFilas[fila];
+			for(int columna=1;columna<datosTabla.length;columna++){
+				datosTabla[columna]="Celda "+fila+", "+columna;
+			}
+			dtm.addRow(datosTabla);
+		}
 	}
 
 	@Override
