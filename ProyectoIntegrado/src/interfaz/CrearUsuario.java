@@ -505,7 +505,6 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		    return false;
 	}
 	private void cargarNombresLabels(){
-		System.out.println(""+arrayIdioma.get(43));
 		lblNombre.setText(arrayIdioma.get(43));
 		lblCorreoElectrnico.setText(arrayIdioma.get(44));
 		lblPass.setText(arrayIdioma.get(45));
