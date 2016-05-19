@@ -18,6 +18,7 @@ public class Ventanas extends JFrame{
 	private Planificacion planificacion;
 	private CrearPlato crearPlato;
 	private CrearUsuario crearUsuario;
+	private ConsultarPlatos consultarPlatos;
 	/**
 	 * Create the frame.
 	 */
@@ -70,7 +71,10 @@ public class Ventanas extends JFrame{
 		}else if(nombre.equals("CrearPlato")){
 			cl.show(contentPane, "CrearPlato");
 		}else if(nombre.equals("ConsultarPlatos")){
-			ConsultarPlatos consultarPlatos=new ConsultarPlatos(Ventanas.this,conexio);
+			if(contentPane.isValid()){
+				contentPane.remove(consultarPlatos);
+			}
+			consultarPlatos=new ConsultarPlatos(Ventanas.this,conexio);
 			cl.addLayoutComponent(consultarPlatos, "ConsultarPlatos");
 			contentPane.add(consultarPlatos);
 			cl.show(contentPane, "ConsultarPlatos");
