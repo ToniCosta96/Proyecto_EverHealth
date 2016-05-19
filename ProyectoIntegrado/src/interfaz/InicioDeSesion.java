@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -29,7 +30,7 @@ import BDD.Consultas;
 public class InicioDeSesion extends JFrame implements KeyListener{
 
 	private static Conexio conexio;
-	private String arrayIdioma[];
+	private ArrayList<String> arrayIdioma;
 	private JPanel contentPane;
 	private JLabel lblNombreDeUsuario;
 	private JTextField textFieldNombre;
@@ -58,8 +59,9 @@ public class InicioDeSesion extends JFrame implements KeyListener{
 	 */
 	public InicioDeSesion() {
 		conexio=new Conexio();
-		arrayIdioma=new CargarIdioma(conexio).getArrayIdioma();
-		setTitle(arrayIdioma[0]);
+		arrayIdioma= new ArrayList<String>();
+		new CargarIdioma(conexio,arrayIdioma);
+		setTitle(arrayIdioma.get(0));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 150);
@@ -76,7 +78,7 @@ public class InicioDeSesion extends JFrame implements KeyListener{
 		contentPane.add(panelCampos);
 		panelCampos.setLayout(new GridLayout(2, 2, 0, 0));
 		
-		lblNombreDeUsuario = new JLabel(arrayIdioma[1]);
+		lblNombreDeUsuario = new JLabel(arrayIdioma.get(1));
 		lblNombreDeUsuario.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panelCampos.add(lblNombreDeUsuario);
 		
@@ -85,7 +87,7 @@ public class InicioDeSesion extends JFrame implements KeyListener{
 		panelCampos.add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
-		lblContrasea = new JLabel(arrayIdioma[2]);
+		lblContrasea = new JLabel(arrayIdioma.get(2));
 		lblContrasea.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panelCampos.add(lblContrasea);
 		
@@ -97,7 +99,7 @@ public class InicioDeSesion extends JFrame implements KeyListener{
 		panelBotones.setOpaque(false);
 		contentPane.add(panelBotones);
 		
-		JButton btnIniciarSesion = new JButton(arrayIdioma[0]);
+		JButton btnIniciarSesion = new JButton(arrayIdioma.get(0));
 		btnIniciarSesion.addKeyListener(this);
 		btnIniciarSesion.addActionListener(new ActionListener() {
 			
@@ -109,7 +111,7 @@ public class InicioDeSesion extends JFrame implements KeyListener{
 		});
 		panelBotones.add(btnIniciarSesion);
 		
-		lblCrearUsuario = new JLabel(arrayIdioma[3]);
+		lblCrearUsuario = new JLabel(arrayIdioma.get(3));
 		lblCrearUsuario.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -120,11 +122,11 @@ public class InicioDeSesion extends JFrame implements KeyListener{
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblCrearUsuario.setText(arrayIdioma[3]);
+				lblCrearUsuario.setText(arrayIdioma.get(3));
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblCrearUsuario.setText("<html><u>"+arrayIdioma[3]+"</u></html>");
+				lblCrearUsuario.setText("<html><u>"+arrayIdioma.get(3)+"</u></html>");
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {

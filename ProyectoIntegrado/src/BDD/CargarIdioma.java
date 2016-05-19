@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.swing.JComboBox;
@@ -16,33 +17,25 @@ public class CargarIdioma {
 	private static final String archivoConfig="./Config.properties";
 	private String arrayIdioma[];
 	
-	public CargarIdioma(Conexio conexio){
-		/*Se carga el array con el idioma de la base de datos*/
-		String idioma;
-		Connection con=conexio.getConexio();
-		idioma=cargarProperties();
-		this.arrayIdioma=cargarIdiomaDeLaBDD(con, idioma, arrayIdioma);
-	}
-	
 	public CargarIdioma(JComboBox<String> comboBoxIdioma){
 		comboBoxIdioma.setSelectedItem(cargarProperties());
 	}
 	
-	public CargarIdioma(Conexio conexio, String arrayIdioma[]){
+	public CargarIdioma(Conexio conexio, ArrayList<String>arrayIdioma){
 		/*Se obtiene el idioma del properties y se carga el idioma de la base de datos.*/
 		String idioma;
 		Connection con=conexio.getConexio();
 		/*Cargar properties*/
 		idioma=cargarProperties();
 		/*Cargar idioma de la base de datos*/
-		this.arrayIdioma=cargarIdiomaDeLaBDD(con,idioma,arrayIdioma);
+		cargarIdiomaDeLaBDD(con,idioma,arrayIdioma);
 	}
 	
-	public CargarIdioma(Conexio conexio, String idioma, String arrayIdioma[]){
+	public CargarIdioma(Conexio conexio, String idioma, ArrayList<String>arrayIdioma){
 		/*Se carga de la base de datos el idioma seleccionado y se guarda en el properties.*/
 		Connection con=conexio.getConexio();
 		/*Cargar idioma de la base de datos*/
-		arrayIdioma=cargarIdiomaDeLaBDD(con,idioma,arrayIdioma);
+		cargarIdiomaDeLaBDD(con,idioma,arrayIdioma);
 		/*Escribir properties*/
 		FileOutputStream output= null;
 		try{
@@ -64,7 +57,6 @@ public class CargarIdioma {
 				}
 			}
 		}
-		this.arrayIdioma=arrayIdioma;
 	}
 	
 	private String cargarProperties(){
@@ -93,25 +85,30 @@ public class CargarIdioma {
 		return idioma;
 	}
 	
-	private String[] cargarIdiomaDeLaBDD(Connection con,String idioma, String arrayIdioma[]){
+	private void cargarIdiomaDeLaBDD(Connection con,String idioma, ArrayList<String> arrayIdioma){
 		try{
 			ResultSet rs = null;
 			Statement cmd = null;
 			cmd = (Statement) con.createStatement();
-			rs=cmd.executeQuery("SELECT COUNT(id) FROM idiomas");
-			rs.next();
-			arrayIdioma=new String[rs.getInt(1)];
+			
 			String cargarIdioma = "SELECT "+idioma+" FROM idiomas";
-			rs= cmd.executeQuery(cargarIdioma);
-				for(int i=0;i<arrayIdioma.length;i++){
-					rs.next();
-					arrayIdioma[i]=rs.getString(1);
+			if(arrayIdioma.isEmpty()){
+				rs= cmd.executeQuery(cargarIdioma);
+				while(rs.next()){
+					arrayIdioma.add(rs.getString(1));
 				}
-				rs.close();
+			}else{
+				rs= cmd.executeQuery(cargarIdioma);
+				for(int i=0;i<arrayIdioma.size();i++){
+					rs.next();
+					arrayIdioma.set(i, rs.getString(1));
+				}
+			}
+			rs.close();
 		}catch(Exception e){
 			System.out.println(e);
 		}
-		return arrayIdioma;
+		
 	}
 	
 	public String[] getArrayIdioma(){

@@ -1,6 +1,7 @@
 package interfaz;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -13,14 +14,14 @@ public class Ventanas extends JFrame{
 	private Conexio conexio;
 	private JPanel contentPane;
 	private CardLayout cl;
-	private Menu menu;
+	public Menu menu;
 	private Planificacion planificacion;
 	private CrearPlato crearPlato;
 	private CrearUsuario crearUsuario;
 	/**
 	 * Create the frame.
 	 */
-	public Ventanas(char ventanaDeInicio, Conexio conexio, String arrayIdioma[]) {
+	public Ventanas(char ventanaDeInicio, Conexio conexio, ArrayList<String>arrayIdioma) {
 		this.conexio= conexio;
 		cl=new CardLayout();
 		
@@ -38,11 +39,11 @@ public class Ventanas extends JFrame{
 		
 		//Preparar paneles del cardLayout
 		if(ventanaDeInicio=='c'){
-			setTitle(arrayIdioma[41]);
+			setTitle(arrayIdioma.get(41));
 			cl.addLayoutComponent(crearUsuario, "CrearUsuario");
 			cl.addLayoutComponent(menu, "Menu");
 		}else if(ventanaDeInicio=='m'){
-			setTitle(arrayIdioma[5]);
+			setTitle(arrayIdioma.get(5));
 			cl.addLayoutComponent(menu, "Menu");
 			cl.addLayoutComponent(crearUsuario, "CrearUsuario");
 		}

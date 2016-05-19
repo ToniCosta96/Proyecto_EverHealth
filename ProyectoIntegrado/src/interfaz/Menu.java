@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -27,7 +28,7 @@ public class Menu extends JPanel implements ActionListener{
 	private JTextField txtCaloriasRestantes;
 	private Ventanas ventanaPrincipal;
 	private Conexio conexio;
-	private String arrayIdioma[];
+	private ArrayList<String> arrayIdioma;
 	private DefaultTableModel dtm;
 	private JLabel lblNewLabelCalorias;
 	private JLabel lblIrAlPerfil;
@@ -40,7 +41,7 @@ public class Menu extends JPanel implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public Menu(Ventanas v,Conexio conexio, String arrayIdioma[]) {
+	public Menu(Ventanas v,Conexio conexio, ArrayList<String> arrayIdioma) {
 		ventanaPrincipal=v;
 		this.arrayIdioma=arrayIdioma;
 		this.conexio=conexio;
@@ -92,16 +93,16 @@ public class Menu extends JPanel implements ActionListener{
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				lblIrAlPerfil.setText(arrayIdioma[12]);
+				lblIrAlPerfil.setText(arrayIdioma.get(12));
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				lblIrAlPerfil.setText("<html><u>"+arrayIdioma[12]+"</u></html>");
+				lblIrAlPerfil.setText("<html><u>"+arrayIdioma.get(12)+"</u></html>");
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ventanaPrincipal.cambiapanel("CrearUsuario");
-				ventanaPrincipal.setTitle(arrayIdioma[7]);
+				ventanaPrincipal.setTitle(arrayIdioma.get(7));
 			}
 		});
 		
@@ -143,7 +144,6 @@ public class Menu extends JPanel implements ActionListener{
 		
 		//Crear y mostrar la tabla de la planificación
 		
-		dtm= new DefaultTableModel();
 		cargarTabla();
 		JPanel panelTabla = new JPanel();
 		panelTabla.setOpaque(false);
@@ -181,26 +181,27 @@ public class Menu extends JPanel implements ActionListener{
 		cargarNombresLabels();
 	}
 	
-	private void cargarNombresLabels(){
-		lblNewLabelCalorias.setText(arrayIdioma[6]);
-		btnPlanificacion.setText(arrayIdioma[7]);
-		lblIrAlPerfil.setText(arrayIdioma[12]);
-		btnEnviarPlanificacin.setText(arrayIdioma[11]);
-		btnHazTuPropio.setText(arrayIdioma[8]);
-		btnConsultarPlatos.setText(arrayIdioma[9]);
-		btnConsultarAlimentos.setText(arrayIdioma[10]);
+	public void cargarNombresLabels(){
+		lblNewLabelCalorias.setText(arrayIdioma.get(6));
+		btnPlanificacion.setText(arrayIdioma.get(7));
+		lblIrAlPerfil.setText(arrayIdioma.get(12));
+		btnEnviarPlanificacin.setText(arrayIdioma.get(11));
+		btnHazTuPropio.setText(arrayIdioma.get(8));
+		btnConsultarPlatos.setText(arrayIdioma.get(9));
+		btnConsultarAlimentos.setText(arrayIdioma.get(10));
 	}
-	private void cargarTabla(){
+	public void cargarTabla(){
+		dtm= new DefaultTableModel();
 		String nombresColumnas[]= new String[7];
 		for(int i=0;i<nombresColumnas.length;i++){
-			nombresColumnas[i]=arrayIdioma[i+24];
+			nombresColumnas[i]=arrayIdioma.get(i+24);
 		}
 		String nombresFilas[]= new String[15];
 		int plato=0;
 		int cuenta=0;
 		for(int i=0;i<nombresFilas.length;i++){
-			nombresFilas[i]=arrayIdioma[31+plato];
-			nombresFilas[i]+=arrayIdioma[13+cuenta];
+			nombresFilas[i]=arrayIdioma.get(31+plato);
+			nombresFilas[i]+=arrayIdioma.get(13+cuenta);
 			cuenta++;
 			if(cuenta>=3){
 				cuenta=0;

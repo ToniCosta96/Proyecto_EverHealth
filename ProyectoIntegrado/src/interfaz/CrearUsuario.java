@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -34,7 +35,7 @@ import calculos.CalcularCalorias;
 
 public class CrearUsuario extends JPanel implements ActionListener{
 	private Conexio conexio;
-	private String arrayIdioma[];
+	private ArrayList<String>arrayIdioma;
 	private Ventanas ventanaPrincipal;
 	private char modoVentana='c';
 	private DatosDeUsuario ddu;
@@ -76,7 +77,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public CrearUsuario(Ventanas v, Conexio conexio, String arrayIdioma[]) {
+	public CrearUsuario(Ventanas v, Conexio conexio, ArrayList<String>arrayIdioma) {
 		final int tamanyoLetraLabels= 20;
 		final int tamanyoLetraFieldsTexts= 16;
 		this.conexio=conexio;
@@ -291,6 +292,8 @@ public class CrearUsuario extends JPanel implements ActionListener{
 				frame.setVisible(true);
 				ventanaPrincipal.dispose();
 			}else{
+				ventanaPrincipal.menu.cargarNombresLabels();
+				ventanaPrincipal.menu.cargarTabla();
 				ventanaPrincipal.cambiapanel("Menu");
 				ventanaPrincipal.setTitle("Ever Health- Menu Principal");
 				//Quitar mensaje de error.
@@ -327,7 +330,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 			}
 		}
 		if(accio.compareTo("comboBoxIdioma")==0){
-			arrayIdioma=new CargarIdioma(conexio, comboBoxIdioma.getSelectedItem().toString(), arrayIdioma).getArrayIdioma();
+			new CargarIdioma(conexio, comboBoxIdioma.getSelectedItem().toString(), arrayIdioma);
 			cargarNombresLabels();
 		}
 	}
@@ -502,28 +505,29 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		    return false;
 	}
 	private void cargarNombresLabels(){
-		lblNombre.setText(arrayIdioma[43]);
-		lblCorreoElectrnico.setText(arrayIdioma[44]);
-		lblPass.setText(arrayIdioma[45]);
-		lblConfirmarPass.setText(arrayIdioma[46]);
-		lblEdad.setText(arrayIdioma[47]);
-		lblAltura.setText(arrayIdioma[48]);
-		lblPeso.setText(arrayIdioma[49]);
-		lblGnero.setText(arrayIdioma[50]);
-		lblObjetivo.setText(arrayIdioma[51]);
-		lblActividadFsica.setText(arrayIdioma[52]);
-		lblEligeIdioma.setText(arrayIdioma[62]);
-		lblCalorasRecomendadas.setText(arrayIdioma[61]);
-		rdbtnMasculino.setText(arrayIdioma[53]);
-		rdbtnFemenino.setText(arrayIdioma[54]);
-		rdbtnAdelgazar.setText(arrayIdioma[55]);
-		rdbtnMantenerse.setText(arrayIdioma[56]);
-		rdbtnEngordar.setText(arrayIdioma[57]);
-		rdbtnSedentario.setText(arrayIdioma[58]);
-		rdbtnLigeramenteActivo.setText(arrayIdioma[59]);
-		rdbtnActivo.setText(arrayIdioma[60]);
-		btnAtras.setText(arrayIdioma[63]);
-		btnGuardar.setText(arrayIdioma[64]);
+		System.out.println(""+arrayIdioma.get(43));
+		lblNombre.setText(arrayIdioma.get(43));
+		lblCorreoElectrnico.setText(arrayIdioma.get(44));
+		lblPass.setText(arrayIdioma.get(45));
+		lblConfirmarPass.setText(arrayIdioma.get(46));
+		lblEdad.setText(arrayIdioma.get(47));
+		lblAltura.setText(arrayIdioma.get(48));
+		lblPeso.setText(arrayIdioma.get(49));
+		lblGnero.setText(arrayIdioma.get(50));
+		lblObjetivo.setText(arrayIdioma.get(51));
+		lblActividadFsica.setText(arrayIdioma.get(52));
+		lblEligeIdioma.setText(arrayIdioma.get(62));
+		lblCalorasRecomendadas.setText(arrayIdioma.get(63));
+		rdbtnMasculino.setText(arrayIdioma.get(53));
+		rdbtnFemenino.setText(arrayIdioma.get(54));
+		rdbtnAdelgazar.setText(arrayIdioma.get(55));
+		rdbtnMantenerse.setText(arrayIdioma.get(56));
+		rdbtnEngordar.setText(arrayIdioma.get(57));
+		rdbtnSedentario.setText(arrayIdioma.get(58));
+		rdbtnLigeramenteActivo.setText(arrayIdioma.get(59));
+		rdbtnActivo.setText(arrayIdioma.get(60));
+		btnAtras.setText(arrayIdioma.get(63));
+		btnGuardar.setText(arrayIdioma.get(64));
 	}
 	public void cambiarModoVentana(char modoVentana){
 		this.modoVentana=modoVentana;
