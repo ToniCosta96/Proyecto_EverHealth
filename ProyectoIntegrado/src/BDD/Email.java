@@ -2,8 +2,6 @@ package BDD;
 
 import java.util.Properties;
 
-import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -11,8 +9,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeBodyPart;
 
 public class Email {
 	private Properties props;
@@ -44,7 +40,6 @@ public class Email {
 	                }}
 	            );
 	    
-	   
     }  
 	private void conectaMailBienvenida(String email){
 		 try {
@@ -52,7 +47,7 @@ public class Email {
 		        message.setFrom(new InternetAddress("everhealthdam@gmail.com"));
 		        message.setRecipients (Message.RecipientType.TO, InternetAddress.parse(email));
 		        message.setSubject("Bienvenido a Ever Health");   
-		        message.setText("En EVerhealth podrás planificarte comodamente tu dieta");
+		        message.setText("En Everhealth podrás planificarte comodamente tu dieta");
 		 
 		        Transport.send(message);
 		        JOptionPane.showMessageDialog(null, "Mensaje enviado");
