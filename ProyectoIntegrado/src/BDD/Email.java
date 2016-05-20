@@ -45,13 +45,9 @@ private void ConectaMail(String email){
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress("everhealthdam@gmail.com"));
         message.setRecipients (Message.RecipientType.TO, InternetAddress.parse(email));
-        message.setSubject("Bienvenido a Ever Health");
-   
-        message.setText("Perfil de usuario");
-        
-        MimeBodyPart contenido = new MimeBodyPart();
-        contenido.setDataHandler(new DataHandler(new FileDataSource("/Escritorio/Prueba.txt")));
-        contenido.setFileName("/Escritorio/Prueba.txt");
+        message.setSubject("Bienvenido a Ever Health");   
+        message.setText("En EVerhealth podrás planificarte comodamente tu dieta");
+
      
     
        // message.setContent(adjunto,null);;
