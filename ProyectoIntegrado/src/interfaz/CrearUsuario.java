@@ -516,18 +516,18 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		lblAltura.setText(arrayIdioma.get(48));
 		lblPeso.setText(arrayIdioma.get(49));
 		lblGnero.setText(arrayIdioma.get(50));
-		lblObjetivo.setText(arrayIdioma.get(51));
 		lblActividadFsica.setText(arrayIdioma.get(52));
+		lblObjetivo.setText(arrayIdioma.get(51));
 		lblEligeIdioma.setText(arrayIdioma.get(62));
-		lblCalorasRecomendadas.setText(arrayIdioma.get(63));
+		lblCalorasRecomendadas.setText(arrayIdioma.get(61));
 		rdbtnMasculino.setText(arrayIdioma.get(53));
 		rdbtnFemenino.setText(arrayIdioma.get(54));
-		rdbtnAdelgazar.setText(arrayIdioma.get(55));
-		rdbtnMantenerse.setText(arrayIdioma.get(56));
-		rdbtnEngordar.setText(arrayIdioma.get(57));
 		rdbtnSedentario.setText(arrayIdioma.get(58));
 		rdbtnLigeramenteActivo.setText(arrayIdioma.get(59));
 		rdbtnActivo.setText(arrayIdioma.get(60));
+		rdbtnAdelgazar.setText(arrayIdioma.get(55));
+		rdbtnMantenerse.setText(arrayIdioma.get(56));
+		rdbtnEngordar.setText(arrayIdioma.get(57));
 		btnAtras.setText(arrayIdioma.get(63));
 		btnGuardar.setText(arrayIdioma.get(64));
 	}
