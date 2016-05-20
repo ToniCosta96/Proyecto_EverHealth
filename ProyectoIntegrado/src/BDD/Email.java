@@ -34,7 +34,7 @@ public class Email {
 	            props, 
 	            new javax.mail.Authenticator() {
 	                protected javax.mail.PasswordAuthentication getPasswordAuthentication(){
-	                    
+	                    //
 	                    return new javax.mail.PasswordAuthentication("everhealthdam@gmail.com","alpatodam");
 	                                
 	                }}

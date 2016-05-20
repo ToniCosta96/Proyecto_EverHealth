@@ -82,6 +82,17 @@ public class EmailVentana extends JDialog {
 							}
 
 							
+							File f;
+							FileWriter fw = new FileReader(f);
+							BufferedReader bw = new BufferedReader(fw) 
+							
+							
+							bw.write 
+							
+							
+							
+							
+							
 
 						} catch (Exception e) {
 							e.getMessage();
