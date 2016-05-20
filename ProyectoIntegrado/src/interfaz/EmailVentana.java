@@ -4,11 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileOutputStream;
-import java.sql.ResultSet;
 
-import javax.mail.BodyPart;
-import javax.mail.internet.MimeBodyPart;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -16,17 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import com.mysql.jdbc.Statement;
-
 import BDD.Conexio;
-import BDD.Email;
 
 public class EmailVentana extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textFieldCorreo;
-	Email em = new Email();
-	Conexio c;
+	private Conexio c;
 
 	/**
 	 * Create the dialog.
@@ -95,7 +87,7 @@ public class EmailVentana extends JDialog {
 							e.getMessage();
 						}
 	*/
-						em.ConectaMail(textFieldCorreo.getText()/*, adjunto*/);
+						//Aquí se llama a Email con el archivo adjunto
 
 					}
 				});

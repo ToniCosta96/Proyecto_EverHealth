@@ -31,6 +31,7 @@ import javax.swing.border.BevelBorder;
 import BDD.CargarIdioma;
 import BDD.Conexio;
 import BDD.Consultas;
+import BDD.Email;
 import calculos.CalcularCalorias;
 
 public class CrearUsuario extends JPanel implements ActionListener{
@@ -311,6 +312,8 @@ public class CrearUsuario extends JPanel implements ActionListener{
 						//Abrir la ventana Menu.
 						ventanaPrincipal.cambiapanel("Menu");
 						ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+						//Enviar correo electrónico de bienvenida.
+						new Email(textFieldCorreo.getText());
 					}
 				}else{
 					//Actualizar usuario
