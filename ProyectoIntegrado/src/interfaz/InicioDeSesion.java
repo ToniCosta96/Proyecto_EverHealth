@@ -26,6 +26,7 @@ import javax.swing.border.EmptyBorder;
 import BDD.CargarIdioma;
 import BDD.Conexio;
 import BDD.Consultas;
+import calculos.Encriptar;
 
 public class InicioDeSesion extends JFrame implements KeyListener{
 
@@ -139,7 +140,7 @@ public class InicioDeSesion extends JFrame implements KeyListener{
 	
 	private void iniciarSesion(){
 		/*Se comprueba la conexión y se inicia sesión si los datos están correctos*/
-		if(new Consultas(conexio).iniciarSesionUsuario(textFieldNombre.getText(), String.valueOf(passwordField.getPassword()))){
+		if(new Consultas(conexio).iniciarSesionUsuario(textFieldNombre.getText(), new Encriptar().getContrasenya(String.valueOf(passwordField.getPassword())))){
 			conexio.setUsuario(textFieldNombre.getText());
 			ventanas('m');
 			dispose();

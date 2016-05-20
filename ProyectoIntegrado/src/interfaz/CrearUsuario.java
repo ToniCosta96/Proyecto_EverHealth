@@ -33,6 +33,7 @@ import BDD.Conexio;
 import BDD.Consultas;
 import BDD.Email;
 import calculos.CalcularCalorias;
+import calculos.Encriptar;
 
 public class CrearUsuario extends JPanel implements ActionListener{
 	private Conexio conexio;
@@ -426,7 +427,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		DatosDeUsuario datosDeUsuario=new DatosDeUsuario();
 		datosDeUsuario.setNombre(textFieldNombre.getText());
 		datosDeUsuario.setEmail(textFieldCorreo.getText());
-		datosDeUsuario.setContrasenya(String.valueOf(passwordField.getPassword()));
+		datosDeUsuario.setContrasenya(new Encriptar().getContrasenya(String.valueOf(passwordField.getPassword())));
 		if(rdbtnMasculino.isSelected()){
 			datosDeUsuario.setGenero(0);
 		}else{
