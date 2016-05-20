@@ -33,6 +33,7 @@ import BDD.Conexio;
 import BDD.Consultas;
 import BDD.Email;
 import calculos.CalcularCalorias;
+import calculos.Encriptar;
 
 public class CrearUsuario extends JPanel implements ActionListener{
 	private Conexio conexio;
@@ -293,11 +294,13 @@ public class CrearUsuario extends JPanel implements ActionListener{
 				frame.setVisible(true);
 				ventanaPrincipal.dispose();
 			}else{
+				/*Recargar labels Menu*/
 				ventanaPrincipal.menu.cargarNombresLabels();
 				ventanaPrincipal.menu.recargarTabla();
+				/*Cargar ventana Menu*/
 				ventanaPrincipal.cambiapanel("Menu");
 				ventanaPrincipal.setTitle("Ever Health- Menu Principal");
-				//Quitar mensaje de error.
+				/*Quitar mensaje de error*/
 				lblError.setText("");
 			}
 		}
@@ -307,12 +310,14 @@ public class CrearUsuario extends JPanel implements ActionListener{
 				if(modoVentana=='c'){
 					//Crear usuario
 					if(new Consultas(conexio).registrarUsuario(guardarDatosUsuario())){
-						//Se guarda el nombre del usuario dentro de "conexion".
+						/*Se guarda el nombre del usuario dentro de "conexion"*/
 						conexio.setUsuario(textFieldNombre.getText());
-						//Abrir la ventana Menu.
+						/*Recargar labels Menu*/
+						ventanaPrincipal.menu.cargarNombresLabels();
+						/*Abrir la ventana Menu*/
 						ventanaPrincipal.cambiapanel("Menu");
 						ventanaPrincipal.setTitle("Ever Health- Menu Principal");
-						//Enviar correo electrónico de bienvenida.
+						/*Enviar correo electrónico de bienvenida.*/
 						new Email(textFieldCorreo.getText());
 					}
 				}else{
@@ -422,7 +427,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		DatosDeUsuario datosDeUsuario=new DatosDeUsuario();
 		datosDeUsuario.setNombre(textFieldNombre.getText());
 		datosDeUsuario.setEmail(textFieldCorreo.getText());
-		datosDeUsuario.setContrasenya(String.valueOf(passwordField.getPassword()));
+		datosDeUsuario.setContrasenya(new Encriptar().getContrasenya(String.valueOf(passwordField.getPassword())));
 		if(rdbtnMasculino.isSelected()){
 			datosDeUsuario.setGenero(0);
 		}else{
