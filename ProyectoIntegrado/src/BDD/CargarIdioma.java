@@ -15,7 +15,6 @@ import com.mysql.jdbc.Connection;
 
 public class CargarIdioma {
 	private static final String archivoConfig="./Config.properties";
-	private String arrayIdioma[];
 	
 	public CargarIdioma(JComboBox<String> comboBoxIdioma){
 		comboBoxIdioma.setSelectedItem(cargarProperties());
@@ -108,10 +107,5 @@ public class CargarIdioma {
 		}catch(Exception e){
 			System.out.println(e);
 		}
-		
-	}
-	
-	public String[] getArrayIdioma(){
-		return arrayIdioma;
 	}
 }
