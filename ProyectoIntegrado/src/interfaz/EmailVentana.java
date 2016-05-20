@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import java.sql.ResultSet;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -11,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import com.mysql.jdbc.Statement;
 
 import BDD.Conexio;
 
@@ -57,48 +61,8 @@ public class EmailVentana extends JDialog {
 				JButton okButton = new JButton("Enviar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						/*
-						 * String[] adjunto = new String[7];
 
-						try {
-							ResultSet rs = null;
-							Statement cmd = null;
-							rs = cmd.executeQuery(
-									"SELECT Nombre, Email, Contrasenya, Genero, Altura, Peso, Objetivo, Actividad FROM Usuario"
-											+ "  WHERE Nombre like " + c.getUsuario());
-
-							while (rs.next()) {
-								adjunto[0] = rs.getString("Nombre");
-								adjunto[1] = rs.getString("Email");
-								adjunto[2] = rs.getString("Contrasenya");
-								adjunto[3] = rs.getString("Genero");
-								adjunto[4] = rs.getString("Altura");
-								adjunto[5] = rs.getString("Peso");
-								adjunto[6] = rs.getString("Objetivo");
-								adjunto[7] = rs.getString("Actividad");
-								
-					
-
-							}
-
-							
-							File f;
-							FileWriter fw = new FileReader(f);
-							BufferedReader bw = new BufferedReader(fw) 
-							
-							
-							bw.write 
-							
-							
-							
-							
-							
-
-						} catch (Exception e) {
-							e.getMessage();
-						}
-	*/
-						//Aquí se llama a Email con el archivo adjunto
+						// Aquí se llama a Email con el archivo adjunto
 
 					}
 				});
@@ -109,9 +73,11 @@ public class EmailVentana extends JDialog {
 			{
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.addActionListener(new ActionListener() {
+
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
 					}
+
 				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
@@ -119,4 +85,44 @@ public class EmailVentana extends JDialog {
 		}
 	}
 
+	public void formarFichero() {
+		String[] adjunto = new String[7];
+
+		try {
+
+			ResultSet rs = null;
+			Statement cmd = null;
+			rs = cmd.executeQuery(
+					"SELECT Nombre, Email, Contrasenya, Genero, Altura, Peso, Objetivo, Actividad FROM Usuario"
+							+ "  WHERE Nombre = " + c.getUsuario());
+
+			while (rs.next()) {
+				adjunto[0] = rs.getString("Nombre");
+				adjunto[1] = rs.getString("Email");
+				adjunto[2] = rs.getString("Contrasenya");
+				adjunto[3] = rs.getString("Genero");
+				adjunto[4] = rs.getString("Altura");
+				adjunto[5] = rs.getString("Peso");
+				adjunto[6] = rs.getString("Objetivo");
+				adjunto[7] = rs.getString("Actividad");
+
+			}
+
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		
+		try {
+			
+			FileOutputStream fichero = new FileOutputStream("datos.docx");
+			
+			
+			
+			
+		}catch(Exception e) {
+			e.getMessage();			
+			
+		}
+
+	}
 }
