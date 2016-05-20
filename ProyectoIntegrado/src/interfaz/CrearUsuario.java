@@ -33,9 +33,8 @@ import BDD.Conexio;
 import BDD.Consultas;
 import BDD.Email;
 import calculos.CalcularCalorias;
-import calculos.Encriptar;
 
-public class CrearUsuario extends JPanel implements ActionListener{
+public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 	private Conexio conexio;
 	private ArrayList<String>arrayIdioma;
 	private Ventanas ventanaPrincipal;
@@ -92,7 +91,6 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		FlowLayout flowLayout = (FlowLayout) panelDatos.getLayout();
 		flowLayout.setVgap(50);
 		
-		
 		JPanel panelDatos2 = new JPanel();
 		panelDatos.add(panelDatos2);
 		panelDatos2.setLayout(new GridLayout(11, 2, 75, 10));
@@ -109,6 +107,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		
 		textFieldNombre = new JTextField();
 		textFieldNombre.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
+		textFieldNombre.addKeyListener(this);
 		panelDatos2.add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
@@ -118,6 +117,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		
 		textFieldCorreo = new JTextField();
 		textFieldCorreo.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
+		textFieldCorreo.addKeyListener(this);
 		panelDatos2.add(textFieldCorreo);
 		textFieldCorreo.setColumns(10);
 		
@@ -127,14 +127,17 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
+		passwordField.addKeyListener(this);
 		panelDatos2.add(passwordField);
 		
 		lblConfirmarPass=new JLabel("");
 		lblConfirmarPass.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
+		lblConfirmarPass.addKeyListener(this);
 		panelDatos2.add(lblConfirmarPass);
 		
 		passwordFieldConfirmar = new JPasswordField();
 		passwordFieldConfirmar.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
+		passwordFieldConfirmar.addKeyListener(this);
 		panelDatos2.add(passwordFieldConfirmar);
 		
 		lblEdad=new JLabel("");
@@ -143,6 +146,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		
 		textFieldEdad = new JTextField();
 		textFieldEdad.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
+		textFieldEdad.addKeyListener(this);
 		panelDatos2.add(textFieldEdad);
 		textFieldEdad.setColumns(10);
 		
@@ -154,20 +158,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		textFieldAltura.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(textFieldAltura);
 		textFieldAltura.setColumns(10);
-		textFieldAltura.addKeyListener(new KeyListener() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-			}
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if(comprobarCampos()){
-					new CalcularCalorias(textFieldCaloriasRecomendadas,guardarDatosUsuario());
-				}
-			}
-			@Override
-			public void keyPressed(KeyEvent e) {
-			}
-		});
+		textFieldAltura.addKeyListener(this);
 		
 		lblPeso=new JLabel("");
 		lblPeso.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraLabels));
@@ -177,20 +168,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		textFieldPeso.setFont(new Font("Tahoma", Font.PLAIN, tamanyoLetraFieldsTexts));
 		panelDatos2.add(textFieldPeso);
 		textFieldPeso.setColumns(10);
-		textFieldPeso.addKeyListener(new KeyListener() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-			}
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if(comprobarCampos()){
-					new CalcularCalorias(textFieldCaloriasRecomendadas,guardarDatosUsuario());
-				}
-			}
-			@Override
-			public void keyPressed(KeyEvent e) {
-			}
-		});
+		textFieldPeso.addKeyListener(this);
 		
 		//Seleccionar género.
 		lblGnero=new JLabel("");
@@ -282,66 +260,6 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		/*Se cargan los textos de la aplicación*/
 		cargarNombresLabels();
 	}
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		String accio = e.getActionCommand();
-
-		if(accio.compareTo("CrearUsuarioBtnAtras")==0){
-			if(modoVentana=='c'){
-				InicioDeSesion frame = new InicioDeSesion();
-				frame.setVisible(true);
-				ventanaPrincipal.dispose();
-			}else{
-				/*Recargar labels Menu*/
-				ventanaPrincipal.menu.cargarNombresLabels();
-				ventanaPrincipal.menu.recargarTabla();
-				/*Cargar ventana Menu*/
-				ventanaPrincipal.cambiapanel("Menu");
-				ventanaPrincipal.setTitle("Ever Health- Menu Principal");
-				/*Quitar mensaje de error*/
-				lblError.setText("");
-			}
-		}
-		if(accio.compareTo("CrearUsuarioBtnGuardar")==0){
-			//Comprovem que les dades son correctes
-			if(comprobarCampos()){
-				if(modoVentana=='c'){
-					//Crear usuario
-					if(new Consultas(conexio).registrarUsuario(guardarDatosUsuario())){
-						/*Se guarda el nombre del usuario dentro de "conexion"*/
-						conexio.setUsuario(textFieldNombre.getText());
-						/*Recargar labels Menu*/
-						ventanaPrincipal.menu.cargarNombresLabels();
-						/*Abrir la ventana Menu*/
-						ventanaPrincipal.cambiapanel("Menu");
-						ventanaPrincipal.setTitle("Ever Health- Menu Principal");
-						/*Enviar correo electrónico de bienvenida.*/
-						new Email(textFieldCorreo.getText());
-					}
-				}else{
-					//Actualizar usuario
-					if(new Consultas(conexio).actualizarUsuario(guardarDatosUsuario())){
-						//Abrir la ventana Menu.
-						ventanaPrincipal.cambiapanel("Menu");
-						ventanaPrincipal.setTitle("Ever Health- Menu Principal");
-					}
-				}
-			}
-		}
-		if(accio.compareTo("rdbtnMasculino")==0 || accio.compareTo("rdbtnFemenino")==0 || accio.compareTo("rdbtnSedentario")==0 ||
-				accio.compareTo("rdbtnLigeramenteActivo")==0 || accio.compareTo("rdbtnActivo")==0 ||
-				accio.compareTo("rdbtnAdelgazar")==0 || accio.compareTo("rdbtnMantenerse")==0 || accio.compareTo("rdbtnEngordar")==0){
-			if(comprobarCampos()){
-				new CalcularCalorias(textFieldCaloriasRecomendadas,guardarDatosUsuario());
-			}
-		}
-		if(accio.compareTo("comboBoxIdioma")==0){
-			new CargarIdioma(conexio, comboBoxIdioma.getSelectedItem().toString(), arrayIdioma);
-			cargarNombresLabels();
-		}
-	}
 	
 	private void seleccionarGenero(JPanel panelDatos2){
 		//Grupo de botones para seleccionar el género.
@@ -427,7 +345,7 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		DatosDeUsuario datosDeUsuario=new DatosDeUsuario();
 		datosDeUsuario.setNombre(textFieldNombre.getText());
 		datosDeUsuario.setEmail(textFieldCorreo.getText());
-		datosDeUsuario.setContrasenya(new Encriptar().getContrasenya(String.valueOf(passwordField.getPassword())));
+		datosDeUsuario.setContrasenya(String.valueOf(passwordField.getPassword()));
 		if(rdbtnMasculino.isSelected()){
 			datosDeUsuario.setGenero(0);
 		}else{
@@ -571,5 +489,77 @@ public class CrearUsuario extends JPanel implements ActionListener{
 		
 		//Se calculan las calorias
 		new CalcularCalorias(textFieldCaloriasRecomendadas,guardarDatosUsuario());
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String accio = e.getActionCommand();
+
+		if(accio.compareTo("CrearUsuarioBtnAtras")==0){
+			if(modoVentana=='c'){
+				InicioDeSesion frame = new InicioDeSesion();
+				frame.setVisible(true);
+				ventanaPrincipal.dispose();
+			}else{
+				/*Recargar labels Menu*/
+				ventanaPrincipal.menu.cargarNombresLabels();
+				ventanaPrincipal.menu.recargarTabla();
+				/*Cargar ventana Menu*/
+				ventanaPrincipal.cambiapanel("Menu");
+				ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+				/*Quitar mensaje de error*/
+				lblError.setText("");
+			}
+		}
+		if(accio.compareTo("CrearUsuarioBtnGuardar")==0){
+			//Comprovem que les dades son correctes
+			if(comprobarCampos()){
+				if(modoVentana=='c'){
+					//Crear usuario
+					if(new Consultas(conexio).registrarUsuario(guardarDatosUsuario())){
+						/*Se guarda el nombre del usuario dentro de "conexion"*/
+						conexio.setUsuario(textFieldNombre.getText());
+						/*Recargar labels Menu*/
+						ventanaPrincipal.menu.cargarNombresLabels();
+						/*Abrir la ventana Menu*/
+						ventanaPrincipal.cambiapanel("Menu");
+						ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+						/*Enviar correo electrónico de bienvenida.*/
+						new Email(textFieldCorreo.getText());
+					}
+				}else{
+					//Actualizar usuario
+					if(new Consultas(conexio).actualizarUsuario(guardarDatosUsuario())){
+						//Abrir la ventana Menu.
+						ventanaPrincipal.cambiapanel("Menu");
+						ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+					}
+				}
+			}
+		}
+		if(accio.compareTo("rdbtnMasculino")==0 || accio.compareTo("rdbtnFemenino")==0 || accio.compareTo("rdbtnSedentario")==0 ||
+				accio.compareTo("rdbtnLigeramenteActivo")==0 || accio.compareTo("rdbtnActivo")==0 ||
+				accio.compareTo("rdbtnAdelgazar")==0 || accio.compareTo("rdbtnMantenerse")==0 || accio.compareTo("rdbtnEngordar")==0){
+			if(comprobarCampos()){
+				new CalcularCalorias(textFieldCaloriasRecomendadas,guardarDatosUsuario());
+			}
+		}
+		if(accio.compareTo("comboBoxIdioma")==0){
+			new CargarIdioma(conexio, comboBoxIdioma.getSelectedItem().toString(), arrayIdioma);
+			cargarNombresLabels();
+		}
+	}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if(comprobarCampos()){
+			new CalcularCalorias(textFieldCaloriasRecomendadas,guardarDatosUsuario());
+		}
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
 	}
 }
