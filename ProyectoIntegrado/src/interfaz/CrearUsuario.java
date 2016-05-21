@@ -370,7 +370,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 		}
 		return datosDeUsuario;
 	}
-	private boolean comprobarCampos(){
+	private boolean comprobarCampos(boolean comprobar){
 		String mensajeError="";
 		if(!textFieldNombre.getText().trim().isEmpty()){
 			if(passwordField.getPassword().length>0 && passwordFieldConfirmar.getPassword().length>0){
@@ -389,24 +389,30 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 							mensajeError="Faltan campos por introducir.";
 						}
 					}else{
-						mensajeError="Las contraseñas no coinciden.";
+						mensajeError=" ";
+						if(comprobar) mensajeError="Las contraseñas no coinciden.";
 					}
 				}else{
-					mensajeError="La contraseña tiene que tener al menos una longitud de 4 caracteres.";
+					mensajeError=" ";
+					if(comprobar) mensajeError="La contraseña tiene que tener al menos una longitud de 4 caracteres.";
 				}
 			}else{
-				mensajeError="No se ha introducido ninguna contraseña.";
+				mensajeError=" ";
+				if(comprobar) mensajeError="No se ha introducido ninguna contraseña.";
 			}
 			//Comprobar correo electrónico
-			if(textFieldCorreo.getText().isEmpty()){
-				mensajeError+=" No se ha introducido ningún correo electrónico.";
+			if(textFieldCorreo.getText().isEmpty() && comprobar){
+				mensajeError=" ";
+				if(comprobar) mensajeError+=" No se ha introducido ningún correo electrónico.";
 			}else{
 				if(comprobarCorreo(textFieldCorreo.getText())==false){
-					mensajeError+=" El correo electrónico no se ha introducido correctamente.";
+					mensajeError=" ";
+					if(comprobar) mensajeError+=" El correo electrónico no se ha introducido correctamente.";
 				}
 			}
 		}else{
-			mensajeError="No se ha introducido el nombre.";
+			mensajeError=" ";
+			if(comprobar) mensajeError="No se ha introducido el nombre.";
 		}
 		if(mensajeError.compareTo("")!=0){
 			lblError.setText(mensajeError);
@@ -513,7 +519,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 		}
 		if(accio.compareTo("CrearUsuarioBtnGuardar")==0){
 			//Comprovem que les dades son correctes
-			if(comprobarCampos()){
+			if(comprobarCampos(true)){
 				if(modoVentana=='c'){
 					//Crear usuario
 					if(new Consultas(conexio).registrarUsuario(guardarDatosUsuario())){
@@ -540,7 +546,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 		if(accio.compareTo("rdbtnMasculino")==0 || accio.compareTo("rdbtnFemenino")==0 || accio.compareTo("rdbtnSedentario")==0 ||
 				accio.compareTo("rdbtnLigeramenteActivo")==0 || accio.compareTo("rdbtnActivo")==0 ||
 				accio.compareTo("rdbtnAdelgazar")==0 || accio.compareTo("rdbtnMantenerse")==0 || accio.compareTo("rdbtnEngordar")==0){
-			if(comprobarCampos()){
+			if(comprobarCampos(true)){
 				new CalcularCalorias(textFieldCaloriasRecomendadas,guardarDatosUsuario());
 			}
 		}
@@ -555,7 +561,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if(comprobarCampos()){
+		if(comprobarCampos(false)){
 			new CalcularCalorias(textFieldCaloriasRecomendadas,guardarDatosUsuario());
 		}
 	}
