@@ -8,6 +8,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -31,13 +33,19 @@ public class CrearPlato extends JPanel {
 	public DefaultTableModel dtm;
 	public DefaultTableModel dtm2;
 	public JTable tablaAlimentos;
+	private JPanel panelScroll;
+	private JPanel panelAlimentos;
 	private JTextField textFieldTituloCrearPlato;
 	private JTable tablaIngredientes;
 	private JTextField textFieldCantidad;
 	private JTextField textFieldCaloriasTotales;
+	private JComboBox<String> comboBoxTipo;
+	private String textoAnterior;
 
 	public CrearPlato(Ventanas v, Conexio conexio) {
+		ventanaPrincipal=v;
 		this.conexio=conexio;
+		
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelTituloCrearPlato = new JPanel();
@@ -62,7 +70,7 @@ public class CrearPlato extends JPanel {
 		labelTipo.setFont(new Font("SimSun", Font.BOLD, 18));
 		panelTituloCrearPlato.add(labelTipo);
 		
-		JComboBox<String> comboBoxTipo = new JComboBox<String>();
+		comboBoxTipo = new JComboBox<String>();
 		comboBoxTipo.setBackground(new Color(255, 255, 153));
 		comboBoxTipo.addItem("Desayuno");
 		comboBoxTipo.addItem("Almuerzo");
@@ -82,11 +90,9 @@ public class CrearPlato extends JPanel {
 		panelCentroCrearPlato.add(panelBusqueda, BorderLayout.NORTH);
 		
 		
-		JPanel panelScroll = new JPanel();
+		panelScroll = new JPanel();
 		panelScroll.setBackground(new Color(255, 255, 153));
 		panelCentroCrearPlato.add(panelScroll, BorderLayout.CENTER);
-		
-		ventanaPrincipal=v;
 		
 		JLabel lblBordeIzquierdo = new JLabel("                ");
 		lblBordeIzquierdo.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -113,7 +119,7 @@ public class CrearPlato extends JPanel {
 		panelBordeDerecho.add(lblBordeDerecho);
 		panelScroll.setLayout(new BoxLayout(panelScroll, BoxLayout.Y_AXIS));
 		
-		JPanel panelAlimentos = new JPanel();
+		panelAlimentos = new JPanel();
 		panelScroll.add(panelAlimentos);
 		panelAlimentos.setLayout(new GridLayout(0, 1, 0, 0));
 		
@@ -168,6 +174,24 @@ public class CrearPlato extends JPanel {
 		textFieldCantidad.setText("100");
 		panelBusqueda.add(textFieldCantidad);
 		textFieldCantidad.setColumns(10);
+		textoAnterior=textFieldCantidad.getText();
+		textFieldCantidad.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(textFieldCantidad.getText().isEmpty() || !comprovarFloat(textFieldCantidad.getText())){
+					textFieldCantidad.setText(textoAnterior);
+				}
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(comprovarFloat(textFieldCantidad.getText())){
+					textoAnterior=textFieldCantidad.getText();
+				}
+			}
+		});
 		
 		JPanel panelCaloriasTotales = new JPanel();
 		panelCaloriasTotales.setOpaque(false);
@@ -184,16 +208,9 @@ public class CrearPlato extends JPanel {
 		textFieldCaloriasTotales.setColumns(10);
 		
 		btnBusqueda.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-				
-				cargarAlimentos(panelScroll,panelAlimentos);
-				
-				
-				
+				cargarAlimentos();
 			}
 		});
 		
@@ -201,7 +218,6 @@ public class CrearPlato extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if(tablaAlimentos.getSelectedRowCount()==1){
 					//System.out.println(dtm.getValueAt(tablaAlimentos.getSelectedRow(),0));
 					Object [] ingrediente=new Object[]{dtm.getValueAt(tablaAlimentos.getSelectedRow(), 0),textFieldCantidad.getText(),(float)(Integer.parseInt(String.valueOf(dtm.getValueAt(tablaAlimentos.getSelectedRow(), 1)))* Integer.parseInt(textFieldCantidad.getText())/100f)};
@@ -221,7 +237,6 @@ public class CrearPlato extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if(tablaIngredientes.getSelectedRowCount()==1){
 					//System.out.println(dtm.getValueAt(tablaAlimentos.getSelectedRow(),0));
 					;
@@ -257,7 +272,6 @@ public class CrearPlato extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				ventanaPrincipal.cambiapanel("Menu");
 			}
 		});
@@ -276,7 +290,6 @@ public class CrearPlato extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				String [] ingredientes=new String[tablaIngredientes.getRowCount()];
 				for(int i=0;i<tablaIngredientes.getRowCount();i++){
 					ingredientes[i]=(String) tablaIngredientes.getValueAt(i, 0);
@@ -290,17 +303,20 @@ public class CrearPlato extends JPanel {
 				}
 				Consultas cons=new Consultas(conexio);
 				cons.registrarPlato(textFieldTituloCrearPlato.getText(), String.valueOf(comboBoxTipo.getSelectedItem()),ingredientes,cantidades);
+				//Cambia al Menu.
+				ventanaPrincipal.cambiapanel("Menu");
+				//Resetea la informacion del panel.
+				recargarPanel();
 			}
 		});
 		panelGuardar.add(buttonGuardar);
 		
 		
 		
-		
-		cargarAlimentos(panelScroll,panelAlimentos);
+		cargarAlimentos();
 
 	}
-	private void cargarAlimentos(JPanel panelScroll,JPanel panelAlimentos){
+	private void cargarAlimentos(){
 		panelAlimentos.removeAll();
 		dtm=new DefaultTableModel();
 		dtm.addColumn("Alimento");
@@ -318,6 +334,26 @@ public class CrearPlato extends JPanel {
 		scrollPaneAlimentos.setBackground(new Color(255, 255, 220));
 		panelAlimentos.add(scrollPaneAlimentos, 0);
 		panelScroll.updateUI();
+	}
+	private void recargarPanel(){
+		textFieldTituloCrearPlato.setText("");
+		comboBoxTipo.setSelectedIndex(0);
+		textFieldBusqueda.setText("");
+		cargarAlimentos();
+		textFieldCantidad.setText("100");
+		int CantidadFilas=tablaIngredientes.getRowCount();
+		for(int i=0;i<CantidadFilas;i++){
+			dtm2.removeRow(0);
+		}
+		textFieldCaloriasTotales.setText("");
+	}
+	private boolean comprovarFloat(String numero){
+		try{
+			Float.parseFloat(numero);
+			return true;
+		}catch(NumberFormatException nfe){
+			return false;
+		}
 	}
 
 }
