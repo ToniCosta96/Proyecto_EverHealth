@@ -18,9 +18,11 @@ public class Consultas{
 	Object valores[];
 	boolean existe;
 	PreparedStatement psInsertar;
+	String nombreUsuario;
 	
 	public Consultas(Conexio conexio){
 		con= conexio.getConexio();
+		nombreUsuario = conexio.getUsuario();
 	}
 	
 	public void consultarAlimentos(){
@@ -86,7 +88,7 @@ public class Consultas{
 			
 			if(existe==false){
 				
-				psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO Usuario (Nombre,Email,Contraseña,Genero,Altura_cm,Peso_kg,Objetivo,Actividad,Edad) VALUES (?,?,?,?,?,?,?,?,?)");
+				psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO Usuario (Nombre,Email,Contrasenya,Genero,Altura_cm,Peso_kg,Objetivo,Actividad,Edad) VALUES (?,?,?,?,?,?,?,?,?)");
 				
 				psInsertar.setString(1, ddu.getNombre());
 				psInsertar.setString(2, ddu.getEmail());
@@ -119,7 +121,7 @@ public class Consultas{
 	public boolean actualizarUsuario(DatosDeUsuario ddu){
 		
 		try {		
-				psInsertar=(PreparedStatement) con.prepareStatement("UPDATE Usuario SET Email=?,Contraseña=?,Genero=?,Altura_cm=?,Peso_kg=?,Objetivo=?,Actividad=?,Edad=? WHERE Nombre LIKE ?");
+				psInsertar=(PreparedStatement) con.prepareStatement("UPDATE Usuario SET Email=?,Contrasenya=?,Genero=?,Altura_cm=?,Peso_kg=?,Objetivo=?,Actividad=?,Edad=? WHERE Nombre LIKE ?");
 				//System.out.println(ddu.getEmail());
 				psInsertar.setString(1, ddu.getEmail());
 				//System.out.println(psInsertar);
@@ -178,10 +180,10 @@ public class Consultas{
 				try {
 					
 					cmd = (Statement) con.createStatement();
-					rs = cmd.executeQuery("SELECT contraseña FROM Usuario WHERE Nombre LIKE "+"'"+nom+"'");
+					rs = cmd.executeQuery("SELECT contrasenya FROM Usuario WHERE Nombre LIKE "+"'"+nom+"'");
 					
 					while (rs.next()) {
-						if(pass.equals(rs.getString("Contraseña"))){
+						if(pass.equals(rs.getString("Contrasenya"))){
 							correcta=true;
 						}					
 						
@@ -205,12 +207,12 @@ public class Consultas{
 			ResultSet rs = null;
 			Statement cmd = null;
 			cmd = (Statement) con.createStatement();
-			rs = cmd.executeQuery("SELECT Nombre,Email,Contraseña FROM Usuario WHERE Nombre LIKE "+"'"+nombre+"'");
+			rs = cmd.executeQuery("SELECT Nombre,Email,Contrasenya FROM Usuario WHERE Nombre LIKE "+"'"+nombre+"'");
 			
 			while (rs.next()) {
 				stringUsuario[0]=rs.getString("Nombre");
 				stringUsuario[1]=rs.getString("Email");
-				stringUsuario[2]=rs.getString("Contraseña");
+				stringUsuario[2]=rs.getString("Contrasenya");
 				
 				
 
@@ -263,7 +265,8 @@ public class Consultas{
 		return ddu;
 	}
 	
-	public void registrarPlato(String nombre,String tipo,int id_Usuario,String [] ingredientes){
+	public void registrarPlato(String nombre,String tipo,String [] ingredientes,int [] cantidades){
+		int id_Usuario=consultarIdUsuario();
 		try {		
 			psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO Plato (Nombre,Tipo,Fid_Usuario) VALUES(?,?,?)");
 			
@@ -280,38 +283,56 @@ public class Consultas{
 			rs = cmd.executeQuery("SELECT id_plato FROM Plato");
 			
 			while (rs.next()) {
-				id_plato=rs.getInt("id_plato");	
+				id_plato=rs.getInt("id_plato");
+				System.out.println("id plato: "+id_plato);
 			}
 			
-			int id_alimento=-1;
+			int id_alimento=0;
+			
 			for(int i=0;i<ingredientes.length;i++){
-				rs = cmd.executeQuery("SELECT id_alimento FROM alimento WHERE Nombre LIKE '"+ingredientes[i]+"'");
-				
+				rs = cmd.executeQuery("SELECT id_alimento FROM alimentos WHERE Nombre ='"+ingredientes[i]+"'");
 				while (rs.next()) {
-					id_alimento=rs.getInt("id_alimento");				
+					id_alimento=rs.getInt("id_alimento");
+					System.out.println("id alimento: "+id_alimento);
 				}
-				
-				psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO alimento_plato (Fid_Alimentos,Fid_Plato) VALUES(?,?)");
+				psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO alimentos_plato(Fid_Alimentos,Fid_Plato,cantidad) VALUES(?,?,?)");
 				
 				psInsertar.setInt(1, id_alimento);
 				psInsertar.setInt(2, id_plato);
-
+				psInsertar.setInt(3, cantidades[i]);
+				
 				psInsertar.execute();
 			}
 			
 			
 			rs.close();
 			
-			
-			
-		
-		
-		
-	}catch(Exception e){
-		System.out.println("Ha habido algun problema con el registro de plato");
-		System.out.println(e);
+		}catch(Exception e){
+			System.out.println("Ha habido algun problema con el registro de plato");
+			System.out.println(e);
+		}
 	}
+	
+	public int consultarIdUsuario(){
+		int id_Usuario=-1;
+		try{
+			ResultSet rs = null;
+			Statement cmd = null;
+			cmd = (Statement) con.createStatement();
+			
+			rs = cmd.executeQuery("SELECT id_usuario FROM Usuario WHERE Nombre='"+nombreUsuario+"'");
+			
+			
+			while (rs.next()) {
+				id_Usuario=rs.getInt("id_Usuario");
+			}
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return id_Usuario;
 	}
 	
 			
 }
+	
+			

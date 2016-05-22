@@ -279,10 +279,17 @@ public class CrearPlato extends JPanel {
 				// TODO Auto-generated method stub
 				String [] ingredientes=new String[tablaIngredientes.getRowCount()];
 				for(int i=0;i<tablaIngredientes.getRowCount();i++){
-					ingredientes[1]=String.valueOf(dtm2.getValueAt(i, 0));
+					ingredientes[i]=(String) tablaIngredientes.getValueAt(i, 0);
+					System.out.println(ingredientes[i]);
+				}
+				
+				int [] cantidades=new int[tablaIngredientes.getRowCount()];
+				for(int i=0;i<tablaIngredientes.getRowCount();i++){
+					cantidades[i]=Integer.parseInt((String)tablaIngredientes.getValueAt(i, 1));
+					System.out.println(cantidades[i]);
 				}
 				Consultas cons=new Consultas(conexio);
-				//cons.registrarPlato(textFieldTituloCrearPlato.getText(), String.valueOf(comboBoxTipo.getSelectedItem()), id_Usuario, ingredientes);
+				cons.registrarPlato(textFieldTituloCrearPlato.getText(), String.valueOf(comboBoxTipo.getSelectedItem()),ingredientes,cantidades);
 			}
 		});
 		panelGuardar.add(buttonGuardar);
