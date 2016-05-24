@@ -10,13 +10,15 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class Email {
+public class Email implements Runnable{
 	private Properties props;
 	private Session session;
+	private String email;
+	private boolean bienvenida;
 	
 	public Email(String email){
-		conectaMail(email);
-		conectaMailBienvenida(email);
+		this.email=email;
+		bienvenida=true;
 	}
 	public Email(String email, DefaultTableModel dtm){
 		
@@ -57,6 +59,13 @@ public class Email {
 	}
 	private void conectaMailPlanificacion(){
 		
+	}
+	@Override
+	public void run() {
+		if(bienvenida){
+			conectaMail(email);
+			conectaMailBienvenida(email);
+		}
 	}
 }
 
