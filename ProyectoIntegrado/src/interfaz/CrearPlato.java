@@ -10,9 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -23,11 +25,11 @@ import javax.swing.table.DefaultTableModel;
 
 import BDD.Conexio;
 import BDD.Consultas;
-import javax.swing.JComboBox;
 
-public class CrearPlato extends JPanel {
+public class CrearPlato extends JPanel implements ActionListener{
 	
 	private Conexio conexio;
+	private ArrayList<String> arrayIdioma;
 	private Ventanas ventanaPrincipal;
 	private JTextField textFieldBusqueda;
 	public DefaultTableModel dtm;
@@ -40,11 +42,22 @@ public class CrearPlato extends JPanel {
 	private JTextField textFieldCantidad;
 	private JTextField textFieldCaloriasTotales;
 	private JComboBox<String> comboBoxTipo;
+	private JLabel lblTituloCrearPlato;
+	private JLabel labelTipo;
+	private JLabel lblBusquedaAlimentos;
+	private JButton btnAnyadir;
+	private JButton btnBusqueda;
+	private JLabel lblIngredientes;
+	private JButton btnEliminar;
+	private JButton buttonAtras;
+	private JButton buttonGuardar;
+	
 	private String textoAnterior;
 
-	public CrearPlato(Ventanas v, Conexio conexio) {
+	public CrearPlato(Ventanas v, Conexio conexio, ArrayList<String> arrayIdioma) {
 		ventanaPrincipal=v;
 		this.conexio=conexio;
+		this.arrayIdioma=arrayIdioma;
 		
 		setLayout(new BorderLayout(0, 0));
 		
@@ -52,7 +65,7 @@ public class CrearPlato extends JPanel {
 		panelTituloCrearPlato.setBackground(new Color(255, 255, 102));
 		add(panelTituloCrearPlato, BorderLayout.NORTH);
 		
-		JLabel lblTituloCrearPlato = new JLabel("PLATO:");
+		lblTituloCrearPlato = new JLabel();
 		lblTituloCrearPlato.setForeground(new Color(255, 160, 122));
 		lblTituloCrearPlato.setFont(new Font("SimSun", Font.BOLD, 18));
 		panelTituloCrearPlato.add(lblTituloCrearPlato);
@@ -65,7 +78,7 @@ public class CrearPlato extends JPanel {
 		panelTituloCrearPlato.add(textFieldTituloCrearPlato);
 		textFieldTituloCrearPlato.setColumns(10);
 		
-		JLabel labelTipo = new JLabel("TIPO:");
+		labelTipo = new JLabel();
 		labelTipo.setForeground(new Color(255, 160, 122));
 		labelTipo.setFont(new Font("SimSun", Font.BOLD, 18));
 		panelTituloCrearPlato.add(labelTipo);
@@ -108,11 +121,11 @@ public class CrearPlato extends JPanel {
 		panelBordeDerecho.add(panel_3);
 		panel_3.setLayout(new GridLayout(2, 1, 0, 20));
 		
-		JButton btnAnyadir = new JButton("A\u00F1adir");
+		btnAnyadir = new JButton();
 		
 		panel_3.add(btnAnyadir);
 		
-		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar = new JButton();
 		panel_3.add(btnEliminar);
 		
 		JLabel lblBordeDerecho = new JLabel("   ");
@@ -127,15 +140,15 @@ public class CrearPlato extends JPanel {
 		panelAlimentos.add(scrollPaneAlimentos);
 		scrollPaneAlimentos.setBackground(new Color(255, 255, 220));
 		
-		JLabel lblIngredientes = new JLabel("Ingredientes del plato:");
+		lblIngredientes = new JLabel();
 		lblIngredientes.setFont(new Font("SimSun", Font.ITALIC, 18));
 		lblIngredientes.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblIngredientes.setHorizontalAlignment(SwingConstants.LEFT);
 		panelScroll.add(lblIngredientes);
 		dtm2=new DefaultTableModel();
-		dtm2.addColumn("Alimento");
-		dtm2.addColumn("Cantidad(g)");
-		dtm2.addColumn("Kcal");
+		dtm2.addColumn(arrayIdioma.get(73));
+		dtm2.addColumn(arrayIdioma.get(74));
+		dtm2.addColumn(arrayIdioma.get(75));
 		
 		
 		panelBusqueda.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
@@ -143,7 +156,7 @@ public class CrearPlato extends JPanel {
 		JLabel labelEspacio = new JLabel("          ");
 		panelBusqueda.add(labelEspacio);
 		
-		JLabel lblBusquedaAlimentos = new JLabel("Busqueda Alimentos:");
+		lblBusquedaAlimentos = new JLabel();
 		panelBusqueda.add(lblBusquedaAlimentos);
 		lblBusquedaAlimentos.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblBusquedaAlimentos.setHorizontalAlignment(SwingConstants.LEFT);
@@ -164,7 +177,7 @@ public class CrearPlato extends JPanel {
 		tablaIngredientes.setBackground(new Color(255, 255, 153));
 		scrollPaneIngredientes.setViewportView(tablaIngredientes);
 		
-		JButton btnBusqueda = new JButton("Buscar");
+		btnBusqueda = new JButton();
 		panelBusqueda.add(btnBusqueda);
 		
 		JLabel lblCantidadgramos = new JLabel("Cantidad(gramos):");
@@ -207,49 +220,14 @@ public class CrearPlato extends JPanel {
 		panelCaloriasTotales.add(textFieldCaloriasTotales);
 		textFieldCaloriasTotales.setColumns(10);
 		
-		btnBusqueda.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cargarAlimentos();
-			}
-		});
+		btnBusqueda.addActionListener(this);
+		btnBusqueda.setActionCommand("btnBusqueda");
 		
-		btnAnyadir.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(tablaAlimentos.getSelectedRowCount()==1){
-					//System.out.println(dtm.getValueAt(tablaAlimentos.getSelectedRow(),0));
-					Object [] ingrediente=new Object[]{dtm.getValueAt(tablaAlimentos.getSelectedRow(), 0),textFieldCantidad.getText(),(float)(Integer.parseInt(String.valueOf(dtm.getValueAt(tablaAlimentos.getSelectedRow(), 1)))* Integer.parseInt(textFieldCantidad.getText())/100f)};
-					dtm2.addRow(ingrediente);
-					float caloriasTotales=0;
-					for(int i=0;i<tablaIngredientes.getRowCount();i++){
-						caloriasTotales+=Float.parseFloat(String.valueOf(tablaIngredientes.getValueAt(i, 2)));
-					}
-					textFieldCaloriasTotales.setText(String.valueOf(caloriasTotales));
-					panelIngredientes.updateUI();
-				}
-				
-			}
-		});
+		btnAnyadir.addActionListener(this);
+		btnAnyadir.setActionCommand("btnAnyadir");
 		
-		btnEliminar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(tablaIngredientes.getSelectedRowCount()==1){
-					//System.out.println(dtm.getValueAt(tablaAlimentos.getSelectedRow(),0));
-					;
-					dtm2.removeRow(tablaIngredientes.getSelectedRow());
-					float caloriasTotales=0;
-					for(int i=0;i<tablaIngredientes.getRowCount();i++){
-						caloriasTotales+=Float.parseFloat(String.valueOf(tablaIngredientes.getValueAt(i, 2)));
-					}
-					textFieldCaloriasTotales.setText(String.valueOf(caloriasTotales));
-					panelIngredientes.updateUI();
-				}
-			}
-		});
+		btnEliminar.addActionListener(this);
+		btnEliminar.setActionCommand("btnEliminar");
 		
 		JPanel panelBordeInferior = new JPanel();
 		panelBordeInferior.setBackground(new Color(255, 255, 153));
@@ -262,19 +240,14 @@ public class CrearPlato extends JPanel {
 		panelAtras.setOpaque(false);
 		panelBordeInferior.add(panelAtras);
 		
-		JButton buttonAtras = new JButton("Atras");
+		buttonAtras = new JButton();
 		panelAtras.add(buttonAtras);
 		buttonAtras.setHorizontalAlignment(SwingConstants.LEFT);
 		buttonAtras.setForeground(new Color(255, 153, 51));
 		buttonAtras.setBackground(new Color(255, 204, 51));
 		buttonAtras.setAlignmentX(1.0f);
-		buttonAtras.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ventanaPrincipal.cambiapanel("Menu");
-			}
-		});
+		buttonAtras.addActionListener(this);
+		buttonAtras.setActionCommand("buttonAtras");
 		
 		JPanel panelGuardar = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) panelGuardar.getLayout();
@@ -282,45 +255,25 @@ public class CrearPlato extends JPanel {
 		panelGuardar.setOpaque(false);
 		panelBordeInferior.add(panelGuardar);
 		
-		JButton buttonGuardar = new JButton("Guardar");
+		buttonGuardar = new JButton();
 		buttonGuardar.setForeground(new Color(255, 153, 51));
 		buttonGuardar.setBackground(new Color(255, 204, 51));
 		buttonGuardar.setAlignmentX(1.0f);
-		buttonGuardar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String [] ingredientes=new String[tablaIngredientes.getRowCount()];
-				for(int i=0;i<tablaIngredientes.getRowCount();i++){
-					ingredientes[i]=(String) tablaIngredientes.getValueAt(i, 0);
-					System.out.println(ingredientes[i]);
-				}
-				
-				int [] cantidades=new int[tablaIngredientes.getRowCount()];
-				for(int i=0;i<tablaIngredientes.getRowCount();i++){
-					cantidades[i]=Integer.parseInt((String)tablaIngredientes.getValueAt(i, 1));
-					System.out.println(cantidades[i]);
-				}
-				Consultas cons=new Consultas(conexio);
-				cons.registrarPlato(textFieldTituloCrearPlato.getText(), String.valueOf(comboBoxTipo.getSelectedItem()),ingredientes,cantidades);
-				//Cambia al Menu.
-				ventanaPrincipal.cambiapanel("Menu");
-				//Resetea la informacion del panel.
-				recargarPanel();
-			}
-		});
+		buttonGuardar.addActionListener(this);
+		buttonGuardar.setActionCommand("buttonGuardar");
 		panelGuardar.add(buttonGuardar);
 		
 		
-		
+		/*Cargar labels y cargar los alimentos*/
+		cargarLabels();
 		cargarAlimentos();
 
 	}
 	private void cargarAlimentos(){
 		panelAlimentos.removeAll();
 		dtm=new DefaultTableModel();
-		dtm.addColumn("Alimento");
-		dtm.addColumn("Kcal (100g)");
+		dtm.addColumn(arrayIdioma.get(73));
+		dtm.addColumn(arrayIdioma.get(74));
 		
 		
 		Consultas cons=new Consultas(conexio);
@@ -347,12 +300,72 @@ public class CrearPlato extends JPanel {
 		}
 		textFieldCaloriasTotales.setText("");
 	}
+	public void cargarLabels(){
+		lblTituloCrearPlato.setText(arrayIdioma.get(68));
+		labelTipo.setText(arrayIdioma.get(69));
+		lblBusquedaAlimentos.setText(arrayIdioma.get(70));
+		btnBusqueda.setText(arrayIdioma.get(71));
+		btnAnyadir.setText(arrayIdioma.get(78));
+		btnEliminar.setText(arrayIdioma.get(79));
+		lblIngredientes.setText(arrayIdioma.get(75));
+		buttonAtras.setText(arrayIdioma.get(81));
+		buttonGuardar.setText(arrayIdioma.get(82));
+	}
 	private boolean comprovarFloat(String numero){
 		try{
 			Float.parseFloat(numero);
 			return true;
 		}catch(NumberFormatException nfe){
 			return false;
+		}
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String accio= e.getActionCommand();
+		if(accio.compareTo("btnBusqueda")==0){
+			cargarAlimentos();
+		}else if(accio.compareTo("btnAnyadir")==0){
+			if(tablaAlimentos.getSelectedRowCount()==1){
+				//System.out.println(dtm.getValueAt(tablaAlimentos.getSelectedRow(),0));
+				Object [] ingrediente=new Object[]{dtm.getValueAt(tablaAlimentos.getSelectedRow(), 0),textFieldCantidad.getText(),(float)(Integer.parseInt(String.valueOf(dtm.getValueAt(tablaAlimentos.getSelectedRow(), 1)))* Integer.parseInt(textFieldCantidad.getText())/100f)};
+				dtm2.addRow(ingrediente);
+				float caloriasTotales=0;
+				for(int i=0;i<tablaIngredientes.getRowCount();i++){
+					caloriasTotales+=Float.parseFloat(String.valueOf(tablaIngredientes.getValueAt(i, 2)));
+				}
+				textFieldCaloriasTotales.setText(String.valueOf(caloriasTotales));
+			}
+		}else if(accio.compareTo("btnEliminar")==0){
+			if(tablaIngredientes.getSelectedRowCount()==1){
+				//System.out.println(dtm.getValueAt(tablaAlimentos.getSelectedRow(),0));
+				;
+				dtm2.removeRow(tablaIngredientes.getSelectedRow());
+				float caloriasTotales=0;
+				for(int i=0;i<tablaIngredientes.getRowCount();i++){
+					caloriasTotales+=Float.parseFloat(String.valueOf(tablaIngredientes.getValueAt(i, 2)));
+				}
+				textFieldCaloriasTotales.setText(String.valueOf(caloriasTotales));
+			}
+		}else if(accio.compareTo("buttonAtras")==0){
+			ventanaPrincipal.cambiapanel("Menu");
+		}else if(accio.compareTo("buttonGuardar")==0){
+			String [] ingredientes=new String[tablaIngredientes.getRowCount()];
+			for(int i=0;i<tablaIngredientes.getRowCount();i++){
+				ingredientes[i]=(String) tablaIngredientes.getValueAt(i, 0);
+				System.out.println(ingredientes[i]);
+			}
+			
+			int [] cantidades=new int[tablaIngredientes.getRowCount()];
+			for(int i=0;i<tablaIngredientes.getRowCount();i++){
+				cantidades[i]=Integer.parseInt((String)tablaIngredientes.getValueAt(i, 1));
+				System.out.println(cantidades[i]);
+			}
+			Consultas cons=new Consultas(conexio);
+			cons.registrarPlato(textFieldTituloCrearPlato.getText(), String.valueOf(comboBoxTipo.getSelectedItem()),ingredientes,cantidades);
+			//Cambia al Menu.
+			ventanaPrincipal.cambiapanel("Menu");
+			//Resetea la informacion del panel.
+			recargarPanel();
 		}
 	}
 

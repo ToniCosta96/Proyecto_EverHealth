@@ -14,7 +14,7 @@ public class Ventanas extends JFrame{
 	private Conexio conexio;
 	private JPanel contentPane;
 	private CardLayout cl;
-	public Menu menu;
+	private Menu menu;
 	private Planificacion planificacion;
 	private CrearPlato crearPlato;
 	private CrearUsuario crearUsuario;
@@ -33,10 +33,10 @@ public class Ventanas extends JFrame{
 		contentPane=new JPanel();
 		
 		//Crear paneles del cardLayout
-		crearUsuario= new CrearUsuario(Ventanas.this, conexio, arrayIdioma);
 		menu = new Menu(Ventanas.this, conexio, arrayIdioma);
 		planificacion= new Planificacion(Ventanas.this, conexio, arrayIdioma);
-		crearPlato= new CrearPlato(Ventanas.this, conexio);
+		crearPlato= new CrearPlato(Ventanas.this, conexio, arrayIdioma);
+		crearUsuario= new CrearUsuario(Ventanas.this, conexio, arrayIdioma, menu, crearPlato);
 		
 		//Preparar paneles del cardLayout
 		if(ventanaDeInicio=='c'){
