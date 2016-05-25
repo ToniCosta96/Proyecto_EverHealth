@@ -146,9 +146,9 @@ public class CrearPlato extends JPanel implements ActionListener{
 		lblIngredientes.setHorizontalAlignment(SwingConstants.LEFT);
 		panelScroll.add(lblIngredientes);
 		dtm2=new DefaultTableModel();
-		dtm2.addColumn(arrayIdioma.get(73));
-		dtm2.addColumn(arrayIdioma.get(74));
 		dtm2.addColumn(arrayIdioma.get(75));
+		dtm2.addColumn(arrayIdioma.get(76));
+		dtm2.addColumn(arrayIdioma.get(77));
 		
 		
 		panelBusqueda.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
@@ -310,6 +310,17 @@ public class CrearPlato extends JPanel implements ActionListener{
 		lblIngredientes.setText(arrayIdioma.get(75));
 		buttonAtras.setText(arrayIdioma.get(81));
 		buttonGuardar.setText(arrayIdioma.get(82));
+		try{
+			int numeroColumnas=tablaIngredientes.getColumnCount();
+			for(int i=0;i<numeroColumnas;i++){
+				tablaIngredientes.getTableHeader().getColumnModel().getColumn(i).setHeaderValue(arrayIdioma.get(75+i));
+			}
+			numeroColumnas=tablaAlimentos.getColumnCount();
+			for(int i=0;i<numeroColumnas;i++){
+				tablaAlimentos.getTableHeader().getColumnModel().getColumn(i).setHeaderValue(arrayIdioma.get(73+i));
+			}
+		}catch(NullPointerException npe){
+		}
 	}
 	private boolean comprovarFloat(String numero){
 		try{
