@@ -532,10 +532,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 						ventanaPrincipal.cambiapanel("Menu");
 						ventanaPrincipal.setTitle("Ever Health- Menu Principal");
 						/*Enviar correo electrónico de bienvenida.*/
-						Thread procesoEmail=new Thread(new Email(textFieldCorreo.getText()), "ProcesoEmail");
-						procesoEmail.setPriority(3);
-						procesoEmail.start();
-						//new Email(textFieldCorreo.getText());
+						new Email(textFieldCorreo.getText());
 					}
 				}else{
 					//Actualizar usuario
