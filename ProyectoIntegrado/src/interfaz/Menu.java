@@ -242,8 +242,8 @@ public class Menu extends JPanel implements ActionListener{
 				plato++;
 			}
 		}
-		for(int i=0;i<nombresColumnas.length;i++){
-		TableColumn column1 = datos.getTableHeader().getColumnModel().getColumn(i+1);
+		for(int i=1;i<nombresColumnas.length;i++){
+		TableColumn column1 = datos.getTableHeader().getColumnModel().getColumn(i);
 		column1.setHeaderValue(nombresColumnas[i]);
 		} 
 		
