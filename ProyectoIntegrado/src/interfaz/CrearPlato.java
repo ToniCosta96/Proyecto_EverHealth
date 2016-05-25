@@ -310,6 +310,7 @@ public class CrearPlato extends JPanel implements ActionListener{
 		lblIngredientes.setText(arrayIdioma.get(75));
 		buttonAtras.setText(arrayIdioma.get(81));
 		buttonGuardar.setText(arrayIdioma.get(82));
+		/*Se cambia el nombre de las columnas*/
 		try{
 			int numeroColumnas=tablaIngredientes.getColumnCount();
 			for(int i=0;i<numeroColumnas;i++){
