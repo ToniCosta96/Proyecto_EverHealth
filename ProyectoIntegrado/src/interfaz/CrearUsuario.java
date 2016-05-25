@@ -41,6 +41,8 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 	private Ventanas ventanaPrincipal;
 	private char modoVentana='c';
 	private DatosDeUsuario ddu;
+	private Menu menu;
+	private CrearPlato crearPlato;
 	
 	private JLabel lblNombre;
 	private JLabel lblCorreoElectrnico;
@@ -79,9 +81,11 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 	/**
 	 * Create the frame.
 	 */
-	public CrearUsuario(Ventanas v, Conexio conexio, ArrayList<String>arrayIdioma) {
+	public CrearUsuario(Ventanas v, Conexio conexio, ArrayList<String>arrayIdioma, Menu menu, CrearPlato crearPlato) {
 		final int tamanyoLetraLabels= 20;
 		final int tamanyoLetraFieldsTexts= 16;
+		this.menu=menu;
+		this.crearPlato=crearPlato;
 		this.conexio=conexio;
 		ventanaPrincipal=v;
 		this.arrayIdioma=arrayIdioma;
@@ -508,9 +512,10 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 				frame.setVisible(true);
 				ventanaPrincipal.dispose();
 			}else{
-				/*Recargar labels Menu*/
-				ventanaPrincipal.menu.cargarNombresLabels();
-				ventanaPrincipal.menu.recargarTabla();
+				/*Recargar labels de la aplicación*/
+				menu.cargarNombresLabels();
+				menu.recargarTabla();
+				crearPlato.cargarLabels();
 				/*Cargar ventana Menu*/
 				ventanaPrincipal.cambiapanel("Menu");
 				ventanaPrincipal.setTitle("Ever Health- Menu Principal");
@@ -526,16 +531,15 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 					if(new Consultas(conexio).registrarUsuario(guardarDatosUsuario())){
 						/*Se guarda el nombre del usuario dentro de "conexion"*/
 						conexio.setUsuario(textFieldNombre.getText());
-						/*Recargar labels Menu*/
-						ventanaPrincipal.menu.cargarNombresLabels();
+						/*Recargar labels de la aplicación*/
+						menu.cargarNombresLabels();
+						menu.recargarTabla();
+						crearPlato.cargarLabels();
 						/*Abrir la ventana Menu*/
 						ventanaPrincipal.cambiapanel("Menu");
 						ventanaPrincipal.setTitle("Ever Health- Menu Principal");
 						/*Enviar correo electrónico de bienvenida.*/
-						Thread procesoEmail=new Thread(new Email(textFieldCorreo.getText()), "ProcesoEmail");
-						procesoEmail.setPriority(3);
-						procesoEmail.start();
-						//new Email(textFieldCorreo.getText());
+						new Email(textFieldCorreo.getText());
 					}
 				}else{
 					//Actualizar usuario

@@ -19,9 +19,16 @@ public class Email implements Runnable{
 	public Email(String email){
 		this.email=email;
 		bienvenida=true;
+		Thread procesoEmail=new Thread(this, "ProcesoEmail");
+		procesoEmail.setPriority(3);
+		procesoEmail.start();
 	}
 	public Email(String email, DefaultTableModel dtm){
-		
+		this.email=email;
+		bienvenida=false;
+		Thread procesoEmail=new Thread(this, "ProcesoEmail");
+		procesoEmail.setPriority(3);
+		procesoEmail.start();
 	}
     
 	private void conectaMail(String email){
@@ -58,13 +65,18 @@ public class Email implements Runnable{
 		    }
 	}
 	private void conectaMailPlanificacion(){
-		
+		//Aquí se añade el archivo adjunto
 	}
 	@Override
 	public void run() {
 		if(bienvenida){
+			/*Mensaje de bienvenida*/
 			conectaMail(email);
 			conectaMailBienvenida(email);
+		}else{
+			/*Mensaje de planificación*/
+			//conectaMail(email);
+			//conectaMailPlanificacion();
 		}
 	}
 }
