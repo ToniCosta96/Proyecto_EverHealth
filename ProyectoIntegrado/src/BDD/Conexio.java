@@ -27,7 +27,7 @@ public class Conexio {
 		//Registrar el driver
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			System.out.println("Conexi�n exitosa");
+			System.out.println("Conexión exitosa");
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}					
