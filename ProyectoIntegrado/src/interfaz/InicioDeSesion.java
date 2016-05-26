@@ -23,6 +23,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import BDD.ActiveDirectori;
 import BDD.CargarIdioma;
 import BDD.Conexio;
 import BDD.Consultas;
@@ -140,9 +141,13 @@ public class InicioDeSesion extends JFrame implements KeyListener{
 		panelBotones.add(lblCrearUsuario);
 	}
 	
-	private void iniciarSesion(){
+	private void iniciarSesion(){		
 		/*Se comprueba la conexión y se inicia sesión si los datos están correctos*/
 		if(new Consultas(conexio).iniciarSesionUsuario(textFieldNombre.getText(), new Encriptar().getContrasenya(String.valueOf(passwordField.getPassword())))){
+			//Si se loguea como admin se hace la conexion con active directory
+			if (textFieldNombre.getText().compareTo("admin")==0){
+				new ActiveDirectori();
+			}
 			conexio.setUsuario(textFieldNombre.getText());
 			ventanas('m');
 			dispose();
