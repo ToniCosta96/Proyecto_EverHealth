@@ -47,6 +47,7 @@ public class CrearPlato extends JPanel implements ActionListener{
 	private JLabel lblBusquedaAlimentos;
 	private JButton btnAnyadir;
 	private JButton btnBusqueda;
+	private JLabel lblCaloriasTotales;
 	private JLabel lblIngredientes;
 	private JButton btnEliminar;
 	private JButton buttonAtras;
@@ -212,7 +213,7 @@ public class CrearPlato extends JPanel implements ActionListener{
 		flowLayout_2.setAlignment(FlowLayout.RIGHT);
 		panelScroll.add(panelCaloriasTotales);
 		
-		JLabel lblCaloriasTotales = new JLabel("Calorias Totales:");
+		lblCaloriasTotales = new JLabel();
 		panelCaloriasTotales.add(lblCaloriasTotales);
 		
 		textFieldCaloriasTotales = new JTextField();
@@ -308,6 +309,7 @@ public class CrearPlato extends JPanel implements ActionListener{
 		btnAnyadir.setText(arrayIdioma.get(78));
 		btnEliminar.setText(arrayIdioma.get(79));
 		lblIngredientes.setText(arrayIdioma.get(75));
+		lblCaloriasTotales.setText(arrayIdioma.get(80));
 		buttonAtras.setText(arrayIdioma.get(81));
 		buttonGuardar.setText(arrayIdioma.get(82));
 		/*Se cambia el nombre de las columnas*/
