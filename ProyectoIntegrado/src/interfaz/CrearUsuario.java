@@ -518,7 +518,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 				crearPlato.cargarLabels();
 				/*Cargar ventana Menu*/
 				ventanaPrincipal.cambiapanel("Menu");
-				ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+				ventanaPrincipal.setTitle(arrayIdioma.get(5));
 				/*Quitar mensaje de error*/
 				lblError.setText("");
 			}
@@ -537,16 +537,16 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 						crearPlato.cargarLabels();
 						/*Abrir la ventana Menu*/
 						ventanaPrincipal.cambiapanel("Menu");
-						ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+						ventanaPrincipal.setTitle(arrayIdioma.get(5));
 						/*Enviar correo electrónico de bienvenida.*/
 						new Email(textFieldCorreo.getText());
 					}
 				}else{
-					//Actualizar usuario
+					/*Actualizar usuario*/
 					if(new Consultas(conexio).actualizarUsuario(guardarDatosUsuario())){
-						//Abrir la ventana Menu.
+						/*Abrir la ventana Menu*/
 						ventanaPrincipal.cambiapanel("Menu");
-						ventanaPrincipal.setTitle("Ever Health- Menu Principal");
+						ventanaPrincipal.setTitle(arrayIdioma.get(5));
 					}
 				}
 			}

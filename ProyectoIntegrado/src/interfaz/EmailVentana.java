@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+
 //import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -27,15 +29,15 @@ public class EmailVentana extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public EmailVentana(Conexio con) {
+	public EmailVentana(Conexio con, ArrayList<String> arrayIdioma) {
 		c = con;
 		setBounds(400, 200, 300, 180);
 		setResizable(false);
 		setModalityType(DEFAULT_MODALITY_TYPE);
-		setTitle("Confirmar correo electrónico");
+		setTitle(arrayIdioma.get(106));
 		getContentPane().setLayout(new BorderLayout());
 		{
-			JLabel lblPregunta = new JLabel("\u00BFDeseas enviar la planificaci\u00F3n al siguiente correo?");
+			JLabel lblPregunta = new JLabel(arrayIdioma.get(107));
 			getContentPane().add(lblPregunta, BorderLayout.NORTH);
 		}
 		FlowLayout fl_contentPanel = new FlowLayout();
@@ -45,7 +47,7 @@ public class EmailVentana extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			JLabel lblCorreo = new JLabel("Correo:");
+			JLabel lblCorreo = new JLabel(arrayIdioma.get(108));
 			contentPanel.add(lblCorreo);
 		}
 		{
@@ -58,7 +60,7 @@ public class EmailVentana extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Enviar");
+				JButton okButton = new JButton(arrayIdioma.get(109));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 
@@ -71,7 +73,7 @@ public class EmailVentana extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancelar");
+				JButton cancelButton = new JButton(arrayIdioma.get(110));
 				cancelButton.addActionListener(new ActionListener() {
 
 					public void actionPerformed(ActionEvent arg0) {

@@ -41,7 +41,7 @@ public class ConsultarAlimentos extends JPanel {
 		panelTituloConsultaAlimentos.setBackground(new Color(255, 255, 102));
 		add(panelTituloConsultaAlimentos, BorderLayout.NORTH);
 		
-		JLabel lblConsultaAlimentos = new JLabel(arrayIdioma.get(96));
+		JLabel lblConsultaAlimentos = new JLabel(arrayIdioma.get(97));
 		lblConsultaAlimentos.setForeground(new Color(255, 160, 122));
 		lblConsultaAlimentos.setFont(new Font("SimSun", Font.BOLD, 18));
 		panelTituloConsultaAlimentos.add(lblConsultaAlimentos);
@@ -64,7 +64,7 @@ public class ConsultarAlimentos extends JPanel {
 		panel_1.setBackground(new Color(255, 255, 153));
 		panelBusqueda.add(panel_1);
 		
-		JLabel lblBusquedaAlimentos = new JLabel(arrayIdioma.get(97));
+		JLabel lblBusquedaAlimentos = new JLabel(arrayIdioma.get(98));
 		lblBusquedaAlimentos.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblBusquedaAlimentos.setHorizontalAlignment(SwingConstants.LEFT);
 		panel_1.add(lblBusquedaAlimentos);
@@ -89,7 +89,7 @@ public class ConsultarAlimentos extends JPanel {
 		
 		
 		
-		JButton btnBusqueda = new JButton(arrayIdioma.get(98));
+		JButton btnBusqueda = new JButton(arrayIdioma.get(99));
 		btnBusqueda.addActionListener(new ActionListener() {
 			
 			@Override
@@ -106,7 +106,7 @@ public class ConsultarAlimentos extends JPanel {
 		});
 		panel_2.add(btnBusqueda);
 		
-		JButton buttonAtras = new JButton(arrayIdioma.get(99));
+		JButton buttonAtras = new JButton(arrayIdioma.get(100));
 		buttonAtras.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {

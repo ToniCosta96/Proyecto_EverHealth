@@ -262,18 +262,18 @@ public class Menu extends JPanel implements ActionListener{
 		String accio=e.getActionCommand();
 		if(accio.compareTo("MenuBtnPlanificacion")==0){
 			ventanaPrincipal.cambiapanel("Planificacion");
-			ventanaPrincipal.setTitle("Ever Health- Planificación");
+			ventanaPrincipal.setTitle(arrayIdioma.get(21));
 		}else if(accio.compareTo("MenuBtnConsultarPlatos")==0){
 			ventanaPrincipal.cambiapanel("ConsultarPlatos");
-			ventanaPrincipal.setTitle("Ever Health- Consultar platos");
+			ventanaPrincipal.setTitle(arrayIdioma.get(86));
 		}else if(accio.compareTo("MenuBtnConsultarAlimentos")==0){
 			ventanaPrincipal.cambiapanel("ConsultarAlimentos");
-			ventanaPrincipal.setTitle("Ever Health- Consultar alimentos");
+			ventanaPrincipal.setTitle(arrayIdioma.get(96));
 		}else if(accio.compareTo("MenuBtnCrearPlato")==0){
 			ventanaPrincipal.cambiapanel("CrearPlato");
-			ventanaPrincipal.setTitle("Ever Health- Crear plato");
+			ventanaPrincipal.setTitle(arrayIdioma.get(67));
 		}else if(accio.compareTo("btnEnviarPlanificacin")==0){
-			new EmailVentana(conexio).setVisible(true);
+			new EmailVentana(conexio, arrayIdioma).setVisible(true);
 		}
 	}
 }
