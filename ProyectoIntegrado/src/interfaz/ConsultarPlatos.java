@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -27,17 +28,16 @@ import BDD.Consultas;
 public class ConsultarPlatos extends JPanel {
 	
 	private Ventanas ventanaPrincipal;
-	private Conexio conexio;
 	private JTextField textFieldBusqueda;
 	private JTable tablePlatos;
 	private JTable tableIngredientes;
-	DefaultTableModel dtmPla;
-	DefaultTableModel dtmIng;
-	Consultas cons;
-	JPanel panelScrollPlatos;
-	public ConsultarPlatos(Ventanas v,Conexio conexio) {
+	private DefaultTableModel dtmPla;
+	private DefaultTableModel dtmIng;
+	private Consultas cons;
+	private JPanel panelScrollPlatos;
+	
+	public ConsultarPlatos(Ventanas v,Conexio conexio, ArrayList<String> arrayIdioma) {
 		ventanaPrincipal=v;
-		this.conexio=conexio;
 		cons=new Consultas(conexio);
 		
 		setBackground(new Color(255, 255, 153));
@@ -47,7 +47,7 @@ public class ConsultarPlatos extends JPanel {
 		panelTituloConsultaPlatos.setBackground(new Color(255, 255, 102));
 		add(panelTituloConsultaPlatos, BorderLayout.NORTH);
 		
-		JLabel lblConsultaPlatos = new JLabel("CONSULTA PLATOS");
+		JLabel lblConsultaPlatos = new JLabel(arrayIdioma.get(87));
 		lblConsultaPlatos.setForeground(new Color(255, 160, 122));
 		lblConsultaPlatos.setFont(new Font("SimSun", Font.BOLD, 18));
 		panelTituloConsultaPlatos.add(lblConsultaPlatos);
@@ -69,8 +69,7 @@ public class ConsultarPlatos extends JPanel {
 		fl_panel_1.setAlignment(FlowLayout.LEFT);
 		panelBusqueda.add(panel_1);
 		
-		JLabel labelBusqueda = new JLabel("Busqueda Platos:");
-		labelBusqueda.setFont(new Font("SimSun", Font.PLAIN, 11));
+		JLabel labelBusqueda = new JLabel(arrayIdioma.get(88));
 		panel_1.add(labelBusqueda);
 		labelBusqueda.setHorizontalTextPosition(SwingConstants.LEFT);
 		labelBusqueda.setHorizontalAlignment(SwingConstants.LEFT);
@@ -80,7 +79,7 @@ public class ConsultarPlatos extends JPanel {
 		textFieldBusqueda.setAlignmentX(Component.LEFT_ALIGNMENT);
 		textFieldBusqueda.setColumns(10);
 		
-		JButton buttonBuscar = new JButton("Buscar");
+		JButton buttonBuscar = new JButton(arrayIdioma.get(71));
 		panel_1.add(buttonBuscar);
 		buttonBuscar.setForeground(new Color(255, 153, 51));
 		buttonBuscar.setBackground(new Color(255, 204, 51));
@@ -98,9 +97,9 @@ public class ConsultarPlatos extends JPanel {
 		scrollPanePlatos.setBackground(new Color(255, 255, 204));
 		
 		dtmPla = new DefaultTableModel();
-		dtmPla.addColumn("Plato");
-		dtmPla.addColumn("Calorias del plato");
-		dtmPla.addColumn("Propietario");
+		dtmPla.addColumn(arrayIdioma.get(89));
+		dtmPla.addColumn(arrayIdioma.get(90));
+		dtmPla.addColumn(arrayIdioma.get(91));
 		tablePlatos = new JTable(dtmPla);
 		tablePlatos.setBackground(new Color(255, 255, 204));
 		scrollPanePlatos.setViewportView(tablePlatos);
@@ -114,9 +113,9 @@ public class ConsultarPlatos extends JPanel {
 		panelScrollIngredientes.add(scrollPaneIngredientes);
 		
 		dtmIng = new DefaultTableModel();
-		dtmIng.addColumn("Ingrediente");
-		dtmIng.addColumn("Cantidad(g)");
-		dtmIng.addColumn("Kcal");
+		dtmIng.addColumn(arrayIdioma.get(92));
+		dtmIng.addColumn(arrayIdioma.get(76));
+		dtmIng.addColumn(arrayIdioma.get(77));
 		tableIngredientes = new JTable(dtmIng);
 		tableIngredientes.setBackground(new Color(255, 255, 204));
 		scrollPaneIngredientes.setViewportView(tableIngredientes);
@@ -130,7 +129,7 @@ public class ConsultarPlatos extends JPanel {
 		panelAtras.setBackground(new Color(255, 255, 153));
 		add(panelAtras, BorderLayout.SOUTH);
 		
-		JButton buttonAtras = new JButton("Atras");
+		JButton buttonAtras = new JButton(arrayIdioma.get(97));
 		buttonAtras.setForeground(new Color(255, 153, 51));
 		buttonAtras.setBackground(new Color(255, 204, 51));
 		buttonAtras.setAlignmentX(1.0f);
@@ -140,7 +139,6 @@ public class ConsultarPlatos extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				ventanaPrincipal.cambiapanel("Menu");
 			}
 		});
@@ -155,7 +153,6 @@ public class ConsultarPlatos extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				int numFilas=dtmPla.getRowCount();
 				for(int i=0;i<numFilas;i++){
 					dtmPla.removeRow(0);
@@ -164,34 +161,20 @@ public class ConsultarPlatos extends JPanel {
 			}
 		});
 		tablePlatos.addMouseListener(new MouseListener() {
-			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
-			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
-			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
-			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
-			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
 				int numFilas=dtmIng.getRowCount();
 				for(int i=0;i<numFilas;i++){
 					dtmIng.removeRow(0);
@@ -199,6 +182,7 @@ public class ConsultarPlatos extends JPanel {
 				cargarIngredientes();
 			}
 		});
+		/*Se cargan los platos*/
 		cargarPlatos();
 	}
 	

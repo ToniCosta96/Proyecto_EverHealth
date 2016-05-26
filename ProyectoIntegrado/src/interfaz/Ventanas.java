@@ -12,6 +12,7 @@ import BDD.Conexio;
 public class Ventanas extends JFrame{
 
 	private Conexio conexio;
+	private ArrayList<String> arrayIdioma;
 	private JPanel contentPane;
 	private CardLayout cl;
 	private Menu menu;
@@ -24,6 +25,7 @@ public class Ventanas extends JFrame{
 	 */
 	public Ventanas(char ventanaDeInicio, Conexio conexio, ArrayList<String>arrayIdioma) {
 		this.conexio= conexio;
+		this.arrayIdioma=arrayIdioma;
 		cl=new CardLayout();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,7 +73,7 @@ public class Ventanas extends JFrame{
 		}else if(nombre.equals("CrearPlato")){
 			cl.show(contentPane, "CrearPlato");
 		}else if(nombre.equals("ConsultarPlatos")){
-			consultarPlatos=new ConsultarPlatos(Ventanas.this,conexio);
+			consultarPlatos=new ConsultarPlatos(Ventanas.this,conexio, arrayIdioma);
 			cl.addLayoutComponent(consultarPlatos, "ConsultarPlatos");
 			contentPane.add(consultarPlatos);
 			cl.show(contentPane, "ConsultarPlatos");

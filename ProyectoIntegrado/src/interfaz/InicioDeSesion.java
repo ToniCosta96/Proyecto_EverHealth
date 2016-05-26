@@ -147,7 +147,7 @@ public class InicioDeSesion extends JFrame implements KeyListener{
 		}else{
 			//Mostrar mensaje de error.
 			JOptionPane.showMessageDialog(null,
-				    "Usuario o contraseï¿½a incorrectos.",
+				    "Usuario o contraseña incorrectos.",
 				    "Error",
 				    JOptionPane.ERROR_MESSAGE);
 		}

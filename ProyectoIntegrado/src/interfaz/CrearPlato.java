@@ -77,7 +77,7 @@ public class CrearPlato extends JPanel implements ActionListener{
 		textFieldTituloCrearPlato.setForeground(new Color(255, 153, 102));
 		textFieldTituloCrearPlato.setFont(new Font("SimSun", Font.BOLD, 18));
 		panelTituloCrearPlato.add(textFieldTituloCrearPlato);
-		textFieldTituloCrearPlato.setColumns(10);
+		textFieldTituloCrearPlato.setColumns(15);
 		
 		labelTipo = new JLabel();
 		labelTipo.setForeground(new Color(255, 160, 122));
