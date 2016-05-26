@@ -33,14 +33,6 @@ public class Consultas{
 		
 		
 	}
-	public void consultarPlatos(){
-		select=new ArrayList<String>();
-		select.add("SELECT Nombre,Tipo FROM alimentos");
-		select.add("Nombre");
-		select.add("Tipo");
-		
-		
-	}
 	
 	public void consultarDades(String busqueda,DefaultTableModel dtmBBDD){
 		//strings pasados por la clase consultas.
@@ -64,6 +56,7 @@ public class Consultas{
 
 				rs.close();
 		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	
@@ -220,6 +213,7 @@ public class Consultas{
 
 				rs.close();
 		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return stringUsuario;
 	}
@@ -332,6 +326,60 @@ public class Consultas{
 		return id_Usuario;
 	}
 	
+	public void consultarPlatos(String busqueda,DefaultTableModel dtm){
+		//strings pasados por la clase consultas.
+				valores=new Object[3];
+
+		try {
+			ResultSet rs = null;
+			Statement cmd = null;
+			cmd = (Statement) con.createStatement();
+			rs = cmd.executeQuery("SELECT p.nombre,u.nombre,SUM(a.Kcal) AS caloriasPlato FROM plato p INNER JOIN usuario u ON Fid_Usuario=id_usuario INNER JOIN alimentos_plato ap ON fid_plato=id_plato INNER JOIN alimentos a ON fid_alimentos=id_alimento WHERE p.nombre LIKE "+"'%"+busqueda+"%'");
+			
+			while (rs.next()) {
+				valores[0]=rs.getString("p.nombre");					
+				valores[1]=rs.getInt("caloriasPlato");
+				valores[2]=rs.getString("u.nombre");
+				
+				if(valores[0]!=null){
+				dtm.addRow(valores);
+				}
+
+			}
+
+				rs.close();
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println(e);
+		}
+	}
+	
+	public void consultarIngredientes(String plato,DefaultTableModel dtm){
+		//strings pasados por la clase consultas.
+				valores=new Object[3];
+
+		try {
+			ResultSet rs = null;
+			Statement cmd = null;
+			cmd = (Statement) con.createStatement();
+			rs = cmd.executeQuery("SELECT a.nombre,ap.cantidad,a.Kcal FROM alimentos a INNER JOIN alimentos_plato ap ON id_alimento=Fid_alimentos INNER JOIN plato p ON id_plato=Fid_plato WHERE p.nombre='"+plato+"'");
+			
+			while (rs.next()) {
+				valores[0]=rs.getString("a.nombre");
+				valores[1]=rs.getInt("ap.cantidad");
+				valores[2]=rs.getInt("a.Kcal");
+				
+				
+				dtm.addRow(valores);
+				
+
+			}
+
+				rs.close();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+	}
 			
 }
 	
