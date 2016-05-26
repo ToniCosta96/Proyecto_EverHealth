@@ -2,6 +2,7 @@ package interfaz;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -12,7 +13,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -72,7 +72,7 @@ public class InicioDeSesion extends JFrame implements KeyListener{
 		contentPane.setBackground(new Color(255, 255, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+		contentPane.setLayout(new GridLayout(2, 1, 0, 0));
 		
 		JPanel panelCampos = new JPanel();
 		panelCampos.setOpaque(false);
@@ -97,6 +97,8 @@ public class InicioDeSesion extends JFrame implements KeyListener{
 		panelCampos.add(passwordField);
 		
 		JPanel panelBotones = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panelBotones.getLayout();
+		flowLayout.setVgap(15);
 		panelBotones.setOpaque(false);
 		contentPane.add(panelBotones);
 		
