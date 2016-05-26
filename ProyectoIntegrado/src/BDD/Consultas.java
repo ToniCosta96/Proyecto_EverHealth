@@ -258,7 +258,7 @@ public class Consultas{
 		ddu.setEdad(iU[5]);
 		return ddu;
 	}
-	//metodo que registra plato
+	//metodo que registra plato.
 	public void registrarPlato(String nombre,String tipo,String [] ingredientes,int [] cantidades){
 		int id_Usuario=consultarIdUsuario();
 		try {		
