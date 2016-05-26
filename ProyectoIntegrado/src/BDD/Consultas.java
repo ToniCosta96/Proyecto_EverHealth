@@ -334,10 +334,10 @@ public class Consultas{
 			ResultSet rs = null;
 			Statement cmd = null;
 			cmd = (Statement) con.createStatement();
-			rs = cmd.executeQuery("SELECT p.nombre,u.nombre,SUM(a.Kcal) AS caloriasPlato FROM plato p INNER JOIN usuario u ON Fid_Usuario=id_usuario INNER JOIN alimentos_plato ap ON fid_plato=id_plato INNER JOIN alimentos a ON fid_alimentos=id_alimento WHERE p.nombre LIKE "+"'%"+busqueda+"%'");
+			rs = cmd.executeQuery("SELECT p.nombre,u.nombre,SUM(a.Kcal) AS caloriasPlato FROM plato p INNER JOIN usuario u ON Fid_Usuario=id_usuario INNER JOIN alimentos_plato ap ON fid_plato=id_plato INNER JOIN alimentos a ON fid_alimentos=id_alimento WHERE p.nombre LIKE "+"'%"+busqueda+"%' GROUP BY p.nombre" );
 			
 			while (rs.next()) {
-				valores[0]=rs.getString("p.nombre");					
+				valores[0]=rs.getString("p.nombre");
 				valores[1]=rs.getInt("caloriasPlato");
 				valores[2]=rs.getString("u.nombre");
 				
