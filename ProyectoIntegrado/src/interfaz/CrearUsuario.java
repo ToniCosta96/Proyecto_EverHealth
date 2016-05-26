@@ -43,6 +43,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 	private DatosDeUsuario ddu;
 	private Menu menu;
 	private CrearPlato crearPlato;
+	private Planificacion planificacion;
 	
 	private JLabel lblNombre;
 	private JLabel lblCorreoElectrnico;
@@ -81,11 +82,12 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 	/**
 	 * Create the frame.
 	 */
-	public CrearUsuario(Ventanas v, Conexio conexio, ArrayList<String>arrayIdioma, Menu menu, CrearPlato crearPlato) {
+	public CrearUsuario(Ventanas v, Conexio conexio, ArrayList<String>arrayIdioma, Menu menu, CrearPlato crearPlato, Planificacion planificacion) {
 		final int tamanyoLetraLabels= 20;
 		final int tamanyoLetraFieldsTexts= 16;
 		this.menu=menu;
 		this.crearPlato=crearPlato;
+		this.planificacion=planificacion;
 		this.conexio=conexio;
 		ventanaPrincipal=v;
 		this.arrayIdioma=arrayIdioma;
@@ -516,6 +518,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 				menu.cargarNombresLabels();
 				menu.recargarTabla();
 				crearPlato.cargarLabels();
+				planificacion.cargarLabels();
 				/*Cargar ventana Menu*/
 				ventanaPrincipal.cambiapanel("Menu");
 				ventanaPrincipal.setTitle(arrayIdioma.get(5));

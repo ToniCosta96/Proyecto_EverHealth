@@ -29,6 +29,10 @@ public class Planificacion extends JPanel implements ActionListener{
 	private JTextField textFieldCalRecomendadas;
 	private JTextField textFieldCalRestantes;
 	private JTextField textFieldDia;
+	private JLabel lblCalorasRecomendadas;
+	private JLabel lblCalorasRestantes;
+	private JButton btnAtras;
+	private JButton btnGuardar;
 	
 	private DiaPlanificacion dia[];
 	private int numeroDia=0;
@@ -51,7 +55,7 @@ public class Planificacion extends JPanel implements ActionListener{
 		panelCabezera.add(panelCaloriasGrid);
 		panelCaloriasGrid.setLayout(new GridLayout(2, 2, 10, 5));
 		
-		JLabel lblCalorasRecomendadas = new JLabel("Calorías recomendadas:");
+		lblCalorasRecomendadas = new JLabel();
 		panelCaloriasGrid.add(lblCalorasRecomendadas);
 		
 		textFieldCalRecomendadas = new JTextField();
@@ -59,7 +63,7 @@ public class Planificacion extends JPanel implements ActionListener{
 		panelCaloriasGrid.add(textFieldCalRecomendadas);
 		textFieldCalRecomendadas.setColumns(10);
 		
-		JLabel lblCalorasRestantes = new JLabel("Calorías restantes:");
+		lblCalorasRestantes = new JLabel();
 		panelCaloriasGrid.add(lblCalorasRestantes);
 		
 		textFieldCalRestantes = new JTextField();
@@ -82,7 +86,6 @@ public class Planificacion extends JPanel implements ActionListener{
 		textFieldDia = new JTextField();
 		textFieldDia.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldDia.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textFieldDia.setText("Lunes");
 		textFieldDia.setEditable(false);
 		panelSeleccionDia.add(textFieldDia);
 		textFieldDia.setColumns(10);
@@ -112,7 +115,7 @@ public class Planificacion extends JPanel implements ActionListener{
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panelInferior.add(panelAtras);
 		
-		JButton btnAtras = new JButton("Atrás");
+		btnAtras = new JButton();
 		btnAtras.setActionCommand("btnAtras");
 		btnAtras.addActionListener(this);
 		panelAtras.add(btnAtras);
@@ -124,27 +127,37 @@ public class Planificacion extends JPanel implements ActionListener{
 		flowLayout_1.setAlignment(FlowLayout.RIGHT);
 		panelInferior.add(panelGuardar);
 		
-		JButton btnGuardar = new JButton("Guardar planificación");
+		btnGuardar = new JButton();
 		btnGuardar.setActionCommand("btnGuardar");
 		btnGuardar.addActionListener(this);
 		panelGuardar.add(btnGuardar);
+		
+		/*Se cargan los labels*/
+		cargarLabels();
 	}
 	
 	private void crearCardLayout(JPanel panelCard){
 		cl=new CardLayout();
 		dia= new DiaPlanificacion[7];
-		dia[0]=new DiaPlanificacion("Lunes");
-		dia[1]=new DiaPlanificacion("Martes");
-		dia[2]=new DiaPlanificacion("Miércoles");
-		dia[3]=new DiaPlanificacion("Jueves");
-		dia[4]=new DiaPlanificacion("Viernes");
-		dia[5]=new DiaPlanificacion("Sábado");
-		dia[6]=new DiaPlanificacion("Domingo");
-		
+		for(int i=0;i<dia.length;i++){
+			dia[i]=new DiaPlanificacion(arrayIdiomas.get(24+i));
+		}
 		for(int i=0;i<7;i++){
 			cl.addLayoutComponent(dia[i], ""+(i+1));
 			panelCard.add(dia[i]);
 		}
+	}
+	
+	public void cargarLabels(){
+		lblCalorasRecomendadas.setText(arrayIdiomas.get(22));
+		lblCalorasRestantes.setText(arrayIdiomas.get(23));
+		textFieldDia.setText(arrayIdiomas.get(24));
+		btnGuardar.setText(arrayIdiomas.get(36));
+		btnAtras.setText(arrayIdiomas.get(37));
+		for(int i=0;i<dia.length;i++){
+			dia[i].setNomDia(arrayIdiomas.get(24+i));
+		}
+		
 	}
 
 	@Override

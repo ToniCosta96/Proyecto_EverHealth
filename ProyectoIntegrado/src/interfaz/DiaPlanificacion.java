@@ -194,5 +194,8 @@ public class DiaPlanificacion extends JPanel {
 	public String getNomDia(){
 		return dia;
 	}
+	public void setNomDia(String dia){
+		this.dia=dia;
+	}
 
 }
