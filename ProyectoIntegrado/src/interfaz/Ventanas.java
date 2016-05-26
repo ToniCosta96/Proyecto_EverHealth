@@ -78,7 +78,7 @@ public class Ventanas extends JFrame{
 			contentPane.add(consultarPlatos);
 			cl.show(contentPane, "ConsultarPlatos");
 		}else if(nombre.equals("ConsultarAlimentos")){
-			ConsultarAlimentos consultarAlimentos=new ConsultarAlimentos(Ventanas.this,conexio);
+			ConsultarAlimentos consultarAlimentos=new ConsultarAlimentos(Ventanas.this,conexio, arrayIdioma);
 			cl.addLayoutComponent(consultarAlimentos, "ConsultarAlimentos");
 			contentPane.add(consultarAlimentos);
 			cl.show(contentPane, "ConsultarAlimentos");

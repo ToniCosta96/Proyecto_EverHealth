@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,20 +25,23 @@ import BDD.Conexio;
 public class ConsultarAlimentos extends JPanel {
 	
 	private Conexio conexio;
+	private ArrayList<String> arrayIdioma;
 	private Ventanas ventanaPrincipal;
 	private JTextField textFieldBusqueda;
 	public DefaultTableModel dtm;
 	public JTable tablaAlimentos;
 
-	public ConsultarAlimentos(Ventanas v, Conexio conexio) {
+	public ConsultarAlimentos(Ventanas v, Conexio conexio, ArrayList<String> arrayIdioma) {
 		this.conexio=conexio;
+		this.arrayIdioma=arrayIdioma;
+		
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelTituloConsultaAlimentos = new JPanel();
 		panelTituloConsultaAlimentos.setBackground(new Color(255, 255, 102));
 		add(panelTituloConsultaAlimentos, BorderLayout.NORTH);
 		
-		JLabel lblConsultaAlimentos = new JLabel("CONSULTA ALIMENTOS");
+		JLabel lblConsultaAlimentos = new JLabel(arrayIdioma.get(96));
 		lblConsultaAlimentos.setForeground(new Color(255, 160, 122));
 		lblConsultaAlimentos.setFont(new Font("SimSun", Font.BOLD, 18));
 		panelTituloConsultaAlimentos.add(lblConsultaAlimentos);
@@ -60,7 +64,7 @@ public class ConsultarAlimentos extends JPanel {
 		panel_1.setBackground(new Color(255, 255, 153));
 		panelBusqueda.add(panel_1);
 		
-		JLabel lblBusquedaAlimentos = new JLabel("Busqueda Alimentos:");
+		JLabel lblBusquedaAlimentos = new JLabel(arrayIdioma.get(97));
 		lblBusquedaAlimentos.setHorizontalTextPosition(SwingConstants.LEFT);
 		lblBusquedaAlimentos.setHorizontalAlignment(SwingConstants.LEFT);
 		panel_1.add(lblBusquedaAlimentos);
@@ -85,7 +89,7 @@ public class ConsultarAlimentos extends JPanel {
 		
 		
 		
-		JButton btnBusqueda = new JButton("Buscar");
+		JButton btnBusqueda = new JButton(arrayIdioma.get(98));
 		btnBusqueda.addActionListener(new ActionListener() {
 			
 			@Override
@@ -102,7 +106,7 @@ public class ConsultarAlimentos extends JPanel {
 		});
 		panel_2.add(btnBusqueda);
 		
-		JButton buttonAtras = new JButton("Atras");
+		JButton buttonAtras = new JButton(arrayIdioma.get(99));
 		buttonAtras.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -130,8 +134,8 @@ public class ConsultarAlimentos extends JPanel {
 	private void cargarAlimentos(JPanel panelScroll){
 		panelScroll.removeAll();
 		dtm=new DefaultTableModel();
-		dtm.addColumn("Alimento");
-		dtm.addColumn("Kcal (100g)");
+		dtm.addColumn(arrayIdioma.get(73));
+		dtm.addColumn(arrayIdioma.get(74));
 		
 		
 		Consultas cons=new Consultas(conexio);
