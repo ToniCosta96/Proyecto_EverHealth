@@ -129,7 +129,7 @@ public class ConsultarPlatos extends JPanel {
 		panelAtras.setBackground(new Color(255, 255, 153));
 		add(panelAtras, BorderLayout.SOUTH);
 		
-		JButton buttonAtras = new JButton(arrayIdioma.get(97));
+		JButton buttonAtras = new JButton(arrayIdioma.get(93));
 		buttonAtras.setForeground(new Color(255, 153, 51));
 		buttonAtras.setBackground(new Color(255, 204, 51));
 		buttonAtras.setAlignmentX(1.0f);
