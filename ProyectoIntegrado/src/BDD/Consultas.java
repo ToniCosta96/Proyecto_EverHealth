@@ -403,7 +403,7 @@ public class Consultas{
 							dia[d].getComboBox().get(0+cont).addItem(plato);
 							dia[d].getComboBox().get(1+cont).addItem(plato);
 							dia[d].getComboBox().get(2+cont).addItem(plato);
-							
+							//
 						}
 						
 					}
