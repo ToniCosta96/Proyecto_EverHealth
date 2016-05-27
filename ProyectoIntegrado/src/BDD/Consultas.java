@@ -11,6 +11,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
 import interfaz.DatosDeUsuario;
+import interfaz.DiaPlanificacion;
 
 public class Consultas{
 	Connection con;
@@ -239,6 +240,7 @@ public class Consultas{
 
 				rs.close();
 		}catch(Exception e){
+			System.out.println(e);
 		}
 		return intUsuario;
 	}
@@ -334,7 +336,7 @@ public class Consultas{
 			ResultSet rs = null;
 			Statement cmd = null;
 			cmd = (Statement) con.createStatement();
-			rs = cmd.executeQuery("SELECT p.nombre,u.nombre,SUM(a.Kcal) AS caloriasPlato FROM plato p INNER JOIN usuario u ON Fid_Usuario=id_usuario INNER JOIN alimentos_plato ap ON fid_plato=id_plato INNER JOIN alimentos a ON fid_alimentos=id_alimento WHERE p.nombre LIKE "+"'%"+busqueda+"%' GROUP BY p.nombre" );
+			rs = cmd.executeQuery("SELECT p.nombre,u.nombre,SUM(a.Kcal/100*cantidad) AS caloriasPlato FROM plato p INNER JOIN usuario u ON Fid_Usuario=id_usuario INNER JOIN alimentos_plato ap ON fid_plato=id_plato INNER JOIN alimentos a ON fid_alimentos=id_alimento WHERE p.nombre LIKE "+"'%"+busqueda+"%' GROUP BY p.nombre" );
 			
 			while (rs.next()) {
 				valores[0]=rs.getString("p.nombre");
@@ -381,6 +383,40 @@ public class Consultas{
 		}
 	}
 			
+
+
+	public void consultarPlatoTipo(DiaPlanificacion[] dia){	
+		String [] tipo =new String[]{"Desayuno","Almuerzo","Comida","Merienda","Cena"};
+		int cont=0;
+		String plato=""; 
+		for(int i=0;i<tipo.length;i++){
+			
+				try {
+					ResultSet rs = null;
+					Statement cmd = null;
+					cmd = (Statement) con.createStatement();
+					rs = cmd.executeQuery("SELECT p.nombre,SUM(a.Kcal/100*cantidad) AS caloriasPlato FROM plato p INNER JOIN alimentos_plato ON fid_plato=id_plato INNER JOIN alimentos a ON fid_alimentos=id_alimento WHERE p.tipo='"+tipo[i]+"'");
+				
+					while (rs.next()) {
+						plato=rs.getString("p.nombre");
+						for(int d=0;d<dia.length;d++){
+							dia[d].getComboBox().get(0+cont).addItem(plato);
+							dia[d].getComboBox().get(1+cont).addItem(plato);
+							dia[d].getComboBox().get(2+cont).addItem(plato);
+							
+						}
+						
+					}
+
+					rs.close();
+				}catch(Exception e){
+					System.out.println(e);
+				}
+			
+			cont+=3;
+		}
+		
+	}
 }
 	
 			

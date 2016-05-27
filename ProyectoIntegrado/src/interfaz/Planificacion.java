@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import BDD.Conexio;
+import BDD.Consultas;
 
 public class Planificacion extends JPanel implements ActionListener{
 
@@ -134,6 +135,8 @@ public class Planificacion extends JPanel implements ActionListener{
 		
 		/*Se cargan los labels*/
 		cargarLabels();
+		new Consultas(conexio).consultarPlatoTipo(dia);
+		
 	}
 	
 	private void crearCardLayout(JPanel panelCard){
