@@ -212,20 +212,20 @@ public class DiaPlanificacion extends JPanel {
 		this.dia=dia;
 	}
 	
-	public void setTextFieldCaloriasDesayuno(JTextField textFieldCaloriasDesayuno) {
-		this.textFieldCaloriasDesayuno = textFieldCaloriasDesayuno;
+	public void setTextFieldCaloriasDesayuno(String textFieldCaloriasDesayuno) {
+		this.textFieldCaloriasDesayuno.setText(textFieldCaloriasDesayuno);
 	}
-	public void setTextFieldCaloriasAlmuerzo(JTextField textFieldCaloriasAlmuerzo) {
-		this.textFieldCaloriasAlmuerzo = textFieldCaloriasAlmuerzo;
+	public void setTextFieldCaloriasAlmuerzo(String textFieldCaloriasAlmuerzo) {
+		this.textFieldCaloriasAlmuerzo.setText(textFieldCaloriasAlmuerzo);
 	}
-	public void setTextFieldCaloriasComida(JTextField textFieldCaloriasComida) {
-		this.textFieldCaloriasComida = textFieldCaloriasComida;
+	public void setTextFieldCaloriasComida(String textFieldCaloriasComida) {
+		this.textFieldCaloriasComida.setText(textFieldCaloriasComida);
 	}
-	public void setTextFieldCaloriasMerienda(JTextField textFieldCaloriasMerienda) {
-		this.textFieldCaloriasMerienda = textFieldCaloriasMerienda;
+	public void setTextFieldCaloriasMerienda(String textFieldCaloriasMerienda) {
+		this.textFieldCaloriasMerienda.setText(textFieldCaloriasMerienda);
 	}
-	public void setTextFieldCaloriasCena(JTextField textFieldCaloriasCena) {
-		this.textFieldCaloriasCena = textFieldCaloriasCena;
+	public void setTextFieldCaloriasCena(String textFieldCaloriasCena) {
+		this.textFieldCaloriasCena.setText(textFieldCaloriasCena);
 	}
 	
 }
