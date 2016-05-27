@@ -14,11 +14,7 @@ import javax.swing.border.EtchedBorder;
 public class DiaPlanificacion extends JPanel {
 	
 	private String dia;
-	private JTextField textFieldCaloriasDesayuno;
-	private JTextField textFieldCaloriasComida;
-	private JTextField textFieldCaloriasMerienda;
-	private JTextField textFieldCaloriasCena;
-	private JTextField textFieldCaloriasAlmuerzo;
+	private JTextField textField[];
 	private ArrayList<JComboBox<String>> comboBox;
 	
 	/**
@@ -26,6 +22,7 @@ public class DiaPlanificacion extends JPanel {
 	 */
 	public DiaPlanificacion(String d) {
 		comboBox=new ArrayList<JComboBox<String>>();
+		textField= new JTextField[5];
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panel = new JPanel();
@@ -56,10 +53,10 @@ public class DiaPlanificacion extends JPanel {
 		JLabel lblCaloriasDesayuno = new JLabel("Calorías:");
 		panelDesayuno.add(lblCaloriasDesayuno);
 		
-		textFieldCaloriasDesayuno = new JTextField();
-		textFieldCaloriasDesayuno.setEditable(false);
-		panelDesayuno.add(textFieldCaloriasDesayuno);
-		textFieldCaloriasDesayuno.setColumns(10);
+		textField[0] = new JTextField();
+		textField[0].setEditable(false);
+		panelDesayuno.add(textField[0]);
+		textField[0].setColumns(10);
 		
 		JLabel lblCrearNuevoDesayuno = new JLabel("Crear nuevo desayuno");
 		panelDesayuno.add(lblCrearNuevoDesayuno);
@@ -87,10 +84,10 @@ public class DiaPlanificacion extends JPanel {
 		JLabel labelCaloriasAlmuerzo = new JLabel("Calorías:");
 		panelAlmuerzo.add(labelCaloriasAlmuerzo);
 		
-		textFieldCaloriasAlmuerzo = new JTextField();
-		textFieldCaloriasAlmuerzo.setEditable(false);
-		textFieldCaloriasAlmuerzo.setColumns(10);
-		panelAlmuerzo.add(textFieldCaloriasAlmuerzo);
+		textField[1] = new JTextField();
+		textField[1].setEditable(false);
+		textField[1].setColumns(10);
+		panelAlmuerzo.add(textField[1]);
 		
 		JLabel labelCrearAlmuerzo = new JLabel("Crear nuevo almuerzo");
 		panelAlmuerzo.add(labelCrearAlmuerzo);
@@ -118,10 +115,10 @@ public class DiaPlanificacion extends JPanel {
 		JLabel lblCalorias2 = new JLabel("Calor\u00EDas:");
 		panelComida.add(lblCalorias2);
 		
-		textFieldCaloriasComida = new JTextField();
-		textFieldCaloriasComida.setEditable(false);
-		textFieldCaloriasComida.setColumns(10);
-		panelComida.add(textFieldCaloriasComida);
+		textField[2] = new JTextField();
+		textField[2].setEditable(false);
+		textField[2].setColumns(10);
+		panelComida.add(textField[2]);
 		
 		JLabel lblCrearNuevaComida = new JLabel("Crear nueva comida");
 		panelComida.add(lblCrearNuevaComida);
@@ -149,10 +146,10 @@ public class DiaPlanificacion extends JPanel {
 		JLabel lblCalorias3 = new JLabel("Calor\u00EDas:");
 		panelMerienda.add(lblCalorias3);
 		
-		textFieldCaloriasMerienda = new JTextField();
-		textFieldCaloriasMerienda.setEditable(false);
-		textFieldCaloriasMerienda.setColumns(10);
-		panelMerienda.add(textFieldCaloriasMerienda);
+		textField[3] = new JTextField();
+		textField[3].setEditable(false);
+		textField[3].setColumns(10);
+		panelMerienda.add(textField[3]);
 		
 		JLabel labelCrearNuevaMerienda = new JLabel("Crear nuevo desayuno");
 		panelMerienda.add(labelCrearNuevaMerienda);
@@ -180,10 +177,10 @@ public class DiaPlanificacion extends JPanel {
 		JLabel label_5 = new JLabel("Calor\u00EDas:");
 		panelCena.add(label_5);
 		
-		textFieldCaloriasCena = new JTextField();
-		textFieldCaloriasCena.setEditable(false);
-		textFieldCaloriasCena.setColumns(10);
-		panelCena.add(textFieldCaloriasCena);
+		textField[4] = new JTextField();
+		textField[4].setEditable(false);
+		textField[4].setColumns(10);
+		panelCena.add(textField[4]);
 		
 		JLabel lblCrearNuevaCena = new JLabel("Crear nueva cena");
 		panelCena.add(lblCrearNuevaCena);
@@ -196,21 +193,11 @@ public class DiaPlanificacion extends JPanel {
 	public void setNomDia(String dia){
 		this.dia=dia;
 	}
-	
-	public void setTextFieldCaloriasDesayuno(String textFieldCaloriasDesayuno) {
-		this.textFieldCaloriasDesayuno.setText(textFieldCaloriasDesayuno);
+	public JTextField[] getTextField() {
+		return textField;
 	}
-	public void setTextFieldCaloriasAlmuerzo(String textFieldCaloriasAlmuerzo) {
-		this.textFieldCaloriasAlmuerzo.setText(textFieldCaloriasAlmuerzo);
-	}
-	public void setTextFieldCaloriasComida(String textFieldCaloriasComida) {
-		this.textFieldCaloriasComida.setText(textFieldCaloriasComida);
-	}
-	public void setTextFieldCaloriasMerienda(String textFieldCaloriasMerienda) {
-		this.textFieldCaloriasMerienda.setText(textFieldCaloriasMerienda);
-	}
-	public void setTextFieldCaloriasCena(String textFieldCaloriasCena) {
-		this.textFieldCaloriasCena.setText(textFieldCaloriasCena);
+	public void setTextField(JTextField[] textField) {
+		this.textField = textField;
 	}
 	public ArrayList<JComboBox<String>> getComboBox() {
 		return comboBox;
