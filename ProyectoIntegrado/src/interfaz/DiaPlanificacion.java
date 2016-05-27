@@ -188,11 +188,6 @@ public class DiaPlanificacion extends JPanel {
 		JLabel lblCalorias3 = new JLabel("Calor\u00EDas:");
 		panelMerienda.add(lblCalorias3);
 		
-		textField[3] = new JTextField();
-		textField[3].setEditable(false);
-		textField[3].setColumns(10);
-		panelMerienda.add(textField[3]);
-		
 		JPanel panelMeriendaCalorias = new JPanel();
 		panelMerienda.add(panelMeriendaCalorias);
 		panelMeriendaCalorias.setLayout(new GridLayout(3, 1, 0, 0));
@@ -210,7 +205,7 @@ public class DiaPlanificacion extends JPanel {
 		textField[11] = new JTextField();
 		textField[11].setEditable(false);
 		textField[11].setColumns(11);
-		panelMeriendaCalorias.add(textField[10]);
+		panelMeriendaCalorias.add(textField[11]);
 		
 		JLabel labelCrearNuevaMerienda = new JLabel("Crear nuevo desayuno");
 		panelMerienda.add(labelCrearNuevaMerienda);
