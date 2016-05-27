@@ -271,7 +271,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		//Se añaden los action listeners a los comboBox.
 		for(int i=0;i<comboBox.size();i++){
 			comboBox.get(i).addItemListener(this);
-			comboBox.get(i).addItem("-");
+			
 		}
 	}
 	public String getNomDia(){

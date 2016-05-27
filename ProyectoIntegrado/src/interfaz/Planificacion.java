@@ -170,6 +170,7 @@ public class Planificacion extends JPanel implements ActionListener{
 		if(accio.compareTo("btnAtras")==0){
 			ventanaPrincipal.cambiapanel("Menu");
 		}else if(accio.compareTo("btnGuardar")==0){
+			new Consultas(conexio).registrarPlanificacion(dia);
 			ventanaPrincipal.cambiapanel("Menu");
 		}else if(accio.compareTo("siguiente")==0){
 			cl.next(panelCard);
