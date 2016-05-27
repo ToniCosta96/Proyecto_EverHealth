@@ -145,9 +145,10 @@ public class InicioDeSesion extends JFrame implements KeyListener{
 		/*Se comprueba la conexión y se inicia sesión si los datos están correctos*/
 		if(new Consultas(conexio).iniciarSesionUsuario(textFieldNombre.getText(), new Encriptar().getContrasenya(String.valueOf(passwordField.getPassword())))){
 			//Si se loguea como admin se hace la conexion con active directory
-			if (textFieldNombre.getText().compareTo("admin")==0){
+			/*if (textFieldNombre.getText().compareTo("admin")==0){
 				new ActiveDirectori();
 			}
+			*/
 			conexio.setUsuario(textFieldNombre.getText());
 			ventanas('m');
 			dispose();
