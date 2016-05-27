@@ -2,6 +2,7 @@ package interfaz;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
@@ -18,26 +19,13 @@ public class DiaPlanificacion extends JPanel {
 	private JTextField textFieldCaloriasMerienda;
 	private JTextField textFieldCaloriasCena;
 	private JTextField textFieldCaloriasAlmuerzo;
-	public JComboBox<String> comboBoxDesayuno1;
-	public JComboBox<String> comboBoxDesayuno2;
-	public JComboBox<String> comboBoxDesayuno3;
-	public JComboBox<String> comboBoxAlmuerzo1;
-	public JComboBox<String> comboBoxAlmuerzo2;
-	public JComboBox<String> comboBoxAlmuerzo3;
-	public JComboBox<String> comboBoxComida1;
-	public JComboBox<String> comboBoxComida2;
-	public JComboBox<String> comboBoxComida3;
-	public JComboBox<String> comboBoxMerieneda1;
-	public JComboBox<String> comboBoxMerieneda2;
-	public JComboBox<String> comboBoxMerieneda3;
-	public JComboBox<String> comboBoxCena1;
-	public JComboBox<String> comboBoxCena2;
-	public JComboBox<String> comboBoxCena3;
+	private ArrayList<JComboBox<String>> comboBox;
 	
 	/**
 	 * Create the panel.
 	 */
 	public DiaPlanificacion(String d) {
+		comboBox=new ArrayList<JComboBox<String>>();
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panel = new JPanel();
@@ -56,17 +44,14 @@ public class DiaPlanificacion extends JPanel {
 		panelDesayuno.add(panelPlatos);
 		panelPlatos.setLayout(new GridLayout(3, 1, 0, 0));
 		
-		comboBoxDesayuno1 = new JComboBox<String>();
-		comboBoxDesayuno1.addItem("Plato1");
-		panelPlatos.add(comboBoxDesayuno1);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos.add(comboBox.get(0));
 		
-		comboBoxDesayuno2 = new JComboBox<String>();
-		comboBoxDesayuno2.addItem("Plato2");
-		panelPlatos.add(comboBoxDesayuno2);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos.add(comboBox.get(1));
 		
-		comboBoxDesayuno3 = new JComboBox<String>();
-		comboBoxDesayuno3.addItem("Plato3");
-		panelPlatos.add(comboBoxDesayuno3);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos.add(comboBox.get(2));
 		
 		JLabel lblCaloriasDesayuno = new JLabel("Calorías:");
 		panelDesayuno.add(lblCaloriasDesayuno);
@@ -90,14 +75,14 @@ public class DiaPlanificacion extends JPanel {
 		panelAlmuerzo.add(panelPlatos5);
 		panelPlatos5.setLayout(new GridLayout(3, 1, 0, 0));
 		
-		comboBoxAlmuerzo1 = new JComboBox<String>();
-		panelPlatos5.add(comboBoxAlmuerzo1);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos5.add(comboBox.get(3));
 		
-		comboBoxAlmuerzo2 = new JComboBox<String>();
-		panelPlatos5.add(comboBoxAlmuerzo2);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos5.add(comboBox.get(4));
 		
-		comboBoxAlmuerzo3 = new JComboBox<String>();
-		panelPlatos5.add(comboBoxAlmuerzo3);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos5.add(comboBox.get(5));
 		
 		JLabel labelCaloriasAlmuerzo = new JLabel("Calorías:");
 		panelAlmuerzo.add(labelCaloriasAlmuerzo);
@@ -121,14 +106,14 @@ public class DiaPlanificacion extends JPanel {
 		panelComida.add(panelPlatos2);
 		panelPlatos2.setLayout(new GridLayout(3, 1, 0, 0));
 		
-		comboBoxComida1 = new JComboBox<String>();
-		panelPlatos2.add(comboBoxComida1);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos2.add(comboBox.get(6));
 		
-		comboBoxComida2 = new JComboBox<String>();
-		panelPlatos2.add(comboBoxComida2);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos2.add(comboBox.get(7));
 		
-		comboBoxComida3 = new JComboBox<String>();
-		panelPlatos2.add(comboBoxComida3);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos2.add(comboBox.get(8));
 		
 		JLabel lblCalorias2 = new JLabel("Calor\u00EDas:");
 		panelComida.add(lblCalorias2);
@@ -152,14 +137,14 @@ public class DiaPlanificacion extends JPanel {
 		panelMerienda.add(panelPlatos3);
 		panelPlatos3.setLayout(new GridLayout(3, 1, 0, 0));
 		
-		comboBoxMerieneda1 = new JComboBox<String>();
-		panelPlatos3.add(comboBoxMerieneda1);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos3.add(comboBox.get(9));
 		
-		comboBoxMerieneda2 = new JComboBox<String>();
-		panelPlatos3.add(comboBoxMerieneda2);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos3.add(comboBox.get(10));
 		
-		comboBoxMerieneda3 = new JComboBox<String>();
-		panelPlatos3.add(comboBoxMerieneda3);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos3.add(comboBox.get(11));
 		
 		JLabel lblCalorias3 = new JLabel("Calor\u00EDas:");
 		panelMerienda.add(lblCalorias3);
@@ -183,14 +168,14 @@ public class DiaPlanificacion extends JPanel {
 		panelCena.add(panelPlatos4);
 		panelPlatos4.setLayout(new GridLayout(3, 1, 0, 0));
 		
-		comboBoxCena1 = new JComboBox<String>();
-		panelPlatos4.add(comboBoxCena1);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos4.add(comboBox.get(12));
 		
-		comboBoxCena2 = new JComboBox<String>();
-		panelPlatos4.add(comboBoxCena2);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos4.add(comboBox.get(13));
 		
-		comboBoxCena3 = new JComboBox<String>();
-		panelPlatos4.add(comboBoxCena3);
+		comboBox.add(new JComboBox<String>());
+		panelPlatos4.add(comboBox.get(14));
 		
 		JLabel label_5 = new JLabel("Calor\u00EDas:");
 		panelCena.add(label_5);
@@ -227,5 +212,10 @@ public class DiaPlanificacion extends JPanel {
 	public void setTextFieldCaloriasCena(String textFieldCaloriasCena) {
 		this.textFieldCaloriasCena.setText(textFieldCaloriasCena);
 	}
-	
+	public ArrayList<JComboBox<String>> getComboBox() {
+		return comboBox;
+	}
+	public void setComboBox(ArrayList<JComboBox<String>> comboBox) {
+		this.comboBox = comboBox;
+	}
 }
