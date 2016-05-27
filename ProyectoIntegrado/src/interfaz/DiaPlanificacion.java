@@ -2,8 +2,6 @@ package interfaz;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -14,9 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 
 public class DiaPlanificacion extends JPanel implements ItemListener{
 	
@@ -276,6 +271,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		//Se añaden los action listeners a los comboBox.
 		for(int i=0;i<comboBox.size();i++){
 			comboBox.get(i).addItemListener(this);
+			comboBox.get(i).addItem("-");
 		}
 	}
 	public String getNomDia(){
