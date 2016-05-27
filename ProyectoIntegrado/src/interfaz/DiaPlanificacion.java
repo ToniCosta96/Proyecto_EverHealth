@@ -2,6 +2,8 @@ package interfaz;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -11,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
-public class DiaPlanificacion extends JPanel {
+public class DiaPlanificacion extends JPanel implements ActionListener{
 	
 	private String dia;
 	private JTextField textField[];
@@ -26,6 +28,7 @@ public class DiaPlanificacion extends JPanel {
 	 * Create the panel.
 	 */
 	public DiaPlanificacion(String d) {
+		dia=d;
 		comboBox=new ArrayList<JComboBox<String>>();
 		textField= new JTextField[15];
 		caloriasDesayuno= new ArrayList<String>();
@@ -264,8 +267,11 @@ public class DiaPlanificacion extends JPanel {
 		
 		JLabel lblCrearNuevaCena = new JLabel("Crear nueva cena");
 		panelCena.add(lblCrearNuevaCena);
-		dia=d;
 		
+		//Se añaden los action listeners a los comboBox.
+		for(int i=0;i<comboBox.size();i++){
+			comboBox.get(i).addActionListener(this);
+		}
 	}
 	public String getNomDia(){
 		return dia;
@@ -293,5 +299,20 @@ public class DiaPlanificacion extends JPanel {
 	}
 	public ArrayList<JComboBox<String>> getComboBox() {
 		return comboBox;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		ArrayList<ArrayList<String>> arraysListCalorias= new ArrayList<ArrayList<String>>();
+		arraysListCalorias.add(caloriasDesayuno);
+		arraysListCalorias.add(caloriasAlmuerzo);
+		arraysListCalorias.add(caloriasComida);
+		arraysListCalorias.add(caloriasMerienda);
+		arraysListCalorias.add(caloriasCena);
+		int numTextField=0;
+		for(int i=0;i<5;i++){
+			textField[i+(numTextField++)].setText(arraysListCalorias.get(i).get(comboBox.get(i+(numTextField++)).getSelectedIndex()));
+			textField[i+(numTextField++)].setText(arraysListCalorias.get(i).get(comboBox.get(i+(numTextField++)).getSelectedIndex()));
+			textField[i+(numTextField)].setText(arraysListCalorias.get(i).get(comboBox.get(i+(numTextField)).getSelectedIndex()));
+		}
 	}
 }
