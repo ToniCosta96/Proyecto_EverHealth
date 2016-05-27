@@ -321,6 +321,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 			textField[numTextField].setText(arraysListCalorias.get(i).get(comboBox.get(numTextField).getSelectedIndex()));
 			numTextField++;
 			textField[numTextField].setText(arraysListCalorias.get(i).get(comboBox.get(numTextField).getSelectedIndex()));
+			numTextField++;
 		}
 		}catch(IndexOutOfBoundsException ioobe){
 		}
