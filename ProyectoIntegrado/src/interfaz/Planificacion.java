@@ -136,7 +136,7 @@ public class Planificacion extends JPanel implements ActionListener{
 		/*Se cargan los labels*/
 		cargarLabels();
 		//carga los combobox de cada dia
-		new Consultas(conexio).consultarPlatoTipo(dia);
+		new Consultas(conexio).rellenarComboBox(dia);
 		
 	}
 	

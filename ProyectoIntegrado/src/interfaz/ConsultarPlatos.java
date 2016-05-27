@@ -99,6 +99,7 @@ public class ConsultarPlatos extends JPanel {
 		dtmPla = new DefaultTableModel();
 		dtmPla.addColumn(arrayIdioma.get(89));
 		dtmPla.addColumn(arrayIdioma.get(90));
+		dtmPla.addColumn("Tipo");
 		dtmPla.addColumn(arrayIdioma.get(91));
 		tablePlatos = new JTable(dtmPla);
 		tablePlatos.setBackground(new Color(255, 255, 204));

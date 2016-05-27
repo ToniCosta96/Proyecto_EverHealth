@@ -43,7 +43,7 @@ public class Consultas{
 			ResultSet rs = null;
 			Statement cmd = null;
 			cmd = (Statement) con.createStatement();
-			rs = cmd.executeQuery(select.get(0)+" WHERE "+select.get(1)+" LIKE "+"'%"+busqueda+"%'");
+			rs = cmd.executeQuery(select.get(0)+" WHERE "+select.get(1)+" LIKE "+"'%"+busqueda+"%' ORDER BY nombre");
 			
 			while (rs.next()) {
 				for(int i=0;i<valores.length;i++){
@@ -330,18 +330,19 @@ public class Consultas{
 	
 	public void consultarPlatos(String busqueda,DefaultTableModel dtm){
 		//strings pasados por la clase consultas.
-				valores=new Object[3];
+				valores=new Object[4];
 
 		try {
 			ResultSet rs = null;
 			Statement cmd = null;
 			cmd = (Statement) con.createStatement();
-			rs = cmd.executeQuery("SELECT p.nombre,u.nombre,SUM(a.Kcal/100*cantidad) AS caloriasPlato FROM plato p INNER JOIN usuario u ON Fid_Usuario=id_usuario INNER JOIN alimentos_plato ap ON fid_plato=id_plato INNER JOIN alimentos a ON fid_alimentos=id_alimento WHERE p.nombre LIKE "+"'%"+busqueda+"%' GROUP BY p.nombre" );
+			rs = cmd.executeQuery("SELECT p.nombre,u.nombre,SUM(a.Kcal/100*cantidad) AS caloriasPlato,p.tipo FROM plato p INNER JOIN usuario u ON Fid_Usuario=id_usuario INNER JOIN alimentos_plato ap ON fid_plato=id_plato INNER JOIN alimentos a ON fid_alimentos=id_alimento WHERE p.nombre LIKE "+"'%"+busqueda+"%' GROUP BY p.nombre ORDER BY p.nombre" );
 			
 			while (rs.next()) {
 				valores[0]=rs.getString("p.nombre");
 				valores[1]=rs.getInt("caloriasPlato");
-				valores[2]=rs.getString("u.nombre");
+				valores[2]=rs.getString("p.tipo");
+				valores[3]=rs.getString("u.nombre");
 				
 				if(valores[0]!=null){
 				dtm.addRow(valores);
@@ -364,7 +365,7 @@ public class Consultas{
 			ResultSet rs = null;
 			Statement cmd = null;
 			cmd = (Statement) con.createStatement();
-			rs = cmd.executeQuery("SELECT a.nombre,ap.cantidad,a.Kcal FROM alimentos a INNER JOIN alimentos_plato ap ON id_alimento=Fid_alimentos INNER JOIN plato p ON id_plato=Fid_plato WHERE p.nombre='"+plato+"'");
+			rs = cmd.executeQuery("SELECT a.nombre,ap.cantidad,a.Kcal FROM alimentos a INNER JOIN alimentos_plato ap ON id_alimento=Fid_alimentos INNER JOIN plato p ON id_plato=Fid_plato WHERE p.nombre='"+plato+"' ORDER BY a.nombre");
 			
 			while (rs.next()) {
 				valores[0]=rs.getString("a.nombre");
@@ -384,8 +385,8 @@ public class Consultas{
 	}
 			
 
-
-	public void consultarPlatoTipo(DiaPlanificacion[] dia){	
+//metodo consultar plato tipo
+	public void rellenarComboBox(DiaPlanificacion[] dia){	
 		String [] tipo =new String[]{"Desayuno","Almuerzo","Comida","Merienda","Cena"};
 		int cont=0;
 		String plato=""; 
@@ -395,27 +396,97 @@ public class Consultas{
 					ResultSet rs = null;
 					Statement cmd = null;
 					cmd = (Statement) con.createStatement();
-					rs = cmd.executeQuery("SELECT p.nombre,SUM(a.Kcal/100*cantidad) AS caloriasPlato FROM plato p INNER JOIN alimentos_plato ON fid_plato=id_plato INNER JOIN alimentos a ON fid_alimentos=id_alimento WHERE p.tipo='"+tipo[i]+"'");
-				
+					rs = cmd.executeQuery("SELECT p.nombre,SUM(a.Kcal/100*cantidad) AS caloriasPlato FROM plato p INNER JOIN alimentos_plato ON fid_plato=id_plato INNER JOIN alimentos a ON fid_alimentos=id_alimento WHERE p.tipo='"+tipo[i]+"' GROUP BY p.nombre ORDER BY p.nombre");
+					
 					while (rs.next()) {
 						plato=rs.getString("p.nombre");
+						System.out.println(plato);
 						for(int d=0;d<dia.length;d++){
 							dia[d].getComboBox().get(0+cont).addItem(plato);
 							dia[d].getComboBox().get(1+cont).addItem(plato);
 							dia[d].getComboBox().get(2+cont).addItem(plato);
-							//
-						}
+							
+							switch (i) {
+							case 0:
+								dia[d].getCaloriasDesayuno().add(rs.getString("caloriasPlato"));
+								break;
+							case 1:
+								dia[d].getCaloriasAlmuerzo().add(rs.getString("caloriasPlato"));
+								break;
+							case 2:
+								dia[d].getCaloriasComida().add(rs.getString("caloriasPlato"));
+								break;
+							case 3:
+								dia[d].getCaloriasMerienda().add(rs.getString("caloriasPlato"));
+								break;
+							case 4:
+								dia[d].getCaloriasCena().add(rs.getString("caloriasPlato"));
+								break;
+							}
+							
+						}					
 						
 					}
 
 					rs.close();
 				}catch(Exception e){
 					System.out.println(e);
+					e.printStackTrace();
 				}
 			
 			cont+=3;
 		}
 		
+	}
+	public void registrarPlanificacion(DiaPlanificacion [] dia){
+		int id_Usuario=consultarIdUsuario();
+		for(int d=0;d<dia.length;d++){
+			try {
+
+				psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO Planificacion_diaria (Dia,fid_Usuario) VALUES(?,?)");
+
+				psInsertar.setString(1, dia[d].getNomDia());
+				psInsertar.setInt(2, id_Usuario);
+
+				psInsertar.execute();
+
+
+				ResultSet rs = null;
+				Statement cmd = null;
+				int id_plan_dia=-1;
+				cmd = (Statement) con.createStatement();
+				rs = cmd.executeQuery("SELECT id_planificacion_diaria FROM Planificacion_diaria");
+
+				while (rs.next()) {
+					id_plan_dia=rs.getInt("id_planificacion_diaria");
+
+				}
+
+				int id_plato=0;
+
+				for(int i=0;i<dia[d].getComboBox().size();i++){
+					int tipo=1;
+					rs = cmd.executeQuery("SELECT id_plato FROM plato WHERE Nombre ='"+dia[d].getComboBox().get(i).getSelectedItem()+"'");
+					while (rs.next()) {
+						id_plato=rs.getInt("id_plato");
+					}
+					psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO plato_dia(Fid_plato,Fid_plan_dia,tipo) VALUES(?,?,?)");
+
+					psInsertar.setInt(1, id_plato);
+					psInsertar.setInt(2, id_plan_dia);
+					psInsertar.setInt(3, tipo);
+					tipo++;
+					psInsertar.execute();
+				}
+
+
+				rs.close();
+
+			}catch(Exception e){
+				System.out.println("Ha habido algun problema con el registro de planificacion");
+				System.out.println(e);
+			}
+		}
 	}
 }
 	
