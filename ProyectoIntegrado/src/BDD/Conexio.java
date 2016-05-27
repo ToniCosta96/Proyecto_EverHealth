@@ -18,7 +18,7 @@ public class Conexio {
 	public void registraDriver(){
 		//...
 				try {
-				con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/everhealth?user=root&password=");
+				con = (Connection) DriverManager.getConnection("jdbc:mysql://54.191.17.183:3306/everhealth?user=everhealth-java&password=alpatodam1");
 				// Otros y operaciones sobre la base de datos...
 				} catch (SQLException ex) {
 				// Mantener el control sobre el tipo de error
