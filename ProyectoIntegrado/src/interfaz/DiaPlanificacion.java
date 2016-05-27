@@ -310,8 +310,10 @@ public class DiaPlanificacion extends JPanel implements ActionListener{
 		arraysListCalorias.add(caloriasCena);
 		int numTextField=0;
 		for(int i=0;i<5;i++){
-			textField[i+(numTextField++)].setText(arraysListCalorias.get(i).get(comboBox.get(i+(numTextField++)).getSelectedIndex()));
-			textField[i+(numTextField++)].setText(arraysListCalorias.get(i).get(comboBox.get(i+(numTextField++)).getSelectedIndex()));
+			textField[i+(numTextField)].setText(arraysListCalorias.get(i).get(comboBox.get(i+(numTextField)).getSelectedIndex()));
+			numTextField++;
+			textField[i+(numTextField)].setText(arraysListCalorias.get(i).get(comboBox.get(i+(numTextField)).getSelectedIndex()));
+			numTextField++;
 			textField[i+(numTextField)].setText(arraysListCalorias.get(i).get(comboBox.get(i+(numTextField)).getSelectedIndex()));
 		}
 	}
