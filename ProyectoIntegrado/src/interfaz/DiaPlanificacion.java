@@ -16,6 +16,11 @@ public class DiaPlanificacion extends JPanel {
 	private String dia;
 	private JTextField textField[];
 	private ArrayList<JComboBox<String>> comboBox;
+	private ArrayList<String> caloriasDesayuno;
+	private ArrayList<String> caloriasAlmuerzo;
+	private ArrayList<String> caloriasComida;
+	private ArrayList<String> caloriasMerienda;
+	private ArrayList<String> caloriasCena;
 	
 	/**
 	 * Create the panel.
@@ -23,6 +28,11 @@ public class DiaPlanificacion extends JPanel {
 	public DiaPlanificacion(String d) {
 		comboBox=new ArrayList<JComboBox<String>>();
 		textField= new JTextField[15];
+		caloriasDesayuno= new ArrayList<String>();
+		caloriasAlmuerzo= new ArrayList<String>();
+		caloriasComida= new ArrayList<String>();
+		caloriasMerienda= new ArrayList<String>();
+		caloriasCena= new ArrayList<String>();
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panel = new JPanel();
@@ -263,16 +273,25 @@ public class DiaPlanificacion extends JPanel {
 	public void setNomDia(String dia){
 		this.dia=dia;
 	}
+	public ArrayList<String> getCaloriasDesayuno() {
+		return caloriasDesayuno;
+	}
+	public ArrayList<String> getCaloriasAlmuerzo() {
+		return caloriasAlmuerzo;
+	}
+	public ArrayList<String> getCaloriasComida() {
+		return caloriasComida;
+	}
+	public ArrayList<String> getCaloriasMerienda() {
+		return caloriasMerienda;
+	}
+	public ArrayList<String> getCaloriasCena() {
+		return caloriasCena;
+	}
 	public JTextField[] getTextField() {
 		return textField;
 	}
-	public void setTextField(JTextField[] textField) {
-		this.textField = textField;
-	}
 	public ArrayList<JComboBox<String>> getComboBox() {
 		return comboBox;
-	}
-	public void setComboBox(ArrayList<JComboBox<String>> comboBox) {
-		this.comboBox = comboBox;
 	}
 }
