@@ -4,6 +4,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -13,7 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
-public class DiaPlanificacion extends JPanel implements ActionListener{
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
+public class DiaPlanificacion extends JPanel implements ItemListener{
 	
 	private String dia;
 	private JTextField textField[];
@@ -270,7 +275,7 @@ public class DiaPlanificacion extends JPanel implements ActionListener{
 		
 		//Se añaden los action listeners a los comboBox.
 		for(int i=0;i<comboBox.size();i++){
-			comboBox.get(i).addActionListener(this);
+			comboBox.get(i).addItemListener(this);
 		}
 	}
 	public String getNomDia(){
@@ -301,7 +306,7 @@ public class DiaPlanificacion extends JPanel implements ActionListener{
 		return comboBox;
 	}
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void itemStateChanged(ItemEvent e) {
 		ArrayList<ArrayList<String>> arraysListCalorias= new ArrayList<ArrayList<String>>();
 		arraysListCalorias.add(caloriasDesayuno);
 		arraysListCalorias.add(caloriasAlmuerzo);
@@ -310,11 +315,13 @@ public class DiaPlanificacion extends JPanel implements ActionListener{
 		arraysListCalorias.add(caloriasCena);
 		int numTextField=0;
 		for(int i=0;i<5;i++){
-			textField[i+(numTextField)].setText(arraysListCalorias.get(i).get(comboBox.get(i+(numTextField)).getSelectedIndex()));
+			textField[(numTextField)].setText(arraysListCalorias.get(i).get(comboBox.get((numTextField)).getSelectedIndex()));
 			numTextField++;
-			textField[i+(numTextField)].setText(arraysListCalorias.get(i).get(comboBox.get(i+(numTextField)).getSelectedIndex()));
+			textField[(numTextField)].setText(arraysListCalorias.get(i).get(comboBox.get((numTextField)).getSelectedIndex()));
 			numTextField++;
-			textField[i+(numTextField)].setText(arraysListCalorias.get(i).get(comboBox.get(i+(numTextField)).getSelectedIndex()));
+			textField[(numTextField)].setText(arraysListCalorias.get(i).get(comboBox.get((numTextField)).getSelectedIndex()));
 		}
 	}
+	
+	
 }
