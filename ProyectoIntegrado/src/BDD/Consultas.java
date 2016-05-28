@@ -386,7 +386,7 @@ public class Consultas{
 			
 
 //metodo consultar plato tipo
-	public void rellenarComboBox(DiaPlanificacion[] dia){	
+	public void rellenarComboBox(DiaPlanificacion[] dia,DefaultTableModel dtm){	
 		String [] tipo =new String[]{"Desayuno","Almuerzo","Comida","Merienda","Cena"};
 		int cont=0;
 		String plato=""; 
@@ -462,12 +462,12 @@ public class Consultas{
 		}
 		
 		if(existep==true){
-			consultarPlanificacion(dia);
+			consultarPlanificacion(dia,dtm);
 		}
 		
 	}
 	
-	public void consultarPlanificacion(DiaPlanificacion [] dia){
+	public void consultarPlanificacion(DiaPlanificacion [] dia,DefaultTableModel dtm){
 		int id_Usuario=consultarIdUsuario();
 		
 			try{
