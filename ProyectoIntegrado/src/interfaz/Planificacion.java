@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 
 import BDD.Conexio;
 import BDD.Consultas;
+import calculos.CalcularCalorias;
 import javafx.scene.control.ComboBox;
 
 public class Planificacion extends JPanel implements ActionListener{
@@ -139,7 +140,9 @@ public class Planificacion extends JPanel implements ActionListener{
 		
 		/*Se cargan los labels*/
 		cargarLabels();
-		//carga los combobox de cada dia
+		//Cargar calorías totales.
+		new CalcularCalorias(textFieldCalRecomendadas, new Consultas(conexio).datosUsuario(conexio.getUsuario()));
+		//Carga los combobox de cada dia.
 		new Consultas(conexio).rellenarComboBox(dia, dtm);
 		
 	}
