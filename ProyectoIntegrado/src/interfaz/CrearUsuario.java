@@ -83,6 +83,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 	 * Create the frame.
 	 */
 	public CrearUsuario(Ventanas v, Conexio conexio, ArrayList<String>arrayIdioma, Menu menu, CrearPlato crearPlato, Planificacion planificacion) {
+		setBackground(new Color(255, 255, 153));
 		final int tamanyoLetraLabels= 20;
 		final int tamanyoLetraFieldsTexts= 16;
 		this.menu=menu;
@@ -95,15 +96,18 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelDatos = new JPanel();
+		panelDatos.setBackground(new Color(255, 255, 153));
 		FlowLayout flowLayout = (FlowLayout) panelDatos.getLayout();
 		flowLayout.setVgap(50);
 		
 		JPanel panelDatos2 = new JPanel();
+		panelDatos2.setOpaque(false);
 		panelDatos.add(panelDatos2);
 		panelDatos2.setLayout(new GridLayout(11, 2, 75, 10));
 		
 		//ScrollPane
 		JScrollPane panelScroll= new JScrollPane(panelDatos);
+		panelScroll.setBackground(new Color(255, 255, 153));
 		panelScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		panelScroll.getVerticalScrollBar().setUnitIncrement(10);
 		add(panelScroll);
@@ -196,6 +200,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 		seleccionarObjetivo(panelDatos2);
 		
 		JPanel panelIdioma = new JPanel();
+		panelIdioma.setBackground(new Color(255, 255, 204));
 		panelDatos2.add(panelIdioma);
 		panelIdioma.setLayout(new GridLayout(1, 2, 0, 0));
 		
@@ -213,6 +218,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 		panelIdioma.add(comboBoxIdioma);
 		
 		JPanel panelCaloriasRecomendadas = new JPanel();
+		panelCaloriasRecomendadas.setBackground(new Color(255, 255, 204));
 		panelCaloriasRecomendadas.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panelDatos2.add(panelCaloriasRecomendadas);
 		panelCaloriasRecomendadas.setLayout(new GridLayout(1, 2, 0, 0));
@@ -229,10 +235,12 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 		textFieldCaloriasRecomendadas.setColumns(10);
 		
 		JPanel panelBotones = new JPanel();
+		panelBotones.setOpaque(false);
 		add(panelBotones, BorderLayout.SOUTH);
 		panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.X_AXIS));
 		
 		JPanel panelBotonesAtras = new JPanel();
+		panelBotonesAtras.setOpaque(false);
 		FlowLayout fl_panelBotonesAtras = (FlowLayout) panelBotonesAtras.getLayout();
 		fl_panelBotonesAtras.setVgap(20);
 		fl_panelBotonesAtras.setHgap(20);
@@ -245,6 +253,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 		btnAtras.addActionListener(this);
 		
 		JPanel panelBotonesGuardar = new JPanel();
+		panelBotonesGuardar.setOpaque(false);
 		FlowLayout fl_panelBotonesGuardar = (FlowLayout) panelBotonesGuardar.getLayout();
 		fl_panelBotonesGuardar.setVgap(20);
 		fl_panelBotonesGuardar.setHgap(20);
@@ -271,6 +280,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 	private void seleccionarGenero(JPanel panelDatos2){
 		//Grupo de botones para seleccionar el género.
 		JPanel panelGenero = new JPanel();
+		panelGenero.setBackground(new Color(255, 255, 204));
 		panelGenero.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelGenero);
 		
@@ -293,6 +303,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 	private void seleccionarActividad(JPanel panelDatos2){
 		//Grupo de botones para seleccionar la actividad física.
 		JPanel panelActividadFisica = new JPanel();
+		panelActividadFisica.setBackground(new Color(255, 255, 204));
 		panelActividadFisica.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelActividadFisica);
 		
@@ -322,6 +333,7 @@ public class CrearUsuario extends JPanel implements ActionListener,KeyListener{
 	private void seleccionarObjetivo(JPanel panelDatos2){
 		//Grupo de botones para seleccionar el género.
 		JPanel panelObjetivo = new JPanel();
+		panelObjetivo.setBackground(new Color(255, 255, 204));
 		panelObjetivo.setBorder(UIManager.getBorder("TextField.border"));
 		panelDatos2.add(panelObjetivo);
 		

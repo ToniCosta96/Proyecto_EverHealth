@@ -23,6 +23,7 @@ import BDD.Conexio;
 import BDD.Consultas;
 import calculos.CalcularCalorias;
 import javafx.scene.control.ComboBox;
+import java.awt.Color;
 
 public class Planificacion extends JPanel implements ActionListener{
 
@@ -44,6 +45,7 @@ public class Planificacion extends JPanel implements ActionListener{
 	private int numeroDia=0;
 	
 	public Planificacion(Ventanas v, Conexio conexio, ArrayList<String> arrayIdiomas, DefaultTableModel dtm) {
+		setBackground(new Color(255, 255, 153));
 		ventanaPrincipal=v;
 		this.arrayIdiomas=arrayIdiomas;
 		this.conexio=conexio;
@@ -52,6 +54,7 @@ public class Planificacion extends JPanel implements ActionListener{
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelCabezera = new JPanel();
+		panelCabezera.setOpaque(false);
 		add(panelCabezera, BorderLayout.NORTH);
 		FlowLayout fl_panelCabezera = (FlowLayout) panelCabezera.getLayout();
 		fl_panelCabezera.setVgap(20);
@@ -59,6 +62,7 @@ public class Planificacion extends JPanel implements ActionListener{
 		fl_panelCabezera.setAlignment(FlowLayout.LEFT);
 		
 		JPanel panelCaloriasGrid = new JPanel();
+		panelCaloriasGrid.setOpaque(false);
 		panelCabezera.add(panelCaloriasGrid);
 		panelCaloriasGrid.setLayout(new GridLayout(2, 2, 10, 5));
 		
@@ -79,10 +83,12 @@ public class Planificacion extends JPanel implements ActionListener{
 		textFieldCalRestantes.setColumns(10);
 		
 		JPanel panelCentral = new JPanel();
+		panelCentral.setOpaque(false);
 		add(panelCentral, BorderLayout.CENTER);
 		panelCentral.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelSeleccionDia = new JPanel();
+		panelSeleccionDia.setOpaque(false);
 		panelCentral.add(panelSeleccionDia, BorderLayout.NORTH);
 		
 		JButton btnA = new JButton("<<");
@@ -103,6 +109,7 @@ public class Planificacion extends JPanel implements ActionListener{
 		panelSeleccionDia.add(btnB);
 		
 		panelCard = new JPanel();
+		panelCard.setOpaque(false);
 		crearCardLayout(panelCard);
 		panelCard.setLayout(cl);
 		
@@ -112,10 +119,12 @@ public class Planificacion extends JPanel implements ActionListener{
 		panelCentral.add(panelScroll, BorderLayout.CENTER);
 		
 		JPanel panelInferior = new JPanel();
+		panelInferior.setOpaque(false);
 		add(panelInferior, BorderLayout.SOUTH);
 		panelInferior.setLayout(new BoxLayout(panelInferior, BoxLayout.X_AXIS));
 		
 		JPanel panelAtras = new JPanel();
+		panelAtras.setOpaque(false);
 		FlowLayout flowLayout = (FlowLayout) panelAtras.getLayout();
 		flowLayout.setVgap(30);
 		flowLayout.setHgap(50);
@@ -128,6 +137,7 @@ public class Planificacion extends JPanel implements ActionListener{
 		panelAtras.add(btnAtras);
 		
 		JPanel panelGuardar = new JPanel();
+		panelGuardar.setOpaque(false);
 		FlowLayout flowLayout_1 = (FlowLayout) panelGuardar.getLayout();
 		flowLayout_1.setVgap(30);
 		flowLayout_1.setHgap(50);

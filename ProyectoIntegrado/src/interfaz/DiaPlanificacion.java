@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
+import java.awt.Color;
 
 public class DiaPlanificacion extends JPanel implements ItemListener{
 	
@@ -29,6 +30,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 	 * Create the panel.
 	 */
 	public DiaPlanificacion(String d, Planificacion planificacion) {
+		setBackground(new Color(255, 255, 204));
 		dia=d;
 		this.planificacion=planificacion;
 		comboBox=new ArrayList<JComboBox<String>>();
@@ -41,11 +43,13 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panel = new JPanel();
+		panel.setOpaque(false);
 		add(panel);
 		
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		JPanel panelDesayuno = new JPanel();
+		panelDesayuno.setOpaque(false);
 		panelDesayuno.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel.add(panelDesayuno);
 		
@@ -53,6 +57,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		panelDesayuno.add(lblDesayuno);
 		
 		JPanel panelPlatos = new JPanel();
+		panelPlatos.setOpaque(false);
 		panelDesayuno.add(panelPlatos);
 		panelPlatos.setLayout(new GridLayout(3, 1, 0, 0));
 		
@@ -69,6 +74,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		panelDesayuno.add(lblCaloriasDesayuno);
 		
 		JPanel panelDesayunoCalorias = new JPanel();
+		panelDesayunoCalorias.setOpaque(false);
 		panelDesayuno.add(panelDesayunoCalorias);
 		panelDesayunoCalorias.setLayout(new GridLayout(3, 1, 0, 0));
 		
@@ -91,6 +97,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		panelDesayuno.add(lblCrearNuevoDesayuno);
 		
 		JPanel panelAlmuerzo = new JPanel();
+		panelAlmuerzo.setOpaque(false);
 		panelAlmuerzo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel.add(panelAlmuerzo);
 		
@@ -98,6 +105,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		panelAlmuerzo.add(labelAlmuerzo);
 		
 		JPanel panelPlatos5 = new JPanel();
+		panelPlatos5.setOpaque(false);
 		panelAlmuerzo.add(panelPlatos5);
 		panelPlatos5.setLayout(new GridLayout(3, 1, 0, 0));
 		
@@ -114,6 +122,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		panelAlmuerzo.add(labelCaloriasAlmuerzo);
 		
 		JPanel panelAlmuerzoCalorias = new JPanel();
+		panelAlmuerzoCalorias.setOpaque(false);
 		panelAlmuerzo.add(panelAlmuerzoCalorias);
 		panelAlmuerzoCalorias.setLayout(new GridLayout(3, 1, 0, 0));
 		
@@ -136,6 +145,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		panelAlmuerzo.add(labelCrearAlmuerzo);
 		
 		JPanel panelComida = new JPanel();
+		panelComida.setOpaque(false);
 		panelComida.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel.add(panelComida);
 		
@@ -143,6 +153,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		panelComida.add(labelComida);
 		
 		JPanel panelPlatos2 = new JPanel();
+		panelPlatos2.setOpaque(false);
 		panelComida.add(panelPlatos2);
 		panelPlatos2.setLayout(new GridLayout(3, 1, 0, 0));
 		
@@ -159,6 +170,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		panelComida.add(lblCalorias2);
 		
 		JPanel panelComidaCalorias = new JPanel();
+		panelComidaCalorias.setOpaque(false);
 		panelComida.add(panelComidaCalorias);
 		panelComidaCalorias.setLayout(new GridLayout(3, 1, 0, 0));
 		
@@ -181,6 +193,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		panelComida.add(lblCrearNuevaComida);
 		
 		JPanel panelMerienda = new JPanel();
+		panelMerienda.setOpaque(false);
 		panelMerienda.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel.add(panelMerienda);
 		
@@ -188,6 +201,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		panelMerienda.add(lblMerienda);
 		
 		JPanel panelPlatos3 = new JPanel();
+		panelPlatos3.setOpaque(false);
 		panelMerienda.add(panelPlatos3);
 		panelPlatos3.setLayout(new GridLayout(3, 1, 0, 0));
 		
@@ -204,6 +218,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		panelMerienda.add(lblCalorias3);
 		
 		JPanel panelMeriendaCalorias = new JPanel();
+		panelMeriendaCalorias.setOpaque(false);
 		panelMerienda.add(panelMeriendaCalorias);
 		panelMeriendaCalorias.setLayout(new GridLayout(3, 1, 0, 0));
 		
@@ -226,6 +241,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		panelMerienda.add(labelCrearNuevaMerienda);
 		
 		JPanel panelCena = new JPanel();
+		panelCena.setOpaque(false);
 		panelCena.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel.add(panelCena);
 		
@@ -233,6 +249,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		panelCena.add(labelCena);
 		
 		JPanel panelPlatos4 = new JPanel();
+		panelPlatos4.setOpaque(false);
 		panelCena.add(panelPlatos4);
 		panelPlatos4.setLayout(new GridLayout(3, 1, 0, 0));
 		
@@ -249,6 +266,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 		panelCena.add(label_5);
 		
 		JPanel panelCenaCalorias = new JPanel();
+		panelCenaCalorias.setOpaque(false);
 		panelCena.add(panelCenaCalorias);
 		panelCenaCalorias.setLayout(new GridLayout(3, 1, 0, 0));
 		
