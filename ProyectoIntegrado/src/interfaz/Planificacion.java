@@ -188,9 +188,9 @@ public class Planificacion extends JPanel implements ActionListener{
 		try{
 		int sumaCalorias=0;
 		for(int tf=0;tf<dia[0].getComboBox().size();tf++){
-			sumaCalorias+=Float.parseFloat(dia[numeroDia].getTextField()[tf].getText());
+			sumaCalorias+=Integer.parseInt(dia[numeroDia].getTextField()[tf].getText());
 		}
-		textFieldCalRestantes.setText(String.valueOf(Float.parseFloat(textFieldCalRecomendadas.getText())-sumaCalorias));
+		textFieldCalRestantes.setText(String.valueOf(Integer.parseInt(textFieldCalRecomendadas.getText())-sumaCalorias));
 		}catch(NumberFormatException nfe){
 			nfe.printStackTrace();
 			JOptionPane.showMessageDialog(null,

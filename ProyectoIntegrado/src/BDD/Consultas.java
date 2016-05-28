@@ -416,19 +416,19 @@ public class Consultas{
 							
 							switch (i) {
 							case 0:
-								dia[d].getCaloriasDesayuno().add(rs.getString("caloriasPlato"));
+								dia[d].getCaloriasDesayuno().add(String.valueOf(rs.getInt("caloriasPlato")));
 								break;
 							case 1:
-								dia[d].getCaloriasAlmuerzo().add(rs.getString("caloriasPlato"));
+								dia[d].getCaloriasAlmuerzo().add(String.valueOf(rs.getInt("caloriasPlato")));
 								break;
 							case 2:
-								dia[d].getCaloriasComida().add(rs.getString("caloriasPlato"));
+								dia[d].getCaloriasComida().add(String.valueOf(rs.getInt("caloriasPlato")));
 								break;
 							case 3:
-								dia[d].getCaloriasMerienda().add(rs.getString("caloriasPlato"));
+								dia[d].getCaloriasMerienda().add(String.valueOf(rs.getInt("caloriasPlato")));
 								break;
 							case 4:
-								dia[d].getCaloriasCena().add(rs.getString("caloriasPlato"));
+								dia[d].getCaloriasCena().add(String.valueOf(rs.getInt("caloriasPlato")));
 								break;
 							}
 							
