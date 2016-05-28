@@ -276,11 +276,11 @@ public class Consultas{
 			Statement cmd = null;
 			int id_plato=-1;
 			cmd = (Statement) con.createStatement();
-			rs = cmd.executeQuery("SELECT id_plato FROM Plato");
+			rs = cmd.executeQuery("SELECT id_plato FROM Plato WHERE fid_usuario='"+id_Usuario+"'");
 			
 			while (rs.next()) {
 				id_plato=rs.getInt("id_plato");
-				System.out.println("id plato: "+id_plato);
+				//System.out.println("id plato: "+id_plato);
 			}
 			
 			int id_alimento=0;
@@ -483,30 +483,37 @@ public class Consultas{
 					Statement cmd = null;
 					int id_plan_dia=-1;
 					cmd = (Statement) con.createStatement();
-					rs = cmd.executeQuery("SELECT id_planificacion_diaria FROM Planificacion_diaria");
+					rs = cmd.executeQuery("SELECT MAX(id_planificacion_diaria) AS id_plan_dia FROM Planificacion_diaria WHERE fid_Usuario='"+id_Usuario+"'");
 
-					while (rs.next()) {
-						id_plan_dia=rs.getInt("id_planificacion_diaria");
+					rs.next(); 
+					id_plan_dia=rs.getInt("id_plan_dia");
 
-					}
+					
 
 					int id_plato=0;
-					int tipo=1;
+					int tipo=0;
+					String[] tipoPlato=new String[]{"Desayuno","Almuerzo","Comida","Merienda","Cena"};
+					int c=0;
 					for(int i=0;i<dia[d].getComboBox().size();i++){
 						
-						rs = cmd.executeQuery("SELECT id_plato FROM plato WHERE Nombre ='"+dia[d].getComboBox().get(i).getSelectedItem()+"'");
+						/*rs = cmd.executeQuery("SELECT id_plato FROM plato WHERE Nombre ='"+dia[d].getComboBox().get(i).getSelectedItem()+"'");
 						while (rs.next()) {
 							id_plato=rs.getInt("id_plato");
-						}
-						System.out.println(id_plato);
-						psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO plato_dia(Fid_plato,Fid_plan_dia,tipo) VALUES(?,?,?)");
+						}*/
+						
+						
+						psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO plato_dia(Fid_plato,Fid_plan_dia,tipo) VALUES((SELECT id_plato FROM plato p WHERE Nombre =? AND p.tipo=?),?,?)");
 
-						psInsertar.setInt(1, id_plato);
-						psInsertar.setInt(2, id_plan_dia);
-						psInsertar.setInt(3, tipo);
+						psInsertar.setString(1, dia[d].getComboBox().get(i).getSelectedItem().toString());
+						psInsertar.setString(2, tipoPlato[c]);
+						psInsertar.setInt(3, id_plan_dia);
+						psInsertar.setInt(4, tipo+1);
 						
 						psInsertar.execute();
 						tipo++;
+						if(tipo%3==0){
+							c++;
+						}
 					}
 
 
@@ -550,7 +557,7 @@ public class Consultas{
 				rs.close();
 
 			}catch(Exception e){
-				System.out.println("Ha habido algun problema con el registro de planificacion");
+				System.out.println("Ha habido algun problema con la actualizacion de planificacion");
 				System.out.println(e);
 			}
 		}
