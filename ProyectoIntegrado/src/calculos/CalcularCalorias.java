@@ -28,7 +28,7 @@ public class CalcularCalorias {
 			}
 		}
 		//Se cambia el texto del textField de calorias
-		textFieldCaloriasRecomendadas.setText(String.valueOf(kiloCal));
+		textFieldCaloriasRecomendadas.setText(String.valueOf((int)kiloCal));
 	}
 	
 	private float calcularSugunActividad(float kiloCal,int actividad){
