@@ -223,9 +223,6 @@ public class Menu extends JPanel implements ActionListener{
 		btnConsultarAlimentos.setText(arrayIdioma.get(10));
 	}
 	public void recargarTabla(){
-		for(int i=0;i<15;i++){
-			dtm.removeRow(0);
-		}
 		String nombresColumnas[]= new String[7];
 		for(int i=0;i<nombresColumnas.length;i++){
 			nombresColumnas[i]=arrayIdioma.get(i+24);
@@ -243,17 +240,14 @@ public class Menu extends JPanel implements ActionListener{
 			}
 		}
 		for(int i=0;i<nombresColumnas.length;i++){
-		TableColumn column1 = datos.getTableHeader().getColumnModel().getColumn(i+1);
-		column1.setHeaderValue(nombresColumnas[i]);
+			TableColumn column1 = datos.getTableHeader().getColumnModel().getColumn(i+1);
+			column1.setHeaderValue(nombresColumnas[i]);
 		} 
 		
 		String[] datosTabla= new String[8];
 		for(int fila=0;fila<nombresFilas.length;fila++){
 			datosTabla[0]=nombresFilas[fila];
-			for(int columna=1;columna<datosTabla.length;columna++){
-				datosTabla[columna]="";
-			}
-			dtm.addRow(datosTabla);
+			dtm.setValueAt(nombresFilas[fila], fila, 0);
 		}
 	}
 	public DefaultTableModel getDtm(){
