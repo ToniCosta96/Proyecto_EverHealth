@@ -173,7 +173,7 @@ public class Menu extends JPanel implements ActionListener{
 		for(int fila=0;fila<nombresFilas.length;fila++){
 			datosTabla[0]=nombresFilas[fila];
 			for(int columna=1;columna<datosTabla.length;columna++){
-				datosTabla[columna]="Celda "+fila+", "+columna;
+				datosTabla[columna]="";
 			}
 			dtm.addRow(datosTabla);
 		}
@@ -251,7 +251,7 @@ public class Menu extends JPanel implements ActionListener{
 		for(int fila=0;fila<nombresFilas.length;fila++){
 			datosTabla[0]=nombresFilas[fila];
 			for(int columna=1;columna<datosTabla.length;columna++){
-				datosTabla[columna]="Celda "+fila+", "+columna;
+				datosTabla[columna]="";
 			}
 			dtm.addRow(datosTabla);
 		}
