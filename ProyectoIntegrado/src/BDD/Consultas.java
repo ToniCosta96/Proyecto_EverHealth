@@ -447,6 +447,7 @@ public class Consultas{
 		
 		int id_Usuario=consultarIdUsuario();
 		boolean existep=false;
+		
 		try{
 			ResultSet rs = null;
 			Statement cmd = null;
@@ -473,24 +474,29 @@ public class Consultas{
 				ResultSet rs = null;
 				ResultSet rs2=null;
 				Statement cmd = null;
+				Statement cmd2=null;
 				cmd = (Statement) con.createStatement();
+				cmd2=(Statement) con.createStatement();
 				rs = cmd.executeQuery("SELECT id_planificacion_diaria FROM Planificacion_diaria WHERE fid_Usuario='"+id_Usuario+"'");
 				int id_plan_dia=0;
-				for(int d=0;d<dia.length;d++,rs.next()) {
+				for(int d=0;d<dia.length;d++) {
+					rs.next();
 					id_plan_dia=rs.getInt("id_planificacion_diaria");
 					
-					rs2 = cmd.executeQuery("SELECT p.nombre FROM plato_dia pd INNER JOIN plato ON fid_plato=id_plato WHERE fid_plan_dia='"+id_plan_dia+"' ORDER BY pd.tipo");
-					int t=1;
+					rs2 = cmd2.executeQuery("SELECT p.nombre FROM plato_dia pd INNER JOIN plato p ON fid_plato=id_plato WHERE fid_plan_dia='"+id_plan_dia+"' ORDER BY pd.tipo");
+					int t=0;
 					while( rs2.next()){
 						dia[d].getComboBox().get(t).setSelectedItem(rs2.getString("p.nombre"));
 						t++;
 					}
+					
 				}
-				
+				rs2.close();
+				rs.close();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-		
+			
 		
 	}
 	
@@ -573,18 +579,21 @@ public class Consultas{
 				ResultSet rs = null;
 				ResultSet rs2=null;
 				Statement cmd = null;
+				Statement cmd2 = null;
 				int id_plan_dia=-1;
 				cmd = (Statement) con.createStatement();
+				cmd2 = (Statement) con.createStatement();
 				rs = cmd.executeQuery("SELECT id_planificacion_diaria FROM Planificacion_diaria WHERE fid_Usuario='"+id_Usuario+"'");
 					
-				for(int d=0;d<dia.length;d++,rs.next()){
+				for(int d=0;d<dia.length;d++){
+					rs.next();
 					id_plan_dia=rs.getInt("id_planificacion_diaria");
 					
 					int id_plato=0;
 					int tipo=1;
 					for(int i=0;i<dia[d].getComboBox().size();i++){
 							
-						rs2 = cmd.executeQuery("SELECT id_plato FROM plato WHERE Nombre ='"+dia[d].getComboBox().get(i).getSelectedItem()+"'");
+						rs2 = cmd2.executeQuery("SELECT id_plato FROM plato WHERE Nombre ='"+dia[d].getComboBox().get(i).getSelectedItem()+"'");
 						while (rs2.next()) {
 							id_plato=rs2.getInt("id_plato");
 						}
@@ -597,11 +606,13 @@ public class Consultas{
 						psInsertar.execute();
 					}
 				}
+				rs2.close();
 				rs.close();
 
 			}catch(Exception e){
 				System.out.println("Ha habido algun problema con la actualizacion de planificacion");
 				System.out.println(e);
+				e.printStackTrace();
 			}
 		}
 	}
