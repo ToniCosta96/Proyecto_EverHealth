@@ -256,6 +256,9 @@ public class Menu extends JPanel implements ActionListener{
 			dtm.addRow(datosTabla);
 		}
 	}
+	public DefaultTableModel getDtm(){
+		return dtm;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

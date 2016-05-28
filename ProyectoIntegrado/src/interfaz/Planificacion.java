@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 import BDD.Conexio;
 import BDD.Consultas;
@@ -38,7 +39,7 @@ public class Planificacion extends JPanel implements ActionListener{
 	private DiaPlanificacion dia[];
 	private int numeroDia=0;
 	
-	public Planificacion(Ventanas v, Conexio conexio, ArrayList<String> arrayIdiomas) {
+	public Planificacion(Ventanas v, Conexio conexio, ArrayList<String> arrayIdiomas, DefaultTableModel dtm) {
 		ventanaPrincipal=v;
 		this.arrayIdiomas=arrayIdiomas;
 		this.conexio=conexio;
@@ -136,7 +137,7 @@ public class Planificacion extends JPanel implements ActionListener{
 		/*Se cargan los labels*/
 		cargarLabels();
 		//carga los combobox de cada dia
-		new Consultas(conexio).rellenarComboBox(dia);
+		new Consultas(conexio).rellenarComboBox(dia, dtm);
 		
 	}
 	
