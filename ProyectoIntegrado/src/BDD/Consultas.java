@@ -445,14 +445,62 @@ public class Consultas{
 			cont+=3;
 		}
 		
+		int id_Usuario=consultarIdUsuario();
+		boolean existep=false;
+		try{
+			ResultSet rs = null;
+			Statement cmd = null;
+	
+			cmd = (Statement) con.createStatement();
+			rs = cmd.executeQuery("SELECT id_planificacion_diaria FROM Planificacion_diaria WHERE fid_Usuario='"+id_Usuario+"'");
+			if(rs.next()==true){
+				existep=true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		if(existep==true){
+			consultarPlanificacion(dia);
+		}
+		
+	}
+	
+	public void consultarPlanificacion(DiaPlanificacion [] dia){
+		int id_Usuario=consultarIdUsuario();
+		
+			try{
+				ResultSet rs = null;
+				ResultSet rs2=null;
+				Statement cmd = null;
+				cmd = (Statement) con.createStatement();
+				rs = cmd.executeQuery("SELECT id_planificacion_diaria FROM Planificacion_diaria WHERE fid_Usuario='"+id_Usuario+"'");
+				int id_plan_dia=0;
+				for(int d=0;d<dia.length;d++,rs.next()) {
+					id_plan_dia=rs.getInt("id_planificacion_diaria");
+					
+					rs2 = cmd.executeQuery("SELECT p.nombre FROM plato_dia pd INNER JOIN plato ON fid_plato=id_plato WHERE fid_plan_dia='"+id_plan_dia+"' ORDER BY pd.tipo");
+					int t=1;
+					while( rs2.next()){
+						dia[d].getComboBox().get(t).setSelectedItem(rs2.getString("p.nombre"));
+						t++;
+					}
+				}
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		
+		
 	}
 	
 	public void registrarPlanificacion(DiaPlanificacion [] dia){
 		int id_Usuario=consultarIdUsuario();
+		boolean existep=false;
 		try{
 			ResultSet rs = null;
 			Statement cmd = null;
-			boolean existe=false;
+			
 			cmd = (Statement) con.createStatement();
 			rs = cmd.executeQuery("SELECT id_planificacion_diaria FROM Planificacion_diaria WHERE fid_Usuario='"+id_Usuario+"'");
 			/*int id_plan_dia=0;
@@ -461,13 +509,13 @@ public class Consultas{
 
 			}*/
 			if(rs.next()==true){
-				existe=true;
+				existep=true;
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
-		if(existe==false){
+		if(existep==false){
 			for(int d=0;d<dia.length;d++){
 				try {
 
@@ -495,11 +543,6 @@ public class Consultas{
 					String[] tipoPlato=new String[]{"Desayuno","Almuerzo","Comida","Merienda","Cena"};
 					int c=0;
 					for(int i=0;i<dia[d].getComboBox().size();i++){
-						
-						/*rs = cmd.executeQuery("SELECT id_plato FROM plato WHERE Nombre ='"+dia[d].getComboBox().get(i).getSelectedItem()+"'");
-						while (rs.next()) {
-							id_plato=rs.getInt("id_plato");
-						}*/
 						
 						
 						psInsertar=(PreparedStatement) con.prepareStatement("INSERT INTO plato_dia(Fid_plato,Fid_plan_dia,tipo) VALUES((SELECT id_plato FROM plato p WHERE Nombre =? AND p.tipo=?),?,?)");
