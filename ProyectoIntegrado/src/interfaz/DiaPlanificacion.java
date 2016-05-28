@@ -274,6 +274,23 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 			
 		}
 	}
+	public void rellenarCalorias(){
+		ArrayList<ArrayList<String>> arraysListCalorias= new ArrayList<ArrayList<String>>();
+		arraysListCalorias.add(caloriasDesayuno);
+		arraysListCalorias.add(caloriasAlmuerzo);
+		arraysListCalorias.add(caloriasComida);
+		arraysListCalorias.add(caloriasMerienda);
+		arraysListCalorias.add(caloriasCena);
+		int numTextField=0;
+		for(int i=0;i<5;i++){
+			textField[numTextField].setText(arraysListCalorias.get(i).get(comboBox.get(numTextField).getSelectedIndex()));
+			numTextField++;
+			textField[numTextField].setText(arraysListCalorias.get(i).get(comboBox.get(numTextField).getSelectedIndex()));
+			numTextField++;
+			textField[numTextField].setText(arraysListCalorias.get(i).get(comboBox.get(numTextField).getSelectedIndex()));
+			numTextField++;
+		}
+	}
 	public String getNomDia(){
 		return dia;
 	}
@@ -304,24 +321,8 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		try{
-		ArrayList<ArrayList<String>> arraysListCalorias= new ArrayList<ArrayList<String>>();
-		arraysListCalorias.add(caloriasDesayuno);
-		arraysListCalorias.add(caloriasAlmuerzo);
-		arraysListCalorias.add(caloriasComida);
-		arraysListCalorias.add(caloriasMerienda);
-		arraysListCalorias.add(caloriasCena);
-		int numTextField=0;
-		for(int i=0;i<5;i++){
-			textField[numTextField].setText(arraysListCalorias.get(i).get(comboBox.get(numTextField).getSelectedIndex()));
-			numTextField++;
-			textField[numTextField].setText(arraysListCalorias.get(i).get(comboBox.get(numTextField).getSelectedIndex()));
-			numTextField++;
-			textField[numTextField].setText(arraysListCalorias.get(i).get(comboBox.get(numTextField).getSelectedIndex()));
-			numTextField++;
-		}
+			rellenarCalorias();
 		}catch(IndexOutOfBoundsException ioobe){
 		}
 	}
-	
-	
 }

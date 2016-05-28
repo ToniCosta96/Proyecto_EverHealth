@@ -145,7 +145,9 @@ public class Planificacion extends JPanel implements ActionListener{
 		new CalcularCalorias(textFieldCalRecomendadas, new Consultas(conexio).datosUsuario(conexio.getUsuario()));
 		//Carga los combobox de cada dia.
 		new Consultas(conexio).rellenarComboBox(dia, dtm);
-		
+		for(int i=0;i<dia.length;i++){
+			dia[i].rellenarCalorias();
+		}
 	}
 	
 	private void crearCardLayout(JPanel panelCard){
