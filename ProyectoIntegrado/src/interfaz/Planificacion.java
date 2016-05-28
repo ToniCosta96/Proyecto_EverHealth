@@ -143,7 +143,7 @@ public class Planificacion extends JPanel implements ActionListener{
 		cargarLabels();
 		//Cargar calorías totales.
 		new CalcularCalorias(textFieldCalRecomendadas, new Consultas(conexio).datosUsuario(conexio.getUsuario()));
-		//Carga los combobox de cada dia.
+		//Carga los combobox de cada dia y los textFields de calorías.
 		new Consultas(conexio).rellenarComboBox(dia, dtm);
 		for(int i=0;i<dia.length;i++){
 			dia[i].rellenarCalorias();
@@ -154,7 +154,7 @@ public class Planificacion extends JPanel implements ActionListener{
 		cl=new CardLayout();
 		dia= new DiaPlanificacion[7];
 		for(int i=0;i<dia.length;i++){
-			dia[i]=new DiaPlanificacion(arrayIdiomas.get(24+i));
+			dia[i]=new DiaPlanificacion(arrayIdiomas.get(24+i), Planificacion.this);
 		}
 		for(int i=0;i<7;i++){
 			cl.addLayoutComponent(dia[i], ""+(i+1));
@@ -175,7 +175,7 @@ public class Planificacion extends JPanel implements ActionListener{
 	}
 	
 	private void guardarPlanificacionMenu(){
-		/*Se guarda la planificacion en la clase Menu*/
+		/*Se guarda la planificacion en la tabla de la clase Menu*/
 		for(int fila=0;fila<dtm.getRowCount();fila++){
 			for(int columna=0;columna<dtm.getColumnCount()-1;columna++){
 				dtm.setValueAt(dia[columna].getComboBox().get(fila).getSelectedItem(), fila, columna+1);
@@ -183,14 +183,12 @@ public class Planificacion extends JPanel implements ActionListener{
 		}
 	}
 	
-	private void calcularCaloriasRestantes(){
+	protected void calcularCaloriasRestantes(){
 		/*Calcular calorías restantes*/
 		try{
 		int sumaCalorias=0;
-		for(int d=0;d<dia.length;d++){
-			for(int tf=0;tf<dia[0].getComboBox().size();tf++){
-				sumaCalorias+=Float.parseFloat(dia[d].getTextField()[tf].getText());
-			}
+		for(int tf=0;tf<dia[0].getComboBox().size();tf++){
+			sumaCalorias+=Float.parseFloat(dia[numeroDia].getTextField()[tf].getText());
 		}
 		textFieldCalRestantes.setText(String.valueOf(Float.parseFloat(textFieldCalRecomendadas.getText())-sumaCalorias));
 		}catch(NumberFormatException nfe){

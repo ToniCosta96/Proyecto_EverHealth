@@ -16,6 +16,7 @@ import javax.swing.border.EtchedBorder;
 public class DiaPlanificacion extends JPanel implements ItemListener{
 	
 	private String dia;
+	private static Planificacion planificacion;
 	private JTextField textField[];
 	private ArrayList<JComboBox<String>> comboBox;
 	private ArrayList<String> caloriasDesayuno;
@@ -27,8 +28,9 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 	/**
 	 * Create the panel.
 	 */
-	public DiaPlanificacion(String d) {
+	public DiaPlanificacion(String d, Planificacion planificacion) {
 		dia=d;
+		this.planificacion=planificacion;
 		comboBox=new ArrayList<JComboBox<String>>();
 		textField= new JTextField[15];
 		caloriasDesayuno= new ArrayList<String>();
@@ -322,6 +324,7 @@ public class DiaPlanificacion extends JPanel implements ItemListener{
 	public void itemStateChanged(ItemEvent e) {
 		try{
 			rellenarCalorias();
+			planificacion.calcularCaloriasRestantes();
 		}catch(IndexOutOfBoundsException ioobe){
 		}
 	}
