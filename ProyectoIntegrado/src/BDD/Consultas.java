@@ -446,28 +446,7 @@ public class Consultas{
 		}
 		
 	}
-	public void registrarPlanificacionProva(DiaPlanificacion [] dia){
-		int id_Usuario=consultarIdUsuario();
-		for(int d=0;d<dia.length;d++){
-			try{
-				ResultSet rs = null;
-				Statement cmd = null;
-				cmd = (Statement) con.createStatement();
-				int tipo=1;
-				for(int i=0;i<dia[d].getComboBox().size();i++){
-					//acabar comando sql
-					psInsertar=(PreparedStatement) con.prepareStatement("REPLACE INTO plato_dia(Fid_plato,Fid_plan_dia,tipo) VALUES((SELECT id_plato FROM plato WHERE Nombre ='"+dia[d].getComboBox().get(i).getSelectedItem()+"'),(SELECT id_planificacion_diaria FROM Planificacion_diaria),?)");
 	
-					psInsertar.setInt(1, tipo);
-					
-					psInsertar.execute();
-					tipo++;
-				}
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-		}
-	}
 	public void registrarPlanificacion(DiaPlanificacion [] dia){
 		int id_Usuario=consultarIdUsuario();
 		try{
