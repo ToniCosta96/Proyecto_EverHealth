@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -172,11 +173,30 @@ public class Planificacion extends JPanel implements ActionListener{
 	}
 	
 	private void guardarPlanificacionMenu(){
-		/*Se guarda la planificacion en Menu*/
+		/*Se guarda la planificacion en la clase Menu*/
 		for(int fila=0;fila<dtm.getRowCount();fila++){
 			for(int columna=0;columna<dtm.getColumnCount()-1;columna++){
 				dtm.setValueAt(dia[columna].getComboBox().get(fila).getSelectedItem(), fila, columna+1);
 			}
+		}
+	}
+	
+	private void calcularCaloriasRestantes(){
+		/*Calcular calorías restantes*/
+		try{
+		int sumaCalorias=0;
+		for(int d=0;d<dia.length;d++){
+			for(int tf=0;tf<dia[0].getComboBox().size();tf++){
+				sumaCalorias+=Float.parseFloat(dia[d].getTextField()[tf].getText());
+			}
+		}
+		textFieldCalRestantes.setText(String.valueOf(Float.parseFloat(textFieldCalRecomendadas.getText())-sumaCalorias));
+		}catch(NumberFormatException nfe){
+			nfe.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+				    ""+nfe,
+				    "Error numérico",
+				    JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -196,6 +216,7 @@ public class Planificacion extends JPanel implements ActionListener{
 				numeroDia=0;
 			}
 			textFieldDia.setText(dia[numeroDia].getNomDia());
+			calcularCaloriasRestantes();
 		}else if(accio.compareTo("anterior")==0){
 			cl.previous(panelCard);
 			numeroDia-=1;
@@ -203,6 +224,7 @@ public class Planificacion extends JPanel implements ActionListener{
 				numeroDia=6;
 			}
 			textFieldDia.setText(dia[numeroDia].getNomDia());
+			calcularCaloriasRestantes();
 		}
 	}
 }
