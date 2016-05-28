@@ -172,7 +172,6 @@ public class Planificacion extends JPanel implements ActionListener{
 		/*Se guarda la planificacion en Menu*/
 		for(int fila=0;fila<dtm.getRowCount();fila++){
 			for(int columna=0;columna<dtm.getColumnCount()-1;columna++){
-				System.out.println(fila+" "+columna+" "+dia[columna].getComboBox().get(fila).getSelectedItem());
 				dtm.setValueAt(dia[columna].getComboBox().get(fila).getSelectedItem(), fila, columna+1);
 			}
 		}
