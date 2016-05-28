@@ -446,6 +446,28 @@ public class Consultas{
 		}
 		
 	}
+	public void registrarPlanificacionProva(DiaPlanificacion [] dia){
+		int id_Usuario=consultarIdUsuario();
+		for(int d=0;d<dia.length;d++){
+			try{
+				ResultSet rs = null;
+				Statement cmd = null;
+				cmd = (Statement) con.createStatement();
+				int tipo=1;
+				for(int i=0;i<dia[d].getComboBox().size();i++){
+					//acabar comando sql
+					psInsertar=(PreparedStatement) con.prepareStatement("REPLACE INTO plato_dia(Fid_plato,Fid_plan_dia,tipo) VALUES((SELECT id_plato FROM plato WHERE Nombre ='"+dia[d].getComboBox().get(i).getSelectedItem()+"'),(SELECT id_planificacion_diaria FROM Planificacion_diaria),?)");
+	
+					psInsertar.setInt(1, tipo);
+					
+					psInsertar.execute();
+					tipo++;
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+	}
 	public void registrarPlanificacion(DiaPlanificacion [] dia){
 		int id_Usuario=consultarIdUsuario();
 		try{
@@ -518,48 +540,42 @@ public class Consultas{
 				}
 			}
 		}else{
-			
-				try {
-					ResultSet rs = null;
-					ResultSet rs2=null;
-					Statement cmd = null;
-					int id_plan_dia=-1;
-					cmd = (Statement) con.createStatement();
-					rs = cmd.executeQuery("SELECT id_planificacion_diaria FROM Planificacion_diaria WHERE fid_Usuario='"+id_Usuario+"'");
+			try {
+				ResultSet rs = null;
+				ResultSet rs2=null;
+				Statement cmd = null;
+				int id_plan_dia=-1;
+				cmd = (Statement) con.createStatement();
+				rs = cmd.executeQuery("SELECT id_planificacion_diaria FROM Planificacion_diaria WHERE fid_Usuario='"+id_Usuario+"'");
 					
-					for(int d=0;d<dia.length;d++,rs.next()){
-						id_plan_dia=rs.getInt("id_planificacion_diaria");
-						
-						int id_plato=0;
-						int tipo=1;
-						for(int i=0;i<dia[d].getComboBox().size();i++){
+				for(int d=0;d<dia.length;d++,rs.next()){
+					id_plan_dia=rs.getInt("id_planificacion_diaria");
+					
+					int id_plato=0;
+					int tipo=1;
+					for(int i=0;i<dia[d].getComboBox().size();i++){
 							
-							rs2 = cmd.executeQuery("SELECT id_plato FROM plato WHERE Nombre ='"+dia[d].getComboBox().get(i).getSelectedItem()+"'");
-							while (rs2.next()) {
-								id_plato=rs2.getInt("id_plato");
-							}
-							psInsertar=(PreparedStatement) con.prepareStatement("UPDATE plato_dia SET Fid_plato=? WHERE fid_plan_dia=? AND tipo=?");
-
-							psInsertar.setInt(1, id_plato);
-							psInsertar.setInt(2, id_plan_dia);
-							psInsertar.setInt(3, tipo);
-							tipo++;
-							psInsertar.execute();
+						rs2 = cmd.executeQuery("SELECT id_plato FROM plato WHERE Nombre ='"+dia[d].getComboBox().get(i).getSelectedItem()+"'");
+						while (rs2.next()) {
+							id_plato=rs2.getInt("id_plato");
 						}
+						psInsertar=(PreparedStatement) con.prepareStatement("UPDATE plato_dia SET Fid_plato=? WHERE fid_plan_dia=? AND tipo=?");
+						
+						psInsertar.setInt(1, id_plato);
+						psInsertar.setInt(2, id_plan_dia);
+						psInsertar.setInt(3, tipo);
+						tipo++;
+						psInsertar.execute();
 					}
-
-					
-
-
-					rs.close();
-
-				}catch(Exception e){
-					System.out.println("Ha habido algun problema con el registro de planificacion");
-					System.out.println(e);
 				}
+				rs.close();
+
+			}catch(Exception e){
+				System.out.println("Ha habido algun problema con el registro de planificacion");
+				System.out.println(e);
 			}
 		}
 	}
-
+}
 	
 			
