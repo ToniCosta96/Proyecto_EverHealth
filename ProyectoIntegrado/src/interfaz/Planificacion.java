@@ -20,12 +20,14 @@ import javax.swing.table.DefaultTableModel;
 
 import BDD.Conexio;
 import BDD.Consultas;
+import javafx.scene.control.ComboBox;
 
 public class Planificacion extends JPanel implements ActionListener{
 
 	private Ventanas ventanaPrincipal;
 	private Conexio conexio;
 	private ArrayList<String> arrayIdiomas;
+	private DefaultTableModel dtm;
 	private CardLayout cl;
 	private JPanel panelCard;
 	private JTextField textFieldCalRecomendadas;
@@ -43,6 +45,7 @@ public class Planificacion extends JPanel implements ActionListener{
 		ventanaPrincipal=v;
 		this.arrayIdiomas=arrayIdiomas;
 		this.conexio=conexio;
+		this.dtm=dtm;
 		
 		setLayout(new BorderLayout(0, 0));
 		
@@ -164,6 +167,16 @@ public class Planificacion extends JPanel implements ActionListener{
 		}
 		
 	}
+	
+	private void guardarPlanificacionMenu(){
+		/*Se guarda la planificacion en Menu*/
+		for(int fila=0;fila<dtm.getRowCount();fila++){
+			for(int columna=0;columna<dtm.getColumnCount()-1;columna++){
+				System.out.println(fila+" "+columna+" "+dia[columna].getComboBox().get(fila).getSelectedItem());
+				dtm.setValueAt(dia[columna].getComboBox().get(fila).getSelectedItem(), fila, columna+1);
+			}
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -172,6 +185,7 @@ public class Planificacion extends JPanel implements ActionListener{
 			ventanaPrincipal.cambiapanel("Menu");
 		}else if(accio.compareTo("btnGuardar")==0){
 			new Consultas(conexio).registrarPlanificacion(dia);
+			guardarPlanificacionMenu();
 			ventanaPrincipal.cambiapanel("Menu");
 		}else if(accio.compareTo("siguiente")==0){
 			cl.next(panelCard);
