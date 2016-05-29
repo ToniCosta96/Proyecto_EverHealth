@@ -26,14 +26,12 @@ import javax.swing.table.TableColumn;
 import BDD.Conexio;
 
 public class Menu extends JPanel implements ActionListener{
-	private JTextField txtCaloriasRestantes;
 	private Ventanas ventanaPrincipal;
 	private Conexio conexio;
 	private ArrayList<String> arrayIdioma;
 	private DefaultTableModel dtm;
 	private JTable datos;
 	private JPanel panelTabla;
-	private JLabel lblNewLabelCalorias;
 	private JLabel lblIrAlPerfil;
 	private JButton btnPlanificacion;
 	private JButton btnEnviarPlanificacin;
@@ -64,15 +62,6 @@ public class Menu extends JPanel implements ActionListener{
 		flowLayout.setHgap(25);
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panelCabezera.add(panelCalorias);
-		
-		lblNewLabelCalorias = new JLabel();
-		panelCalorias.add(lblNewLabelCalorias);
-		
-		txtCaloriasRestantes = new JTextField();
-		panelCalorias.add(txtCaloriasRestantes);
-		txtCaloriasRestantes.setText("Calorias Restantes");
-		txtCaloriasRestantes.setColumns(12);
-		txtCaloriasRestantes.setEditable(false);
 		
 		JPanel panelIrAlPerfil = new JPanel();
 		panelIrAlPerfil.setOpaque(false);
@@ -122,7 +111,7 @@ public class Menu extends JPanel implements ActionListener{
 		
 		JPanel panelBotones = new JPanel();
 		panelBotones.setOpaque(false);
-		panelBotones.setLayout(new GridLayout(4, 1, 0, 0));
+		panelBotones.setLayout(new GridLayout(4, 1, 0, 65));
 		panelDivisor.add(panelBotones);
 		
 		btnPlanificacion = new JButton();
@@ -202,10 +191,11 @@ public class Menu extends JPanel implements ActionListener{
 		datos.getColumnModel().getColumn(0).setCellRenderer(tcr);
 		//datos.getColumnModel().getColumn(0).setCellRenderer(datos.getTableHeader().getDefaultRenderer());
 		datos.getColumnModel().getColumn(0).setPreferredWidth(150);
+		datos.setRowHeight(25);
 		
 		JScrollPane scrollPane = new JScrollPane(datos);
 		scrollPane.setOpaque(false);
-		scrollPane.setPreferredSize(new Dimension(600, 500));
+		scrollPane.setPreferredSize(new Dimension(600, 398));
 		panelTabla.add(scrollPane);
 		panelDivisor.add(panelTabla);
 		
@@ -214,7 +204,6 @@ public class Menu extends JPanel implements ActionListener{
 	}
 	
 	public void cargarNombresLabels(){
-		lblNewLabelCalorias.setText(arrayIdioma.get(6));
 		btnPlanificacion.setText(arrayIdioma.get(7));
 		lblIrAlPerfil.setText(arrayIdioma.get(12));
 		btnEnviarPlanificacin.setText(arrayIdioma.get(11));
