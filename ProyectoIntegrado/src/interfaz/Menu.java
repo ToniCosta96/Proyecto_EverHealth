@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import BDD.Conexio;
+import java.awt.Font;
 
 public class Menu extends JPanel implements ActionListener{
 	private Ventanas ventanaPrincipal;
@@ -38,6 +39,7 @@ public class Menu extends JPanel implements ActionListener{
 	private JButton btnHazTuPropio;
 	private JButton btnConsultarPlatos;
 	private JButton btnConsultarAlimentos;
+	private JLabel lblEverhealth;
 
 	/**
 	 * Create the frame.
@@ -58,10 +60,16 @@ public class Menu extends JPanel implements ActionListener{
 		JPanel panelCalorias = new JPanel();
 		panelCalorias.setOpaque(false);
 		FlowLayout flowLayout = (FlowLayout) panelCalorias.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEADING);
 		flowLayout.setVgap(10);
 		flowLayout.setHgap(25);
-		flowLayout.setAlignment(FlowLayout.LEFT);
 		panelCabezera.add(panelCalorias);
+		
+		lblEverhealth = new JLabel();
+		lblEverhealth.setText("EverHealth");
+		lblEverhealth.setForeground(new Color(255, 160, 122));
+		lblEverhealth.setFont(new Font("Serif", Font.BOLD, 45));
+		panelCalorias.add(lblEverhealth);
 		
 		JPanel panelIrAlPerfil = new JPanel();
 		panelIrAlPerfil.setOpaque(false);
