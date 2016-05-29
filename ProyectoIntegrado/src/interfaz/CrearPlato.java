@@ -32,6 +32,7 @@ public class CrearPlato extends JPanel implements ActionListener{
 	private ArrayList<String> arrayIdioma;
 	private Ventanas ventanaPrincipal;
 	private JTextField textFieldBusqueda;
+	private DiaPlanificacion dia[];
 	public DefaultTableModel dtm;
 	public DefaultTableModel dtm2;
 	public JTable tablaAlimentos;
@@ -55,10 +56,11 @@ public class CrearPlato extends JPanel implements ActionListener{
 	
 	private String textoAnterior;
 
-	public CrearPlato(Ventanas v, Conexio conexio, ArrayList<String> arrayIdioma) {
+	public CrearPlato(Ventanas v, Conexio conexio, ArrayList<String> arrayIdioma, DiaPlanificacion dia[]) {
 		ventanaPrincipal=v;
 		this.conexio=conexio;
 		this.arrayIdioma=arrayIdioma;
+		this.dia=dia;
 		
 		setLayout(new BorderLayout(0, 0));
 		
@@ -376,6 +378,8 @@ public class CrearPlato extends JPanel implements ActionListener{
 			}
 			Consultas cons=new Consultas(conexio);
 			cons.registrarPlato(textFieldTituloCrearPlato.getText(), String.valueOf(comboBoxTipo.getSelectedItem()),ingredientes,cantidades);
+			//Carrega el plat en Planificación
+			new Consultas(conexio).rellenarComboBox(dia, null);
 			//Cambia al Menu.
 			ventanaPrincipal.cambiapanel("Menu");
 			//Resetea la informacion del panel.

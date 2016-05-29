@@ -487,7 +487,7 @@ public class Consultas{
 					int t=0;
 					while( rs2.next()){
 						dia[d].getComboBox().get(t).setSelectedItem(rs2.getString("p.nombre"));
-						dtm.setValueAt(rs2.getString("p.nombre"), t, d+1);
+						if(dtm!=null) dtm.setValueAt(rs2.getString("p.nombre"), t, d+1);
 						t++;
 					}
 					

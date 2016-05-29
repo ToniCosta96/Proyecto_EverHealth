@@ -209,6 +209,9 @@ public class Planificacion extends JPanel implements ActionListener{
 				    JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	public DiaPlanificacion[] getDia(){
+		return dia;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

@@ -37,7 +37,7 @@ public class Ventanas extends JFrame{
 		//Crear paneles del cardLayout
 		menu = new Menu(Ventanas.this, conexio, arrayIdioma);
 		planificacion= new Planificacion(Ventanas.this, conexio, arrayIdioma, menu.getDtm());
-		crearPlato= new CrearPlato(Ventanas.this, conexio, arrayIdioma);
+		crearPlato= new CrearPlato(Ventanas.this, conexio, arrayIdioma, planificacion.getDia());
 		crearUsuario= new CrearUsuario(Ventanas.this, conexio, arrayIdioma, menu, crearPlato, planificacion);
 		
 		//Preparar paneles del cardLayout
