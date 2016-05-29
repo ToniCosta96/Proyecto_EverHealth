@@ -390,16 +390,14 @@ public class Consultas{
 		String [] tipo =new String[]{"Desayuno","Almuerzo","Comida","Merienda","Cena"};
 		int cont=0;
 		String plato=""; 
-		/*for(int a=0;a<dia.length;a++){
-		dia[a].getCaloriasDesayuno().add("0");
-		dia[a].getCaloriasAlmuerzo().add("0");
-		dia[a].getCaloriasComida().add("0");
-		dia[a].getCaloriasMerienda().add("0");
-		dia[a].getCaloriasCena().add("0");
-		}*/
+		for(int d=0;d<dia.length;d++){
+			for(int i=0;i<dia[0].getComboBox().size();i++){
+				dia[d].getComboBox().get(i).removeAllItems();
+			}
+		}
 		
 		for(int i=0;i<tipo.length;i++){
-			
+				
 				try {
 					ResultSet rs = null;
 					Statement cmd = null;
